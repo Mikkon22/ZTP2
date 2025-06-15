@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block body %}
+    <h1>Task List</h1>
+
+    <a href="{{ path('task_new') }}" class="btn btn-primary mb-3">Create New Task</a>
+
+    <div class="row">
+        {% for task in tasks %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ task.title }}</h5>
+                        <p class="card-text">{{ task.description }}</p>
+                        <p class="text-muted">Created: {{ task.createdAt|date('Y-m-d H:i:s') }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <form action="{{ path('task_toggle', {'id': task.id}) }}" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-sm {{ task.isDone ? 'btn-success' : 'btn-secondary' }}">
+                                    {{ task.isDone ? 'Done' : 'Mark as Done' }}
+                                </button>
+                            </form>
+                            <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-sm btn-info">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p>No tasks found. Create one!</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %} 

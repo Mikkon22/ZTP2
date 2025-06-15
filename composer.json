@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/src/"
+        }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^7.2",
+        "phpunit/phpunit": "^12.2"
+    },
+    "require": {
+        "doctrine/collections": "^2.3",
+        "symfony/security-core": "^7.3"
+    }
+}

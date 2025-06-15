@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Transaction{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const transactionTypeInputs = document.querySelectorAll('input[name="transaction[transactionType]"]');
+            const categorySelect = document.querySelector('#transaction_category');
+
+            transactionTypeInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Submit the form to trigger the POST_SUBMIT event and reload categories
+                    this.form.submit();
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="h3 mb-4">Edit Transaction</h1>
+
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        {{ form_label(form.portfolio) }}
+                        {{ form_widget(form.portfolio, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_help(form.portfolio) }}
+                        {{ form_errors(form.portfolio) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.transactionType) }}
+                        <div class="btn-group w-100" role="group">
+                            {{ form_widget(form.transactionType) }}
+                        </div>
+                        {{ form_help(form.transactionType) }}
+                        {{ form_errors(form.transactionType) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_help(form.title) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.amount) }}
+                        <div class="input-group">
+                            {{ form_widget(form.amount, {'attr': {'class': 'form-control'}}) }}
+                            <span class="input-group-text">PLN</span>
+                        </div>
+                        {{ form_help(form.amount) }}
+                        {{ form_errors(form.amount) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.category) }}
+                        {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_help(form.category) }}
+                        {{ form_errors(form.category) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_help(form.description) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.date) }}
+                        {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_help(form.date) }}
+                        {{ form_errors(form.date) }}
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Save Changes
+                        </button>
+                        <a href="{{ path('app_transaction_show', {'id': transaction.id}) }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-1"></i>Cancel
+                        </a>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

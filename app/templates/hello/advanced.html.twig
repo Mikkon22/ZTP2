@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Advanced Twig Examples{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .custom-card { margin-bottom: 20px; }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <h2>Twig Filters</h2>
+                </div>
+                <div class="card-body">
+                    {# String filters #}
+                    <p>Uppercase: {{ "hello"|upper }}</p>
+                    <p>Lowercase: {{ "WORLD"|lower }}</p>
+                    <p>Capitalize: {{ "symfony"|capitalize }}</p>
+                    
+                    {# Number filters #}
+                    <p>Number format: {{ 1234.56|number_format(2, ',', ' ') }}</p>
+                    
+                    {# Date filter #}
+                    <p>Date: {{ "now"|date("Y-m-d") }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <h2>Twig Functions</h2>
+                </div>
+                <div class="card-body">
+                    {# Random function #}
+                    <p>Random number: {{ random(1, 100) }}</p>
+                    
+                    {# Include function #}
+                    {{ include('hello/_partial.html.twig', {message: 'Hello from partial!'}) }}
+                    
+                    {# Path function #}
+                    <p>Link to home: <a href="{{ path('hello_index') }}">Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Page{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Hello World!</h1>
+            <p class="card-text">Welcome to my Symfony application.</p>
+            
+            {# Example of using variables #}
+            {% if name is defined %}
+                <p>Hello, {{ name }}!</p>
+            {% endif %}
+
+            {# Example of a list #}
+            <h3>Example List:</h3>
+            <ul class="list-group">
+                {% for i in 1..3 %}
+                    <li class="list-group-item">Item {{ i }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %} 

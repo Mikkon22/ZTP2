@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block body %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="h3">Transactions</h1>
+    </div>
+    <div class="col text-end">
+        <a href="{{ path('app_transaction_new') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i>New Transaction
+        </a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label for="tag" class="form-label">Filter by Tag</label>
+                <select name="tag" id="tag" class="form-select">
+                    <option value="">All Tags</option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}" {% if selected_tag is not null and selected_tag == tag.id %}selected{% endif %}>
+                            {{ tag.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
+            </div>
+            <div class="col-md-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary me-2">Filter</button>
+                <a href="{{ path('app_transaction_index') }}" class="btn btn-secondary">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fas fa-filter me-1"></i>Filter by Category
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ path('app_transaction_index') }}">All Categories</a></li>
+                <li><hr class="dropdown-divider"></li>
+                {% set categories = [] %}
+                {% for transaction in transactions %}
+                    {% if transaction.category.name not in categories %}
+                        {% set categories = categories|merge([transaction.category.name]) %}
+                    {% endif %}
+                {% endfor %}
+                {% for category in categories|sort %}
+                    <li><a class="dropdown-item" href="{{ path('app_transaction_index', {'category': category}) }}">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fas fa-wallet me-1"></i>Filter by Portfolio
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ path('app_transaction_index') }}">All Portfolios</a></li>
+                <li><hr class="dropdown-divider"></li>
+                {% set portfolios = [] %}
+                {% for transaction in transactions %}
+                    {% if transaction.portfolio.name not in portfolios %}
+                        {% set portfolios = portfolios|merge([transaction.portfolio.name]) %}
+                    {% endif %}
+                {% endfor %}
+                {% for portfolio in portfolios|sort %}
+                    <li><a class="dropdown-item" href="{{ path('app_transaction_index', {'portfolio': portfolio}) }}">{{ portfolio }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Portfolio</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                    <th class="text-end">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.date|date('Y-m-d H:i') }}</td>
+                        <td>{{ transaction.portfolio.name }}</td>
+                        <td>{{ transaction.title }}</td>
+                        <td>{{ transaction.category.name }}</td>
+                        <td>
+                            {% for tag in transaction.tags %}
+                                <span class="badge bg-secondary me-1">{{ tag.name }}</span>
+                            {% endfor %}
+                        </td>
+                        <td class="text-end {% if transaction.amount < 0 %}text-danger{% else %}text-success{% endif %}">
+                            {{ transaction.amount|number_format(2, '.', ',') }} zł
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-4">No transactions found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if transactions|length > 0 %}
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Summary</h5>
+                    {% set total_income = 0 %}
+                    {% set total_expense = 0 %}
+                    {% for transaction in transactions %}
+                        {% if transaction.amount > 0 %}
+                            {% set total_income = total_income + transaction.amount %}
+                        {% else %}
+                            {% set total_expense = total_expense + transaction.amount %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted mb-1">Total Income</p>
+                            <p class="h4 text-success mb-3">{{ total_income|number_format(2, '.', ',') }} PLN</p>
+                            
+                            <p class="text-muted mb-1">Total Expenses</p>
+                            <p class="h4 text-danger mb-3">{{ total_expense|number_format(2, '.', ',') }} PLN</p>
+                            
+                            <p class="text-muted mb-1">Balance</p>
+                            <p class="h4 {% if total_income + total_expense < 0 %}text-danger{% else %}text-success{% endif %} mb-0">
+                                {{ (total_income + total_expense)|number_format(2, '.', ',') }} PLN
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %} 

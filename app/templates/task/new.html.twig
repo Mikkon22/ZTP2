@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Task{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">New Task</h1>
+            
+            <div class="alert alert-info">
+                Note: Form handling will be added later. This is just a preview of the task data.
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3">Title</dt>
+                <dd class="col-sm-9">{{ task.title }}</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">{{ task.description }}</dd>
+
+                <dt class="col-sm-3">Created At</dt>
+                <dd class="col-sm-9">{{ task.createdAt|date('Y-m-d H:i:s') }}</dd>
+
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9">
+                    <span class="badge {{ task.isDone ? 'bg-success' : 'bg-secondary' }}">
+                        {{ task.isDone ? 'Done' : 'Pending' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <a href="{{ path('task_index') }}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+{% endblock %} 
