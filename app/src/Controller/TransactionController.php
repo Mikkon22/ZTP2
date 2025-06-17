@@ -189,4 +189,13 @@ class TransactionController extends AbstractController
 
         return $this->redirectToRoute('app_transaction_index');
     }
+
+    #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
+    public function show(Transaction $transaction): Response
+    {
+        $this->denyAccessUnlessGranted('view', $transaction->getPortfolio());
+        return $this->render('transaction/show.html.twig', [
+            'transaction' => $transaction,
+        ]);
+    }
 } 
