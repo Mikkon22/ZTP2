@@ -1,18 +1,35 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Service;
 
 use App\Entity\Category;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Service for handling category-related business logic.
+ */
 class CategoryService
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {
+    /**
+     * CategoryService constructor.
+     */
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
     }
 
+    /**
+     * Creates default categories for a user.
+     */
     public function createDefaultCategories(User $user): void
     {
         // Default expense categories

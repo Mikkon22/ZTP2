@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -12,25 +21,35 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Command to add default categories for a specific user.
+ */
 #[AsCommand(
     name: 'app:add-default-categories',
     description: 'Adds default categories for a specific user',
 )]
 class AddDefaultCategoriesCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-        private CategoryService $categoryService,
-    ) {
+    /**
+     * Constructor.
+     */
+    public function __construct(private EntityManagerInterface $entityManager, private CategoryService $categoryService)
+    {
         parent::__construct();
     }
 
+    /**
+     * Configures the command arguments and options.
+     */
     protected function configure(): void
     {
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'Email of the user to add categories for');
     }
 
+    /**
+     * Executes the command to add default categories for a user.
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

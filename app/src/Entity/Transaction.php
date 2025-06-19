@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use App\Repository\TransactionRepository;
@@ -9,6 +18,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
+/**
+ * Transaction entity representing a financial transaction.
+ */
 class Transaction
 {
     #[ORM\Id]
@@ -39,22 +51,34 @@ class Transaction
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'transactions')]
     private Collection $tags;
 
+    /**
+     * Transaction constructor.
+     */
     public function __construct()
     {
         $this->date = new \DateTime();
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * Get the ID of the transaction.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Get the title of the transaction.
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * Set the title of the transaction.
+     */
     public function setTitle(string $title): static
     {
         $this->title = $title;
@@ -62,11 +86,17 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Get the description of the transaction.
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * Set the description of the transaction.
+     */
     public function setDescription(?string $description): static
     {
         $this->description = $description;
@@ -74,11 +104,17 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Get the amount of the transaction.
+     */
     public function getAmount(): float
     {
         return $this->amount;
     }
 
+    /**
+     * Set the amount of the transaction.
+     */
     public function setAmount(float $amount): static
     {
         $this->amount = $amount;
@@ -86,11 +122,17 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Get the date of the transaction.
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
+    /**
+     * Set the date of the transaction.
+     */
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
@@ -98,11 +140,17 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Get the portfolio associated with the transaction.
+     */
     public function getPortfolio(): ?Portfolio
     {
         return $this->portfolio;
     }
 
+    /**
+     * Set the portfolio associated with the transaction.
+     */
     public function setPortfolio(?Portfolio $portfolio): static
     {
         $this->portfolio = $portfolio;
@@ -110,11 +158,17 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Get the category associated with the transaction.
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Set the category associated with the transaction.
+     */
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
@@ -123,6 +177,8 @@ class Transaction
     }
 
     /**
+     * Get the tags associated with the transaction.
+     *
      * @return Collection<int, Tag>
      */
     public function getTags(): Collection
@@ -130,6 +186,9 @@ class Transaction
         return $this->tags;
     }
 
+    /**
+     * Add a tag to the transaction.
+     */
     public function addTag(Tag $tag): static
     {
         if (!$this->tags->contains($tag)) {
@@ -139,6 +198,9 @@ class Transaction
         return $this;
     }
 
+    /**
+     * Remove a tag from the transaction.
+     */
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);

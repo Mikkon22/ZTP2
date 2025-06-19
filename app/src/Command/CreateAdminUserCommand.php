@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -10,19 +19,26 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * Command to create the admin user.
+ */
 #[AsCommand(
     name: 'app:create-admin-user',
     description: 'Creates the admin user',
 )]
 class CreateAdminUserCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher,
-    ) {
+    /**
+     * Constructor.
+     */
+    public function __construct(private EntityManagerInterface $entityManager, private UserPasswordHasherInterface $passwordHasher)
+    {
         parent::__construct();
     }
 
+    /**
+     * Executes the command to create the admin user.
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Creating admin user...');

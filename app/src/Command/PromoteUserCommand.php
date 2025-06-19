@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -11,18 +20,26 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Command to promote a user to ROLE_ADMIN.
+ */
 #[AsCommand(
     name: 'app:promote-user',
     description: 'Promotes a user to ROLE_ADMIN',
 )]
 class PromoteUserCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {
+    /**
+     * Constructor.
+     */
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
         parent::__construct();
     }
 
+    /**
+     * Configures the command arguments and options.
+     */
     protected function configure(): void
     {
         $this
@@ -30,6 +47,9 @@ class PromoteUserCommand extends Command
         ;
     }
 
+    /**
+     * Executes the command to promote a user to admin.
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\Category;
@@ -10,18 +19,26 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Command to create default expense and income categories for the admin user.
+ */
 #[AsCommand(
     name: 'app:create-default-categories',
     description: 'Creates default expense and income categories',
 )]
 class CreateDefaultCategoriesCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {
+    /**
+     * Constructor.
+     */
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
         parent::__construct();
     }
 
+    /**
+     * Executes the command to create default categories.
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Creating default categories...');

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use App\Repository\TagRepository;
@@ -8,6 +17,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
+/**
+ * Tag entity representing a tag for transactions.
+ */
 class Tag
 {
     #[ORM\Id]
@@ -25,21 +37,33 @@ class Tag
     #[ORM\ManyToMany(targetEntity: Transaction::class, mappedBy: 'tags')]
     private Collection $transactions;
 
+    /**
+     * Tag constructor.
+     */
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
     }
 
+    /**
+     * Get the ID of the tag.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Get the name of the tag.
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of the tag.
+     */
     public function setName(string $name): static
     {
         $this->name = $name;
@@ -47,11 +71,17 @@ class Tag
         return $this;
     }
 
+    /**
+     * Get the owner of the tag.
+     */
     public function getOwner(): ?User
     {
         return $this->owner;
     }
 
+    /**
+     * Set the owner of the tag.
+     */
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
@@ -60,6 +90,8 @@ class Tag
     }
 
     /**
+     * Get the transactions associated with the tag.
+     *
      * @return Collection<int, Transaction>
      */
     public function getTransactions(): Collection
@@ -67,6 +99,9 @@ class Tag
         return $this->transactions;
     }
 
+    /**
+     * Add a transaction to the tag.
+     */
     public function addTransaction(Transaction $transaction): static
     {
         if (!$this->transactions->contains($transaction)) {
@@ -77,6 +112,9 @@ class Tag
         return $this;
     }
 
+    /**
+     * Remove a transaction from the tag.
+     */
     public function removeTransaction(Transaction $transaction): static
     {
         if ($this->transactions->removeElement($transaction)) {
@@ -86,6 +124,9 @@ class Tag
         return $this;
     }
 
+    /**
+     * String representation of the tag.
+     */
     public function __toString(): string
     {
         return $this->name;

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Task;
@@ -9,9 +18,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * Controller for managing tasks.
+ */
 #[Route('/task')]
 class TaskController extends AbstractController
 {
+    /**
+     * Display the list of tasks.
+     */
     #[Route('/', name: 'task_index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
@@ -20,6 +35,9 @@ class TaskController extends AbstractController
         ]);
     }
 
+    /**
+     * Create a new task (example, no form).
+     */
     #[Route('/new', name: 'task_new', methods: ['GET'])]
     public function new(): Response
     {
@@ -33,6 +51,9 @@ class TaskController extends AbstractController
         ]);
     }
 
+    /**
+     * Show a task.
+     */
     #[Route('/{id}', name: 'task_show', methods: ['GET'])]
     public function show(Task $task): Response
     {
@@ -41,6 +62,9 @@ class TaskController extends AbstractController
         ]);
     }
 
+    /**
+     * Toggle the completion status of a task.
+     */
     #[Route('/{id}/toggle', name: 'task_toggle', methods: ['POST'])]
     public function toggle(Task $task, EntityManagerInterface $entityManager): Response
     {

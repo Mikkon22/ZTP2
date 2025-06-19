@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Tag;
@@ -12,10 +21,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Controller responsible for managing tags.
+ */
 #[Route('/tag')]
 #[IsGranted('ROLE_USER')]
 class TagController extends AbstractController
 {
+    /**
+     * Displays a list of tags for the current user.
+     */
     #[Route('/', name: 'app_tag_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -26,6 +41,9 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles creation of a new tag via form.
+     */
     #[Route('/new', name: 'app_tag_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -50,6 +68,9 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles creation of a new tag via AJAX.
+     */
     #[Route('/ajax/new', name: 'app_tag_ajax_new', methods: ['POST'])]
     public function ajaxNew(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -79,6 +100,9 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles editing of an existing tag.
+     */
     #[Route('/{id}/edit', name: 'app_tag_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
     {
@@ -103,6 +127,9 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles deletion of a tag.
+     */
     #[Route('/{id}', name: 'app_tag_delete', methods: ['POST'])]
     public function delete(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
     {

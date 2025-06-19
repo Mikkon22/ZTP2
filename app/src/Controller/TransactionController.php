@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Transaction;
@@ -12,10 +21,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Controller responsible for managing transactions.
+ */
 #[Route('/transaction')]
 #[IsGranted('ROLE_USER')]
 class TransactionController extends AbstractController
 {
+    /**
+     * Displays a list of transactions for the current user, with optional filtering by tag and date range.
+     */
     #[Route('/', name: 'app_transaction_index', methods: ['GET'])]
     public function index(Request $request, TransactionRepository $transactionRepository): Response
     {
@@ -56,6 +71,9 @@ class TransactionController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles creation of a new transaction.
+     */
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -94,6 +112,9 @@ class TransactionController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles editing of an existing transaction.
+     */
     #[Route('/{id}/edit', name: 'app_transaction_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Transaction $transaction, EntityManagerInterface $entityManager): Response
     {
@@ -173,6 +194,9 @@ class TransactionController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles deletion of a transaction.
+     */
     #[Route('/{id}/delete', name: 'app_transaction_delete', methods: ['POST'])]
     public function delete(Request $request, Transaction $transaction, EntityManagerInterface $entityManager): Response
     {
@@ -192,6 +216,9 @@ class TransactionController extends AbstractController
         return $this->redirectToRoute('app_transaction_index');
     }
 
+    /**
+     * Displays a single transaction.
+     */
     #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
     public function show(Transaction $transaction): Response
     {

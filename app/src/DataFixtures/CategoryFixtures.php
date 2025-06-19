@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;
@@ -8,8 +17,14 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Data fixture for loading default categories.
+ */
 class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * Load categories into the database.
+     */
     public function load(ObjectManager $manager): void
     {
         /** @var User $admin */
@@ -82,6 +97,9 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
+    /**
+     * Get the dependencies for this fixture.
+     */
     public function getDependencies(): array
     {
         return [

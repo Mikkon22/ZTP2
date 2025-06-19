@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -13,8 +22,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin')]
+/**
+ * Controller for admin user management.
+ */
 class AdminController extends AbstractController
 {
+    /**
+     * Display the list of users for admin.
+     */
     #[Route('/users', name: 'app_admin_users')]
     public function users(EntityManagerInterface $entityManager): Response
     {
@@ -27,6 +42,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Edit a user as admin.
+     */
     #[Route('/user/{id}/edit', name: 'app_admin_edit_user')]
     public function editUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -50,6 +68,9 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Change a user's password as admin.
+     */
     #[Route('/user/{id}/change-password', name: 'app_admin_change_user_password')]
     public function changeUserPassword(Request $request, User $user, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {

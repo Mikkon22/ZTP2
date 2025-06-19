@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use App\Repository\PortfolioRepository;
@@ -8,6 +17,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PortfolioRepository::class)]
+/**
+ * Portfolio entity representing a user's financial portfolio.
+ */
 class Portfolio
 {
     #[ORM\Id]
@@ -31,22 +43,34 @@ class Portfolio
     #[ORM\OneToMany(mappedBy: 'portfolio', targetEntity: Transaction::class, orphanRemoval: true)]
     private Collection $transactions;
 
+    /**
+     * Portfolio constructor.
+     */
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->balance = 0.0;
     }
 
+    /**
+     * Get the ID of the portfolio.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Get the name of the portfolio.
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of the portfolio.
+     */
     public function setName(string $name): static
     {
         $this->name = $name;
@@ -54,11 +78,17 @@ class Portfolio
         return $this;
     }
 
+    /**
+     * Get the type of the portfolio.
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
+    /**
+     * Set the type of the portfolio.
+     */
     public function setType(string $type): static
     {
         $this->type = $type;
@@ -66,11 +96,17 @@ class Portfolio
         return $this;
     }
 
+    /**
+     * Get the balance of the portfolio.
+     */
     public function getBalance(): float
     {
         return $this->balance;
     }
 
+    /**
+     * Set the balance of the portfolio.
+     */
     public function setBalance(float $balance): static
     {
         $this->balance = $balance;
@@ -78,6 +114,9 @@ class Portfolio
         return $this;
     }
 
+    /**
+     * Update the balance of the portfolio based on its transactions.
+     */
     public function updateBalance(): static
     {
         $this->balance = 0.0;
@@ -88,11 +127,17 @@ class Portfolio
         return $this;
     }
 
+    /**
+     * Get the owner of the portfolio.
+     */
     public function getOwner(): ?User
     {
         return $this->owner;
     }
 
+    /**
+     * Set the owner of the portfolio.
+     */
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
@@ -101,6 +146,8 @@ class Portfolio
     }
 
     /**
+     * Get the transactions associated with the portfolio.
+     *
      * @return Collection<int, Transaction>
      */
     public function getTransactions(): Collection
@@ -108,6 +155,9 @@ class Portfolio
         return $this->transactions;
     }
 
+    /**
+     * Add a transaction to the portfolio.
+     */
     public function addTransaction(Transaction $transaction): static
     {
         if (!$this->transactions->contains($transaction)) {
@@ -119,6 +169,9 @@ class Portfolio
         return $this;
     }
 
+    /**
+     * Remove a transaction from the portfolio.
+     */
     public function removeTransaction(Transaction $transaction): static
     {
         if ($this->transactions->removeElement($transaction)) {

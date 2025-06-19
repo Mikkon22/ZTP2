@@ -1,11 +1,23 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+/**
+ * Category entity representing a financial category for a user.
+ */
 class Category
 {
     #[ORM\Id]
@@ -29,16 +41,25 @@ class Category
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
+    /**
+     * Get the ID of the category.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Get the name of the category.
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of the category.
+     */
     public function setName(string $name): static
     {
         $this->name = $name;
@@ -46,11 +67,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the type of the category (income or expense).
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
+    /**
+     * Set the type of the category.
+     */
     public function setType(string $type): static
     {
         if (!\in_array($type, ['income', 'expense'])) {
@@ -61,11 +88,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the description of the category.
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * Set the description of the category.
+     */
     public function setDescription(?string $description): static
     {
         $this->description = $description;
@@ -73,11 +106,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the color of the category.
+     */
     public function getColor(): ?string
     {
         return $this->color;
     }
 
+    /**
+     * Set the color of the category.
+     */
     public function setColor(?string $color): static
     {
         $this->color = $color;
@@ -85,11 +124,17 @@ class Category
         return $this;
     }
 
+    /**
+     * Get the owner of the category.
+     */
     public function getOwner(): ?User
     {
         return $this->owner;
     }
 
+    /**
+     * Set the owner of the category.
+     */
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;

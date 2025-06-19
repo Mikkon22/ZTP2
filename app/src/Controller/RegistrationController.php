@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -12,15 +21,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller responsible for user registration.
+ */
 class RegistrationController extends AbstractController
 {
+    /**
+     * Handles user registration.
+     *
+     * @param Request                     $request            The HTTP request object
+     * @param UserPasswordHasherInterface $userPasswordHasher The password hasher
+     * @param EntityManagerInterface      $entityManager      The entity manager
+     * @param CategoryService             $categoryService    The category service
+     *
+     * @return Response The HTTP response
+     */
     #[Route('/register', name: 'app_register')]
-    public function register(
-        Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager,
-        CategoryService $categoryService,
-    ): Response {
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryService $categoryService): Response
+    {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
