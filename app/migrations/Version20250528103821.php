@@ -23,4 +23,4 @@ final class Version20250528103821 extends AbstractMigration
     {
         $this->addSql('ALTER TABLE category DROP type');
     }
-} 
+}

@@ -20,9 +20,7 @@ final class Version20250610121818 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql(<<<'SQL'
-            ALTER TABLE portfolio ADD type VARCHAR(255) NOT NULL
-        SQL);
+
     }
 
     public function down(Schema $schema): void
