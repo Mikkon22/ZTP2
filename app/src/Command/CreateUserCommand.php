@@ -32,6 +32,9 @@ class CreateUserCommand extends Command
 {
     /**
      * Constructor.
+     *
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
      */
     public function __construct(private EntityManagerInterface $entityManager, private UserPasswordHasherInterface $passwordHasher)
     {
@@ -50,6 +53,11 @@ class CreateUserCommand extends Command
 
     /**
      * Executes the command to create a new user.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

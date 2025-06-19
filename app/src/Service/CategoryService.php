@@ -22,6 +22,8 @@ class CategoryService
 {
     /**
      * CategoryService constructor.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
      */
     public function __construct(private EntityManagerInterface $entityManager)
     {
@@ -29,6 +31,8 @@ class CategoryService
 
     /**
      * Creates default categories for a user.
+     *
+     * @param User $user the user entity for whom to create categories
      */
     public function createDefaultCategories(User $user): void
     {

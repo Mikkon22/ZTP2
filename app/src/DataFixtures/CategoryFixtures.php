@@ -24,6 +24,8 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * Load categories into the database.
+     *
+     * @param ObjectManager $manager the object manager for persisting entities
      */
     public function load(ObjectManager $manager): void
     {
@@ -99,6 +101,8 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 
     /**
      * Get the dependencies for this fixture.
+     *
+     * @return array the list of fixture dependencies
      */
     public function getDependencies(): array
     {

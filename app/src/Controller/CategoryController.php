@@ -29,6 +29,8 @@ class CategoryController extends AbstractController
 {
     /**
      * Displays a list of categories for the current user.
+     *
+     * @return Response the response object
      */
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(): Response
@@ -40,6 +42,11 @@ class CategoryController extends AbstractController
 
     /**
      * Handles creation of a new category.
+     *
+     * @param Request                $request       the HTTP request
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -65,6 +72,10 @@ class CategoryController extends AbstractController
 
     /**
      * Displays a single category.
+     *
+     * @param Category $category the category entity
+     *
+     * @return Response the response object
      */
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
@@ -78,6 +89,12 @@ class CategoryController extends AbstractController
 
     /**
      * Handles editing of a category.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Category               $category      the category entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
@@ -101,6 +118,12 @@ class CategoryController extends AbstractController
 
     /**
      * Handles deletion of a category.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Category               $category      the category entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response

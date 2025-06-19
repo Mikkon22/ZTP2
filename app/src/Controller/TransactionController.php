@@ -30,6 +30,11 @@ class TransactionController extends AbstractController
 {
     /**
      * Displays a list of transactions for the current user, with optional filtering by tag and date range.
+     *
+     * @param Request               $request               the HTTP request
+     * @param TransactionRepository $transactionRepository the transaction repository
+     *
+     * @return Response the response object
      */
     #[Route('/', name: 'app_transaction_index', methods: ['GET'])]
     public function index(Request $request, TransactionRepository $transactionRepository): Response
@@ -73,6 +78,11 @@ class TransactionController extends AbstractController
 
     /**
      * Handles creation of a new transaction.
+     *
+     * @param Request                $request       the HTTP request
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -114,6 +124,12 @@ class TransactionController extends AbstractController
 
     /**
      * Handles editing of an existing transaction.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Transaction            $transaction   the transaction entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_transaction_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Transaction $transaction, EntityManagerInterface $entityManager): Response
@@ -196,6 +212,12 @@ class TransactionController extends AbstractController
 
     /**
      * Handles deletion of a transaction.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Transaction            $transaction   the transaction entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}/delete', name: 'app_transaction_delete', methods: ['POST'])]
     public function delete(Request $request, Transaction $transaction, EntityManagerInterface $entityManager): Response
@@ -218,6 +240,10 @@ class TransactionController extends AbstractController
 
     /**
      * Displays a single transaction.
+     *
+     * @param Transaction $transaction the transaction entity
+     *
+     * @return Response the response object
      */
     #[Route('/{id}', name: 'app_transaction_show', methods: ['GET'])]
     public function show(Transaction $transaction): Response

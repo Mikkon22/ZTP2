@@ -27,6 +27,12 @@ class ProfileController extends AbstractController
 {
     /**
      * Handles password change for the logged-in user.
+     *
+     * @param Request                     $request        the HTTP request
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/profile/change-password', name: 'app_change_password')]
     public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response

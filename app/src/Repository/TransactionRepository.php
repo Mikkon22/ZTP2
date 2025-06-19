@@ -27,6 +27,8 @@ class TransactionRepository extends ServiceEntityRepository
 {
     /**
      * TransactionRepository constructor.
+     *
+     * @param ManagerRegistry $registry the manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -35,6 +37,9 @@ class TransactionRepository extends ServiceEntityRepository
 
     /**
      * Save a Transaction entity.
+     *
+     * @param Transaction $entity the transaction entity to save
+     * @param bool        $flush  whether to flush changes to the database
      */
     public function save(Transaction $entity, bool $flush = false): void
     {
@@ -47,6 +52,9 @@ class TransactionRepository extends ServiceEntityRepository
 
     /**
      * Remove a Transaction entity.
+     *
+     * @param Transaction $entity the transaction entity to remove
+     * @param bool        $flush  whether to flush changes to the database
      */
     public function remove(Transaction $entity, bool $flush = false): void
     {

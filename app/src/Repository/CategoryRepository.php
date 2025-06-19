@@ -27,6 +27,8 @@ class CategoryRepository extends ServiceEntityRepository
 {
     /**
      * CategoryRepository constructor.
+     *
+     * @param ManagerRegistry $registry the manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -35,6 +37,9 @@ class CategoryRepository extends ServiceEntityRepository
 
     /**
      * Save a Category entity.
+     *
+     * @param Category $entity the category entity to save
+     * @param bool     $flush  whether to flush changes to the database
      */
     public function save(Category $entity, bool $flush = false): void
     {
@@ -47,6 +52,9 @@ class CategoryRepository extends ServiceEntityRepository
 
     /**
      * Remove a Category entity.
+     *
+     * @param Category $entity the category entity to remove
+     * @param bool     $flush  whether to flush changes to the database
      */
     public function remove(Category $entity, bool $flush = false): void
     {

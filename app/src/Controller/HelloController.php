@@ -26,6 +26,8 @@ class HelloController extends AbstractController
 {
     /**
      * Homepage redirect to hello.
+     *
+     * @return Response redirects to hello index
      */
     #[Route('/', name: 'homepage')]
     public function homepage(): Response
@@ -35,6 +37,8 @@ class HelloController extends AbstractController
 
     /**
      * Index action.
+     *
+     * @return Response the response object
      */
     #[Route(
         '/hello',
@@ -52,6 +56,8 @@ class HelloController extends AbstractController
 
     /**
      * Advanced Twig examples.
+     *
+     * @return Response the response object
      */
     #[Route(
         '/hello/advanced',

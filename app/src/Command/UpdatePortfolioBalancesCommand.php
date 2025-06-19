@@ -30,6 +30,8 @@ class UpdatePortfolioBalancesCommand extends Command
 {
     /**
      * Constructor.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
      */
     public function __construct(private EntityManagerInterface $entityManager)
     {
@@ -38,6 +40,11 @@ class UpdatePortfolioBalancesCommand extends Command
 
     /**
      * Executes the command to update portfolio balances.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

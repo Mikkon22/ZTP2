@@ -54,6 +54,8 @@ class Portfolio
 
     /**
      * Get the ID of the portfolio.
+     *
+     * @return int|null the ID of the portfolio
      */
     public function getId(): ?int
     {
@@ -62,6 +64,8 @@ class Portfolio
 
     /**
      * Get the name of the portfolio.
+     *
+     * @return string|null the name of the portfolio
      */
     public function getName(): ?string
     {
@@ -70,6 +74,8 @@ class Portfolio
 
     /**
      * Set the name of the portfolio.
+     *
+     * @param string $name the name to set
      */
     public function setName(string $name): static
     {
@@ -80,6 +86,8 @@ class Portfolio
 
     /**
      * Get the type of the portfolio.
+     *
+     * @return string|null the type of the portfolio
      */
     public function getType(): ?string
     {
@@ -88,6 +96,8 @@ class Portfolio
 
     /**
      * Set the type of the portfolio.
+     *
+     * @param string $type the type to set
      */
     public function setType(string $type): static
     {
@@ -98,6 +108,8 @@ class Portfolio
 
     /**
      * Get the balance of the portfolio.
+     *
+     * @return float the balance of the portfolio
      */
     public function getBalance(): float
     {
@@ -106,6 +118,8 @@ class Portfolio
 
     /**
      * Set the balance of the portfolio.
+     *
+     * @param float $balance the balance to set
      */
     public function setBalance(float $balance): static
     {
@@ -129,6 +143,8 @@ class Portfolio
 
     /**
      * Get the owner of the portfolio.
+     *
+     * @return User|null the owner of the portfolio
      */
     public function getOwner(): ?User
     {
@@ -137,6 +153,8 @@ class Portfolio
 
     /**
      * Set the owner of the portfolio.
+     *
+     * @param User|null $owner the owner to set
      */
     public function setOwner(?User $owner): static
     {
@@ -148,7 +166,7 @@ class Portfolio
     /**
      * Get the transactions associated with the portfolio.
      *
-     * @return Collection<int, Transaction>
+     * @return Collection<int, Transaction> the transactions collection
      */
     public function getTransactions(): Collection
     {
@@ -157,6 +175,8 @@ class Portfolio
 
     /**
      * Add a transaction to the portfolio.
+     *
+     * @param Transaction $transaction the transaction to add
      */
     public function addTransaction(Transaction $transaction): static
     {
@@ -171,6 +191,8 @@ class Portfolio
 
     /**
      * Remove a transaction from the portfolio.
+     *
+     * @param Transaction $transaction the transaction to remove
      */
     public function removeTransaction(Transaction $transaction): static
     {

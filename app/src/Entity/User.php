@@ -68,6 +68,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the ID of the user.
+     *
+     * @return int|null the ID of the user
      */
     public function getId(): ?int
     {
@@ -76,6 +78,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the email of the user.
+     *
+     * @return string|null the email of the user
      */
     public function getEmail(): ?string
     {
@@ -84,6 +88,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Set the email of the user.
+     *
+     * @param string $email the email to set
      */
     public function setEmail(string $email): static
     {
@@ -94,6 +100,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the unique user identifier (email).
+     *
+     * @return string the user identifier (email)
      */
     public function getUserIdentifier(): string
     {
@@ -102,6 +110,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the roles of the user.
+     *
+     * @return array the roles of the user
      */
     public function getRoles(): array
     {
@@ -113,6 +123,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Set the roles of the user.
+     *
+     * @param array $roles the roles to set
      */
     public function setRoles(array $roles): static
     {
@@ -123,6 +135,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the hashed password of the user.
+     *
+     * @return string the hashed password
      */
     public function getPassword(): string
     {
@@ -131,6 +145,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Set the hashed password of the user.
+     *
+     * @param string $password the password to set
      */
     public function setPassword(string $password): static
     {
@@ -149,6 +165,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the first name of the user.
+     *
+     * @return string|null the first name of the user
      */
     public function getFirstName(): ?string
     {
@@ -157,6 +175,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Set the first name of the user.
+     *
+     * @param string $firstName the first name to set
      */
     public function setFirstName(string $firstName): static
     {
@@ -167,6 +187,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the last name of the user.
+     *
+     * @return string|null the last name of the user
      */
     public function getLastName(): ?string
     {
@@ -175,6 +197,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Set the last name of the user.
+     *
+     * @param string $lastName the last name to set
      */
     public function setLastName(string $lastName): static
     {
@@ -185,6 +209,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the full name of the user.
+     *
+     * @return string the full name of the user
      */
     public function getFullName(): string
     {
@@ -194,7 +220,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Get the portfolios owned by the user.
      *
-     * @return Collection<int, Portfolio>
+     * @return Collection<int, Portfolio> the portfolios collection
      */
     public function getPortfolios(): Collection
     {
@@ -203,6 +229,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Add a portfolio to the user.
+     *
+     * @param Portfolio $portfolio the portfolio to add
      */
     public function addPortfolio(Portfolio $portfolio): static
     {
@@ -216,6 +244,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Remove a portfolio from the user.
+     *
+     * @param Portfolio $portfolio the portfolio to remove
      */
     public function removePortfolio(Portfolio $portfolio): static
     {
@@ -231,7 +261,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Get the categories owned by the user.
      *
-     * @return Collection<int, Category>
+     * @return Collection<int, Category> the categories collection
      */
     public function getCategories(): Collection
     {
@@ -240,6 +270,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Add a category to the user.
+     *
+     * @param Category $category the category to add
      */
     public function addCategory(Category $category): static
     {
@@ -253,6 +285,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Remove a category from the user.
+     *
+     * @param Category $category the category to remove
      */
     public function removeCategory(Category $category): static
     {
@@ -268,7 +302,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Get the tags owned by the user.
      *
-     * @return Collection<int, Tag>
+     * @return Collection<int, Tag> the tags collection
      */
     public function getTags(): Collection
     {
@@ -277,6 +311,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Add a tag to the user.
+     *
+     * @param Tag $tag the tag to add
      */
     public function addTag(Tag $tag): static
     {
@@ -290,6 +326,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Remove a tag from the user.
+     *
+     * @param Tag $tag the tag to remove
      */
     public function removeTag(Tag $tag): static
     {

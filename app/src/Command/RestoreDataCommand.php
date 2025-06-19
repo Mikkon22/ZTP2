@@ -33,6 +33,9 @@ class RestoreDataCommand extends Command
 {
     /**
      * Constructor.
+     *
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
      */
     public function __construct(private EntityManagerInterface $entityManager, private UserPasswordHasherInterface $passwordHasher)
     {
@@ -41,6 +44,11 @@ class RestoreDataCommand extends Command
 
     /**
      * Executes the command to restore initial data.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

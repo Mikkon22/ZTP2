@@ -22,6 +22,8 @@ class DefaultController extends AbstractController
 {
     /**
      * Home page route.
+     *
+     * @return Response redirects to the appropriate route based on user authentication
      */
     #[Route('/', name: 'app_home')]
     public function index(): Response

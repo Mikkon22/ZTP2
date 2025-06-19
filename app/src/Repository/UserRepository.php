@@ -30,6 +30,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 {
     /**
      * UserRepository constructor.
+     *
+     * @param ManagerRegistry $registry the manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -38,6 +40,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Save a User entity.
+     *
+     * @param User $entity the user entity to save
+     * @param bool $flush  whether to flush changes to the database
      */
     public function save(User $entity, bool $flush = false): void
     {
@@ -50,6 +55,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Remove a User entity.
+     *
+     * @param User $entity the user entity to remove
+     * @param bool $flush  whether to flush changes to the database
      */
     public function remove(User $entity, bool $flush = false): void
     {
@@ -62,6 +70,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param PasswordAuthenticatedUserInterface $user              the user whose password is being upgraded
+     * @param string                             $newHashedPassword the new hashed password
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {

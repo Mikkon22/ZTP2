@@ -62,6 +62,8 @@ class Transaction
 
     /**
      * Get the ID of the transaction.
+     *
+     * @return int|null the ID of the transaction
      */
     public function getId(): ?int
     {
@@ -70,6 +72,8 @@ class Transaction
 
     /**
      * Get the title of the transaction.
+     *
+     * @return string|null the title of the transaction
      */
     public function getTitle(): ?string
     {
@@ -78,6 +82,8 @@ class Transaction
 
     /**
      * Set the title of the transaction.
+     *
+     * @param string $title the title to set
      */
     public function setTitle(string $title): static
     {
@@ -88,6 +94,8 @@ class Transaction
 
     /**
      * Get the description of the transaction.
+     *
+     * @return string|null the description of the transaction
      */
     public function getDescription(): ?string
     {
@@ -96,6 +104,8 @@ class Transaction
 
     /**
      * Set the description of the transaction.
+     *
+     * @param string|null $description the description to set
      */
     public function setDescription(?string $description): static
     {
@@ -106,6 +116,8 @@ class Transaction
 
     /**
      * Get the amount of the transaction.
+     *
+     * @return float the amount of the transaction
      */
     public function getAmount(): float
     {
@@ -114,6 +126,8 @@ class Transaction
 
     /**
      * Set the amount of the transaction.
+     *
+     * @param float $amount the amount to set
      */
     public function setAmount(float $amount): static
     {
@@ -124,6 +138,8 @@ class Transaction
 
     /**
      * Get the date of the transaction.
+     *
+     * @return \DateTimeInterface|null the date of the transaction
      */
     public function getDate(): ?\DateTimeInterface
     {
@@ -132,6 +148,8 @@ class Transaction
 
     /**
      * Set the date of the transaction.
+     *
+     * @param \DateTimeInterface $date the date to set
      */
     public function setDate(\DateTimeInterface $date): static
     {
@@ -142,6 +160,8 @@ class Transaction
 
     /**
      * Get the portfolio associated with the transaction.
+     *
+     * @return Portfolio|null the portfolio entity
      */
     public function getPortfolio(): ?Portfolio
     {
@@ -150,6 +170,8 @@ class Transaction
 
     /**
      * Set the portfolio associated with the transaction.
+     *
+     * @param Portfolio|null $portfolio the portfolio entity to set
      */
     public function setPortfolio(?Portfolio $portfolio): static
     {
@@ -160,6 +182,8 @@ class Transaction
 
     /**
      * Get the category associated with the transaction.
+     *
+     * @return Category|null the category entity
      */
     public function getCategory(): ?Category
     {
@@ -168,6 +192,8 @@ class Transaction
 
     /**
      * Set the category associated with the transaction.
+     *
+     * @param Category|null $category the category entity to set
      */
     public function setCategory(?Category $category): static
     {
@@ -179,7 +205,7 @@ class Transaction
     /**
      * Get the tags associated with the transaction.
      *
-     * @return Collection<int, Tag>
+     * @return Collection<int, Tag> the tags collection
      */
     public function getTags(): Collection
     {
@@ -188,6 +214,8 @@ class Transaction
 
     /**
      * Add a tag to the transaction.
+     *
+     * @param Tag $tag the tag to add
      */
     public function addTag(Tag $tag): static
     {
@@ -200,6 +228,8 @@ class Transaction
 
     /**
      * Remove a tag from the transaction.
+     *
+     * @param Tag $tag the tag to remove
      */
     public function removeTag(Tag $tag): static
     {

@@ -25,6 +25,8 @@ class UserFixtures extends Fixture
 
     /**
      * UserFixtures constructor.
+     *
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher service
      */
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -33,6 +35,8 @@ class UserFixtures extends Fixture
 
     /**
      * Load users into the database.
+     *
+     * @param ObjectManager $manager the object manager for persisting entities
      */
     public function load(ObjectManager $manager): void
     {

@@ -30,6 +30,8 @@ class CreateDefaultCategoriesCommand extends Command
 {
     /**
      * Constructor.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
      */
     public function __construct(private EntityManagerInterface $entityManager)
     {
@@ -38,6 +40,11 @@ class CreateDefaultCategoriesCommand extends Command
 
     /**
      * Executes the command to create default categories.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

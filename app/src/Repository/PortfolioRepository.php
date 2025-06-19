@@ -27,6 +27,8 @@ class PortfolioRepository extends ServiceEntityRepository
 {
     /**
      * PortfolioRepository constructor.
+     *
+     * @param ManagerRegistry $registry the manager registry for Doctrine
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -35,6 +37,9 @@ class PortfolioRepository extends ServiceEntityRepository
 
     /**
      * Save a Portfolio entity.
+     *
+     * @param Portfolio $entity the portfolio entity to save
+     * @param bool      $flush  whether to flush changes to the database
      */
     public function save(Portfolio $entity, bool $flush = false): void
     {
@@ -47,6 +52,9 @@ class PortfolioRepository extends ServiceEntityRepository
 
     /**
      * Remove a Portfolio entity.
+     *
+     * @param Portfolio $entity the portfolio entity to remove
+     * @param bool      $flush  whether to flush changes to the database
      */
     public function remove(Portfolio $entity, bool $flush = false): void
     {

@@ -26,6 +26,10 @@ class TaskController extends AbstractController
 {
     /**
      * Display the list of tasks.
+     *
+     * @param TaskRepository $taskRepository the task repository
+     *
+     * @return Response the response object
      */
     #[Route('/', name: 'task_index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
@@ -37,6 +41,8 @@ class TaskController extends AbstractController
 
     /**
      * Create a new task (example, no form).
+     *
+     * @return Response the response object
      */
     #[Route('/new', name: 'task_new', methods: ['GET'])]
     public function new(): Response
@@ -53,6 +59,10 @@ class TaskController extends AbstractController
 
     /**
      * Show a task.
+     *
+     * @param Task $task the task entity
+     *
+     * @return Response the response object
      */
     #[Route('/{id}', name: 'task_show', methods: ['GET'])]
     public function show(Task $task): Response
@@ -64,6 +74,11 @@ class TaskController extends AbstractController
 
     /**
      * Toggle the completion status of a task.
+     *
+     * @param Task                   $task          the task entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}/toggle', name: 'task_toggle', methods: ['POST'])]
     public function toggle(Task $task, EntityManagerInterface $entityManager): Response

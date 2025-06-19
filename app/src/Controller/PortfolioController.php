@@ -29,6 +29,8 @@ class PortfolioController extends AbstractController
 {
     /**
      * Display the list of portfolios for the current user.
+     *
+     * @return Response the response object
      */
     #[Route('/', name: 'app_portfolio_index', methods: ['GET'])]
     public function index(): Response
@@ -40,6 +42,11 @@ class PortfolioController extends AbstractController
 
     /**
      * Create a new portfolio for the current user.
+     *
+     * @param Request                $request       the HTTP request
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/new', name: 'app_portfolio_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -65,6 +72,10 @@ class PortfolioController extends AbstractController
 
     /**
      * Show a portfolio.
+     *
+     * @param Portfolio $portfolio the portfolio entity
+     *
+     * @return Response the response object
      */
     #[Route('/{id}', name: 'app_portfolio_show', methods: ['GET'])]
     public function show(Portfolio $portfolio): Response
@@ -78,6 +89,12 @@ class PortfolioController extends AbstractController
 
     /**
      * Edit a portfolio.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Portfolio              $portfolio     the portfolio entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_portfolio_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Portfolio $portfolio, EntityManagerInterface $entityManager): Response
@@ -101,6 +118,12 @@ class PortfolioController extends AbstractController
 
     /**
      * Delete a portfolio.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Portfolio              $portfolio     the portfolio entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
      */
     #[Route('/{id}', name: 'app_portfolio_delete', methods: ['POST'])]
     public function delete(Request $request, Portfolio $portfolio, EntityManagerInterface $entityManager): Response
