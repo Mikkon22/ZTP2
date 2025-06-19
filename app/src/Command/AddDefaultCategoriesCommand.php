@@ -39,14 +39,15 @@ class AddDefaultCategoriesCommand extends Command
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
         if (!$user) {
-            $io->error(sprintf('User with email "%s" not found.', $email));
+            $io->error(\sprintf('User with email "%s" not found.', $email));
+
             return Command::FAILURE;
         }
 
         $this->categoryService->createDefaultCategories($user);
 
-        $io->success(sprintf('Default categories have been created for user "%s".', $email));
+        $io->success(\sprintf('Default categories have been created for user "%s".', $email));
 
         return Command::SUCCESS;
     }
-} 
+}

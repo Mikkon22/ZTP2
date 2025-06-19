@@ -88,4 +88,4 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
             UserFixtures::class,
         ];
     }
-} 
+}

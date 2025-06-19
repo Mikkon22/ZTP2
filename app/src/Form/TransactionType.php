@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Portfolio;
 use App\Entity\Tag;
 use App\Entity\Transaction;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,10 +18,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\GreaterThan;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class TransactionType extends AbstractType
 {
@@ -121,7 +121,7 @@ class TransactionType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) use ($user) {
+                'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->where('c.owner = :user')
                         ->orderBy('c.name', 'ASC');
@@ -196,4 +196,4 @@ class TransactionType extends AbstractType
 
         $resolver->setRequired('user');
     }
-} 
+}

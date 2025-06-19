@@ -27,7 +27,7 @@ class TaskController extends AbstractController
         $task = new Task();
         $task->setTitle('Example Task');
         $task->setDescription('This is an example task created without a form.');
-        
+
         return $this->render('task/new.html.twig', [
             'task' => $task,
         ]);
@@ -49,4 +49,4 @@ class TaskController extends AbstractController
 
         return $this->redirectToRoute('task_index');
     }
-} 
+}

@@ -42,6 +42,7 @@ class Category
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -52,10 +53,11 @@ class Category
 
     public function setType(string $type): static
     {
-        if (!in_array($type, ['income', 'expense'])) {
+        if (!\in_array($type, ['income', 'expense'])) {
             throw new \InvalidArgumentException('Invalid category type');
         }
         $this->type = $type;
+
         return $this;
     }
 
@@ -67,6 +69,7 @@ class Category
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -78,6 +81,7 @@ class Category
     public function setColor(?string $color): static
     {
         $this->color = $color;
+
         return $this;
     }
 
@@ -89,6 +93,7 @@ class Category
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
+
         return $this;
     }
-} 
+}

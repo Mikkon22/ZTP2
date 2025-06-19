@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Hello controller.
  */
@@ -36,9 +37,9 @@ class HelloController extends AbstractController
     public function index(): Response
     {
         $name = 'John Doe';
-        
+
         return $this->render('hello/index.html.twig', [
-            'name' => $name
+            'name' => $name,
         ]);
     }
 
@@ -56,4 +57,4 @@ class HelloController extends AbstractController
     {
         return $this->render('hello/advanced.html.twig');
     }
-} 
+}

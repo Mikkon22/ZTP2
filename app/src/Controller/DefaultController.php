@@ -14,6 +14,7 @@ class DefaultController extends AbstractController
         if ($this->getUser()) {
             return $this->redirectToRoute('app_portfolio_index');
         }
+
         return $this->redirectToRoute('app_register');
     }
-} 
+}

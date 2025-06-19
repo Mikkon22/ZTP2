@@ -32,6 +32,7 @@ class CreateAdminUserCommand extends Command
 
         if ($existingAdmin) {
             $output->writeln('Admin user already exists.');
+
             return Command::SUCCESS;
         }
 
@@ -41,7 +42,7 @@ class CreateAdminUserCommand extends Command
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setFirstName('Admin');
         $admin->setLastName('User');
-        
+
         // Hash the password
         $hashedPassword = $this->passwordHasher->hashPassword($admin, 'admin123');
         $admin->setPassword($hashedPassword);
@@ -55,4 +56,4 @@ class CreateAdminUserCommand extends Command
 
         return Command::SUCCESS;
     }
-} 
+}

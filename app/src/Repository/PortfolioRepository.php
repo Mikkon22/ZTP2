@@ -38,4 +38,4 @@ class PortfolioRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-} 
+}

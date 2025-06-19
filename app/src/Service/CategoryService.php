@@ -10,7 +10,8 @@ class CategoryService
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-    ) {}
+    ) {
+    }
 
     public function createDefaultCategories(User $user): void
     {
@@ -41,10 +42,10 @@ class CategoryService
             $category->setColor($categoryData['color']);
             $category->setType($categoryData['type']);
             $category->setOwner($user);
-            
+
             $this->entityManager->persist($category);
         }
 
         $this->entityManager->flush();
     }
-} 
+}

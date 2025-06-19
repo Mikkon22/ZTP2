@@ -31,6 +31,7 @@ class CreateDefaultCategoriesCommand extends Command
 
         if (!$admin) {
             $output->writeln('Admin user not found. Please create an admin user first.');
+
             return Command::FAILURE;
         }
 
@@ -67,11 +68,11 @@ class CreateDefaultCategoriesCommand extends Command
                 $category->setColor($categoryData['color']);
                 $category->setType($categoryData['type']);
                 $category->setOwner($admin);
-                
+
                 $this->entityManager->persist($category);
-                $output->writeln(sprintf('Created category: %s', $categoryData['name']));
+                $output->writeln(\sprintf('Created category: %s', $categoryData['name']));
             } else {
-                $output->writeln(sprintf('Category already exists: %s', $categoryData['name']));
+                $output->writeln(\sprintf('Category already exists: %s', $categoryData['name']));
             }
         }
 
@@ -80,4 +81,4 @@ class CreateDefaultCategoriesCommand extends Command
 
         return Command::SUCCESS;
     }
-} 
+}

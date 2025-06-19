@@ -35,8 +35,8 @@ class RecalculatePortfolioBalancesCommand extends Command
             $newBalance = $portfolio->getBalance();
 
             if ($oldBalance !== $newBalance) {
-                $count++;
-                $io->text(sprintf(
+                ++$count;
+                $io->text(\sprintf(
                     'Updated portfolio "%s" balance from %.2f to %.2f',
                     $portfolio->getName(),
                     $oldBalance,
@@ -48,11 +48,11 @@ class RecalculatePortfolioBalancesCommand extends Command
         $this->entityManager->flush();
 
         if ($count > 0) {
-            $io->success(sprintf('Successfully updated %d portfolio balances.', $count));
+            $io->success(\sprintf('Successfully updated %d portfolio balances.', $count));
         } else {
             $io->info('All portfolio balances are correct.');
         }
 
         return Command::SUCCESS;
     }
-} 
+}

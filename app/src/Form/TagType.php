@@ -31,4 +31,4 @@ class TagType extends AbstractType
             'data_class' => Tag::class,
         ]);
     }
-} 
+}

@@ -38,13 +38,15 @@ class PromoteUserCommand extends Command
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
         if (!$user) {
-            $io->error(sprintf('User with email "%s" not found.', $email));
+            $io->error(\sprintf('User with email "%s" not found.', $email));
+
             return Command::FAILURE;
         }
 
         $roles = $user->getRoles();
-        if (in_array('ROLE_ADMIN', $roles)) {
-            $io->warning(sprintf('User "%s" is already an admin.', $email));
+        if (\in_array('ROLE_ADMIN', $roles)) {
+            $io->warning(\sprintf('User "%s" is already an admin.', $email));
+
             return Command::SUCCESS;
         }
 
@@ -54,8 +56,8 @@ class PromoteUserCommand extends Command
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $io->success(sprintf('User "%s" has been promoted to admin.', $email));
+        $io->success(\sprintf('User "%s" has been promoted to admin.', $email));
 
         return Command::SUCCESS;
     }
-} 
+}

@@ -28,7 +28,7 @@ class CategoryController extends AbstractController
     {
         $category = new Category();
         $category->setOwner($this->getUser());
-        
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
@@ -87,4 +87,4 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('app_category_index');
     }
-} 
+}

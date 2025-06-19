@@ -20,7 +20,7 @@ class CreateUserCommand extends Command
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher
+        private UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();
     }
@@ -48,8 +48,8 @@ class CreateUserCommand extends Command
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $io->success(sprintf('User %s was created successfully!', $email));
+        $io->success(\sprintf('User %s was created successfully!', $email));
 
         return Command::SUCCESS;
     }
-} 
+}

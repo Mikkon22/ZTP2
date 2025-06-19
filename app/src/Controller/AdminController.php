@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -40,7 +39,8 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', sprintf('User "%s" has been updated successfully!', $user->getEmail()));
+            $this->addFlash('success', \sprintf('User "%s" has been updated successfully!', $user->getEmail()));
+
             return $this->redirectToRoute('app_admin_users');
         }
 
@@ -69,7 +69,8 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', sprintf('Password for user %s has been changed successfully!', $user->getEmail()));
+            $this->addFlash('success', \sprintf('Password for user %s has been changed successfully!', $user->getEmail()));
+
             return $this->redirectToRoute('app_admin_users');
         }
 
@@ -78,4 +79,4 @@ class AdminController extends AbstractController
             'user' => $user,
         ]);
     }
-} 
+}

@@ -50,6 +50,7 @@ class Portfolio
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -61,6 +62,7 @@ class Portfolio
     public function setType(string $type): static
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -72,6 +74,7 @@ class Portfolio
     public function setBalance(float $balance): static
     {
         $this->balance = $balance;
+
         return $this;
     }
 
@@ -81,6 +84,7 @@ class Portfolio
         foreach ($this->transactions as $transaction) {
             $this->balance += $transaction->getAmount();
         }
+
         return $this;
     }
 
@@ -92,6 +96,7 @@ class Portfolio
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
+
         return $this;
     }
 
@@ -125,4 +130,4 @@ class Portfolio
 
         return $this;
     }
-} 
+}

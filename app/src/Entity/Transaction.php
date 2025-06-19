@@ -58,6 +58,7 @@ class Transaction
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -69,6 +70,7 @@ class Transaction
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -80,6 +82,7 @@ class Transaction
     public function setAmount(float $amount): static
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -91,6 +94,7 @@ class Transaction
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
         return $this;
     }
 
@@ -102,6 +106,7 @@ class Transaction
     public function setPortfolio(?Portfolio $portfolio): static
     {
         $this->portfolio = $portfolio;
+
         return $this;
     }
 
@@ -113,6 +118,7 @@ class Transaction
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -136,6 +142,7 @@ class Transaction
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);
+
         return $this;
     }
-} 
+}

@@ -28,7 +28,7 @@ class PortfolioController extends AbstractController
     {
         $portfolio = new Portfolio();
         $portfolio->setOwner($this->getUser());
-        
+
         $form = $this->createForm(PortfolioType::class, $portfolio);
         $form->handleRequest($request);
 
@@ -87,4 +87,4 @@ class PortfolioController extends AbstractController
 
         return $this->redirectToRoute('app_portfolio_index');
     }
-} 
+}

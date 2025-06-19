@@ -43,6 +43,7 @@ class Tag
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -54,6 +55,7 @@ class Tag
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
+
         return $this;
     }
 
@@ -88,4 +90,4 @@ class Tag
     {
         return $this->name;
     }
-} 
+}

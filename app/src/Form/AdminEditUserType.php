@@ -48,4 +48,4 @@ class AdminEditUserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
-} 
+}

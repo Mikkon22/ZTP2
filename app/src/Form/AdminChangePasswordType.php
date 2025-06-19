@@ -45,4 +45,4 @@ class AdminChangePasswordType extends AbstractType
     {
         $resolver->setDefaults([]);
     }
-} 
+}

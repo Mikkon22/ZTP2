@@ -31,7 +31,7 @@ class TagController extends AbstractController
     {
         $tag = new Tag();
         $tag->setOwner($this->getUser());
-        
+
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
@@ -40,6 +40,7 @@ class TagController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Tag created successfully.');
+
             return $this->redirectToRoute('app_tag_index');
         }
 
@@ -53,7 +54,7 @@ class TagController extends AbstractController
     public function ajaxNew(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        
+
         if (!$this->isCsrfTokenValid('ajax-tag', $request->headers->get('X-CSRF-TOKEN'))) {
             return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], 400);
         }
@@ -92,6 +93,7 @@ class TagController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Tag updated successfully.');
+
             return $this->redirectToRoute('app_tag_index');
         }
 
@@ -117,4 +119,4 @@ class TagController extends AbstractController
 
         return $this->redirectToRoute('app_tag_index');
     }
-} 
+}

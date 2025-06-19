@@ -37,4 +37,4 @@ class PortfolioType extends AbstractType
             'data_class' => Portfolio::class,
         ]);
     }
-} 
+}

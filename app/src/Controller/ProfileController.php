@@ -36,6 +36,7 @@ class ProfileController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Your password has been changed successfully!');
+
             return $this->redirectToRoute('app_portfolio_index');
         }
 
@@ -43,4 +44,4 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-} 
+}

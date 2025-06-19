@@ -2,9 +2,9 @@
 
 namespace App\Command;
 
-use App\Entity\User;
-use App\Entity\Portfolio;
 use App\Entity\Category;
+use App\Entity\Portfolio;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,7 +21,7 @@ class RestoreDataCommand extends Command
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher
+        private UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();
     }
@@ -36,10 +36,10 @@ class RestoreDataCommand extends Command
         $user->setFirstName('Admin');
         $user->setLastName('User');
         $user->setRoles(['ROLE_USER']);
-        
+
         $hashedPassword = $this->passwordHasher->hashPassword($user, 'password123');
         $user->setPassword($hashedPassword);
-        
+
         $this->entityManager->persist($user);
 
         // Create default categories
@@ -76,9 +76,9 @@ class RestoreDataCommand extends Command
         $io->note('You can now log in with:');
         $io->listing([
             'Email: admin@example.com',
-            'Password: password123'
+            'Password: password123',
         ]);
 
         return Command::SUCCESS;
     }
-} 
+}

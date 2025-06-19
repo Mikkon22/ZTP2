@@ -32,7 +32,7 @@ class UserFixtures extends Fixture
         $admin->setPassword($hashedPassword);
 
         $manager->persist($admin);
-        
+
         // Create regular user
         $user = new User();
         $user->setEmail('user@example.com');
@@ -47,10 +47,10 @@ class UserFixtures extends Fixture
         $user->setPassword($hashedPassword);
 
         $manager->persist($user);
-        
+
         $manager->flush();
 
         $this->addReference('admin-user', $admin);
         $this->addReference('default-user', $user);
     }
-} 
+}

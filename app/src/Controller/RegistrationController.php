@@ -16,10 +16,10 @@ class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
     public function register(
-        Request $request, 
-        UserPasswordHasherInterface $userPasswordHasher, 
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
-        CategoryService $categoryService
+        CategoryService $categoryService,
     ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -41,6 +41,7 @@ class RegistrationController extends AbstractController
             $categoryService->createDefaultCategories($user);
 
             $this->addFlash('success', 'Your account has been created successfully!');
+
             return $this->redirectToRoute('app_login');
         }
 
@@ -48,4 +49,4 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-} 
+}

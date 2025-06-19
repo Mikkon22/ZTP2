@@ -15,7 +15,7 @@ class PortfolioVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])
+        return \in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])
             && $subject instanceof Portfolio;
     }
 
@@ -29,7 +29,7 @@ class PortfolioVoter extends Voter
         /** @var Portfolio $portfolio */
         $portfolio = $subject;
 
-        return match($attribute) {
+        return match ($attribute) {
             self::VIEW, self::EDIT, self::DELETE => $this->canAccess($portfolio, $user),
             default => false,
         };
@@ -39,4 +39,4 @@ class PortfolioVoter extends Voter
     {
         return $portfolio->getOwner() === $user;
     }
-} 
+}
