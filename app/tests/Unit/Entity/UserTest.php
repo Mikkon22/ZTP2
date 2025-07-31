@@ -63,7 +63,7 @@ class UserTest extends TestCase
     {
         $this->user->setFirstName('John');
         $this->user->setLastName('Doe');
-        
+
         $this->assertEquals('John Doe', $this->user->getFullName());
     }
-} 
+}
