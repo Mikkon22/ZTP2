@@ -50,6 +50,6 @@ class TagTest extends TestCase
     public function testToString(): void
     {
         $this->tag->setName('Important');
-        $this->assertEquals('Important', (string)$this->tag);
+        $this->assertEquals('Important', (string) $this->tag);
     }
-} 
+}

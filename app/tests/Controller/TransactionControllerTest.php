@@ -32,4 +32,4 @@ class TransactionControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
     }
-} 
+}

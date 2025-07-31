@@ -49,4 +49,4 @@ class PortfolioControllerTest extends WebTestCase
         ]);
         $this->assertResponseRedirects('/portfolio/');
     }
-} 
+}

@@ -67,4 +67,4 @@ class TransactionTest extends TestCase
         $this->assertSame($this->portfolio, $this->transaction->getPortfolio());
         $this->assertSame($this->category, $this->transaction->getCategory());
     }
-} 
+}

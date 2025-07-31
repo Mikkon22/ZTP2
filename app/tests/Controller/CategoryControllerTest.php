@@ -47,4 +47,4 @@ class CategoryControllerTest extends WebTestCase
         ]);
         $this->assertResponseRedirects('/category/');
     }
-} 
+}

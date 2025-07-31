@@ -56,4 +56,4 @@ class PortfolioTest extends TestCase
         $this->portfolio->setOwner($this->user);
         $this->assertSame($this->user, $this->portfolio->getOwner());
     }
-} 
+}

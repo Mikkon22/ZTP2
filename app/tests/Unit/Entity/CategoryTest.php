@@ -48,4 +48,4 @@ class CategoryTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->category->setType('invalid_type');
     }
-} 
+}
