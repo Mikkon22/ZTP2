@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\Category;
@@ -10,18 +19,33 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Command to create default expense and income categories for the admin user.
+ */
 #[AsCommand(
     name: 'app:create-default-categories',
     description: 'Creates default expense and income categories',
 )]
 class CreateDefaultCategoriesCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
+     */
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
         parent::__construct();
     }
 
+    /**
+     * Executes the command to create default categories.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Creating default categories...');
@@ -31,6 +55,7 @@ class CreateDefaultCategoriesCommand extends Command
 
         if (!$admin) {
             $output->writeln('Admin user not found. Please create an admin user first.');
+
             return Command::FAILURE;
         }
 
@@ -67,11 +92,11 @@ class CreateDefaultCategoriesCommand extends Command
                 $category->setColor($categoryData['color']);
                 $category->setType($categoryData['type']);
                 $category->setOwner($admin);
-                
+
                 $this->entityManager->persist($category);
-                $output->writeln(sprintf('Created category: %s', $categoryData['name']));
+                $output->writeln(\sprintf('Created category: %s', $categoryData['name']));
             } else {
-                $output->writeln(sprintf('Category already exists: %s', $categoryData['name']));
+                $output->writeln(\sprintf('Category already exists: %s', $categoryData['name']));
             }
         }
 
@@ -80,4 +105,4 @@ class CreateDefaultCategoriesCommand extends Command
 
         return Command::SUCCESS;
     }
-} 
+}

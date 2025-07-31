@@ -1,11 +1,21 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Portfolio;
 use App\Entity\Tag;
 use App\Entity\Transaction;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,13 +27,21 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\GreaterThan;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * Form type for Transaction entity.
+ */
 class TransactionType extends AbstractType
 {
+    /**
+     * Builds the form for Transaction entity.
+     *
+     * @param FormBuilderInterface $builder the form builder
+     * @param array                $options the options for this form
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var UserInterface $user */
@@ -121,7 +139,7 @@ class TransactionType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) use ($user) {
+                'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->where('c.owner = :user')
                         ->orderBy('c.name', 'ASC');
@@ -147,7 +165,7 @@ class TransactionType extends AbstractType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user): void {
             $form = $event->getForm();
             $transaction = $event->getData();
             $type = $transaction && $transaction->getAmount() ? ($transaction->getAmount() > 0 ? 'income' : 'expense') : 'expense';
@@ -167,7 +185,7 @@ class TransactionType extends AbstractType
             ]);
         });
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($user) {
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($user): void {
             $form = $event->getForm();
             $data = $event->getData();
             $type = $data['transactionType'] ?? 'expense';
@@ -188,6 +206,11 @@ class TransactionType extends AbstractType
         });
     }
 
+    /**
+     * Configures the options for this form type.
+     *
+     * @param OptionsResolver $resolver the resolver for the options
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -196,4 +219,4 @@ class TransactionType extends AbstractType
 
         $resolver->setRequired('user');
     }
-} 
+}

@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 /**
  * Hello controller.
  */
@@ -16,6 +26,8 @@ class HelloController extends AbstractController
 {
     /**
      * Homepage redirect to hello.
+     *
+     * @return Response redirects to hello index
      */
     #[Route('/', name: 'homepage')]
     public function homepage(): Response
@@ -26,7 +38,7 @@ class HelloController extends AbstractController
     /**
      * Index action.
      *
-     * @return Response HTTP response
+     * @return Response the response object
      */
     #[Route(
         '/hello',
@@ -36,16 +48,16 @@ class HelloController extends AbstractController
     public function index(): Response
     {
         $name = 'John Doe';
-        
+
         return $this->render('hello/index.html.twig', [
-            'name' => $name
+            'name' => $name,
         ]);
     }
 
     /**
      * Advanced Twig examples.
      *
-     * @return Response HTTP response
+     * @return Response the response object
      */
     #[Route(
         '/hello/advanced',
@@ -56,4 +68,4 @@ class HelloController extends AbstractController
     {
         return $this->render('hello/advanced.html.twig');
     }
-} 
+}

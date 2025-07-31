@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -11,11 +20,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/admin')]
+/**
+ * Controller for admin user management.
+ */
 class AdminController extends AbstractController
 {
+    /**
+     * Display the list of users for admin.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/users', name: 'app_admin_users')]
     public function users(EntityManagerInterface $entityManager): Response
     {
@@ -28,6 +46,15 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Edit a user as admin.
+     *
+     * @param Request                $request       the HTTP request
+     * @param User                   $user          the user entity to edit
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/user/{id}/edit', name: 'app_admin_edit_user')]
     public function editUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
@@ -40,7 +67,8 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', sprintf('User "%s" has been updated successfully!', $user->getEmail()));
+            $this->addFlash('success', \sprintf('User "%s" has been updated successfully!', $user->getEmail()));
+
             return $this->redirectToRoute('app_admin_users');
         }
 
@@ -50,6 +78,16 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Change a user's password as admin.
+     *
+     * @param Request                     $request        the HTTP request
+     * @param User                        $user           the user entity whose password is to be changed
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/user/{id}/change-password', name: 'app_admin_change_user_password')]
     public function changeUserPassword(Request $request, User $user, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -69,7 +107,8 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', sprintf('Password for user %s has been changed successfully!', $user->getEmail()));
+            $this->addFlash('success', \sprintf('Password for user %s has been changed successfully!', $user->getEmail()));
+
             return $this->redirectToRoute('app_admin_users');
         }
 
@@ -78,4 +117,4 @@ class AdminController extends AbstractController
             'user' => $user,
         ]);
     }
-} 
+}

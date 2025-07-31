@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Form\ChangePasswordFormType;
@@ -11,8 +20,20 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * Controller responsible for user profile actions.
+ */
 class ProfileController extends AbstractController
 {
+    /**
+     * Handles password change for the logged-in user.
+     *
+     * @param Request                     $request        the HTTP request
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/profile/change-password', name: 'app_change_password')]
     public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -36,6 +57,7 @@ class ProfileController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Your password has been changed successfully!');
+
             return $this->redirectToRoute('app_portfolio_index');
         }
 
@@ -43,4 +65,4 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-} 
+}

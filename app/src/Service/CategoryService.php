@@ -1,17 +1,39 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Service;
 
 use App\Entity\Category;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Service for handling category-related business logic.
+ */
 class CategoryService
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {}
+    /**
+     * CategoryService constructor.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
+     */
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
+    /**
+     * Creates default categories for a user.
+     *
+     * @param User $user the user entity for whom to create categories
+     */
     public function createDefaultCategories(User $user): void
     {
         // Default expense categories
@@ -41,10 +63,10 @@ class CategoryService
             $category->setColor($categoryData['color']);
             $category->setType($categoryData['type']);
             $category->setOwner($user);
-            
+
             $this->entityManager->persist($category);
         }
 
         $this->entityManager->flush();
     }
-} 
+}

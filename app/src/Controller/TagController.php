@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Tag;
@@ -12,10 +21,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Controller responsible for managing tags.
+ */
 #[Route('/tag')]
 #[IsGranted('ROLE_USER')]
 class TagController extends AbstractController
 {
+    /**
+     * Displays a list of tags for the current user.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/', name: 'app_tag_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -26,12 +45,20 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles creation of a new tag via form.
+     *
+     * @param Request                $request       the HTTP request
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/new', name: 'app_tag_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $tag = new Tag();
         $tag->setOwner($this->getUser());
-        
+
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
@@ -40,6 +67,7 @@ class TagController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Tag created successfully.');
+
             return $this->redirectToRoute('app_tag_index');
         }
 
@@ -49,11 +77,19 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles creation of a new tag via AJAX.
+     *
+     * @param Request                $request       the HTTP request
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return JsonResponse the JSON response object
+     */
     #[Route('/ajax/new', name: 'app_tag_ajax_new', methods: ['POST'])]
     public function ajaxNew(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        
+
         if (!$this->isCsrfTokenValid('ajax-tag', $request->headers->get('X-CSRF-TOKEN'))) {
             return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], 400);
         }
@@ -78,6 +114,15 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles editing of an existing tag.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Tag                    $tag           the tag entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/{id}/edit', name: 'app_tag_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
     {
@@ -92,6 +137,7 @@ class TagController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Tag updated successfully.');
+
             return $this->redirectToRoute('app_tag_index');
         }
 
@@ -101,6 +147,15 @@ class TagController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles deletion of a tag.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Tag                    $tag           the tag entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/{id}', name: 'app_tag_delete', methods: ['POST'])]
     public function delete(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
     {
@@ -117,4 +172,4 @@ class TagController extends AbstractController
 
         return $this->redirectToRoute('app_tag_index');
     }
-} 
+}

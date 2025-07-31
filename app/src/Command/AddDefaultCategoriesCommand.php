@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -12,25 +21,43 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Command to add default categories for a specific user.
+ */
 #[AsCommand(
     name: 'app:add-default-categories',
     description: 'Adds default categories for a specific user',
 )]
 class AddDefaultCategoriesCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-        private CategoryService $categoryService,
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param EntityManagerInterface $entityManager   the entity manager
+     * @param CategoryService        $categoryService the category service
+     */
+    public function __construct(private EntityManagerInterface $entityManager, private CategoryService $categoryService)
+    {
         parent::__construct();
     }
 
+    /**
+     * Configures the command arguments and options.
+     */
     protected function configure(): void
     {
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'Email of the user to add categories for');
     }
 
+    /**
+     * Executes the command to add default categories for a user.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -39,14 +66,15 @@ class AddDefaultCategoriesCommand extends Command
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
         if (!$user) {
-            $io->error(sprintf('User with email "%s" not found.', $email));
+            $io->error(\sprintf('User with email "%s" not found.', $email));
+
             return Command::FAILURE;
         }
 
         $this->categoryService->createDefaultCategories($user);
 
-        $io->success(sprintf('Default categories have been created for user "%s".', $email));
+        $io->success(\sprintf('Default categories have been created for user "%s".', $email));
 
         return Command::SUCCESS;
     }
-} 
+}

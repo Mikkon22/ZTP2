@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -7,15 +16,28 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * Data fixture for loading default users.
+ */
 class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
 
+    /**
+     * UserFixtures constructor.
+     *
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher service
+     */
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
     }
 
+    /**
+     * Load users into the database.
+     *
+     * @param ObjectManager $manager the object manager for persisting entities
+     */
     public function load(ObjectManager $manager): void
     {
         // Create admin user
@@ -32,7 +54,7 @@ class UserFixtures extends Fixture
         $admin->setPassword($hashedPassword);
 
         $manager->persist($admin);
-        
+
         // Create regular user
         $user = new User();
         $user->setEmail('user@example.com');
@@ -47,10 +69,10 @@ class UserFixtures extends Fixture
         $user->setPassword($hashedPassword);
 
         $manager->persist($user);
-        
+
         $manager->flush();
 
         $this->addReference('admin-user', $admin);
         $this->addReference('default-user', $user);
     }
-} 
+}

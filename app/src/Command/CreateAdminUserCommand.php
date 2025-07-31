@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\User;
@@ -10,19 +19,34 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * Command to create the admin user.
+ */
 #[AsCommand(
     name: 'app:create-admin-user',
     description: 'Creates the admin user',
 )]
 class CreateAdminUserCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher,
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
+     */
+    public function __construct(private EntityManagerInterface $entityManager, private UserPasswordHasherInterface $passwordHasher)
+    {
         parent::__construct();
     }
 
+    /**
+     * Executes the command to create the admin user.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Creating admin user...');
@@ -32,6 +56,7 @@ class CreateAdminUserCommand extends Command
 
         if ($existingAdmin) {
             $output->writeln('Admin user already exists.');
+
             return Command::SUCCESS;
         }
 
@@ -41,7 +66,7 @@ class CreateAdminUserCommand extends Command
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setFirstName('Admin');
         $admin->setLastName('User');
-        
+
         // Hash the password
         $hashedPassword = $this->passwordHasher->hashPassword($admin, 'admin123');
         $admin->setPassword($hashedPassword);
@@ -55,4 +80,4 @@ class CreateAdminUserCommand extends Command
 
         return Command::SUCCESS;
     }
-} 
+}

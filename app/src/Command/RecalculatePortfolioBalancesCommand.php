@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
 use App\Entity\Portfolio;
@@ -10,18 +19,33 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Command to recalculate all portfolio balances based on their transactions.
+ */
 #[AsCommand(
     name: 'app:recalculate-portfolio-balances',
     description: 'Recalculates all portfolio balances based on their transactions',
 )]
 class RecalculatePortfolioBalancesCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param EntityManagerInterface $entityManager the entity manager
+     */
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
         parent::__construct();
     }
 
+    /**
+     * Executes the command to recalculate portfolio balances.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -35,8 +59,8 @@ class RecalculatePortfolioBalancesCommand extends Command
             $newBalance = $portfolio->getBalance();
 
             if ($oldBalance !== $newBalance) {
-                $count++;
-                $io->text(sprintf(
+                ++$count;
+                $io->text(\sprintf(
                     'Updated portfolio "%s" balance from %.2f to %.2f',
                     $portfolio->getName(),
                     $oldBalance,
@@ -48,11 +72,11 @@ class RecalculatePortfolioBalancesCommand extends Command
         $this->entityManager->flush();
 
         if ($count > 0) {
-            $io->success(sprintf('Successfully updated %d portfolio balances.', $count));
+            $io->success(\sprintf('Successfully updated %d portfolio balances.', $count));
         } else {
             $io->info('All portfolio balances are correct.');
         }
 
         return Command::SUCCESS;
     }
-} 
+}

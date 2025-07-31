@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -11,10 +20,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Controller responsible for managing categories.
+ */
 #[Route('/category')]
 #[IsGranted('ROLE_USER')]
 class CategoryController extends AbstractController
 {
+    /**
+     * Displays a list of categories for the current user.
+     *
+     * @return Response the response object
+     */
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(): Response
     {
@@ -23,12 +40,20 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles creation of a new category.
+     *
+     * @param Request                $request       the HTTP request
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $category = new Category();
         $category->setOwner($this->getUser());
-        
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
@@ -45,6 +70,13 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Displays a single category.
+     *
+     * @param Category $category the category entity
+     *
+     * @return Response the response object
+     */
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
@@ -55,6 +87,15 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles editing of a category.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Category               $category      the category entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
@@ -75,6 +116,15 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles deletion of a category.
+     *
+     * @param Request                $request       the HTTP request
+     * @param Category               $category      the category entity
+     * @param EntityManagerInterface $entityManager the entity manager
+     *
+     * @return Response the response object
+     */
     #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
@@ -87,4 +137,4 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('app_category_index');
     }
-} 
+}

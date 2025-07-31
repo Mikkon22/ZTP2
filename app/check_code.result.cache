@@ -1,0 +1,101 @@
+
+Found 0 of 43 files that can be fixed in 0.693 seconds, 18.00 MB memory used
+WARNING: The Symfony standard uses 1 deprecated sniff
+-------------------------------------------------------------------------------
+-  Generic.Functions.CallTimePassByReference
+   This sniff has been deprecated since v3.12.1 and will be removed in v4.0.0.
+
+Deprecated sniffs are still run, but will stop working at some point in the future.
+
+
+FILE: /home/wwwroot/app/src/Entity/Category.php
+----------------------------------------------------------------------
+FOUND 5 ERRORS AFFECTING 5 LINES
+----------------------------------------------------------------------
+  68 | ERROR | Missing @return tag in function comment
+  90 | ERROR | Missing @return tag in function comment
+ 115 | ERROR | Missing @return tag in function comment
+ 137 | ERROR | Missing @return tag in function comment
+ 159 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Transaction.php
+----------------------------------------------------------------------
+FOUND 8 ERRORS AFFECTING 8 LINES
+----------------------------------------------------------------------
+  87 | ERROR | Missing @return tag in function comment
+ 109 | ERROR | Missing @return tag in function comment
+ 131 | ERROR | Missing @return tag in function comment
+ 153 | ERROR | Missing @return tag in function comment
+ 175 | ERROR | Missing @return tag in function comment
+ 197 | ERROR | Missing @return tag in function comment
+ 219 | ERROR | Missing @return tag in function comment
+ 233 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Tag.php
+----------------------------------------------------------------------
+FOUND 4 ERRORS AFFECTING 4 LINES
+----------------------------------------------------------------------
+  72 | ERROR | Missing @return tag in function comment
+  94 | ERROR | Missing @return tag in function comment
+ 116 | ERROR | Missing @return tag in function comment
+ 131 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/User.php
+----------------------------------------------------------------------
+FOUND 11 ERRORS AFFECTING 11 LINES
+----------------------------------------------------------------------
+  93 | ERROR | Missing @return tag in function comment
+ 128 | ERROR | Missing @return tag in function comment
+ 150 | ERROR | Missing @return tag in function comment
+ 180 | ERROR | Missing @return tag in function comment
+ 202 | ERROR | Missing @return tag in function comment
+ 234 | ERROR | Missing @return tag in function comment
+ 249 | ERROR | Missing @return tag in function comment
+ 275 | ERROR | Missing @return tag in function comment
+ 290 | ERROR | Missing @return tag in function comment
+ 316 | ERROR | Missing @return tag in function comment
+ 331 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+
+FILE: /home/wwwroot/app/src/Entity/Portfolio.php
+----------------------------------------------------------------------
+FOUND 7 ERRORS AFFECTING 7 LINES
+----------------------------------------------------------------------
+  79 | ERROR | Missing @return tag in function comment
+ 101 | ERROR | Missing @return tag in function comment
+ 123 | ERROR | Missing @return tag in function comment
+ 133 | ERROR | Missing @return tag in function comment
+ 158 | ERROR | Missing @return tag in function comment
+ 180 | ERROR | Missing @return tag in function comment
+ 196 | ERROR | Missing @return tag in function comment
+----------------------------------------------------------------------
+
+Time: 1.03 secs; Memory: 10MB
+
+ ------- -------- ---- ---------------------- 
+  State   Domain   Id   Message Preview (en)  
+ ------- -------- ---- ---------------------- 
+
+ ------- -------- ---- ---------------------- ------------------------------- 
+  State   Domain   Id   Message Preview (pl)   Fallback Message Preview (en)  
+ ------- -------- ---- ---------------------- ------------------------------- 
+
+[notice] Migrating up to DoctrineMigrations\Version20250610121818
+[warning] Migration DoctrineMigrations\Version20250610113734 was executed but did not result in any SQL statements.
+[warning] Migration DoctrineMigrations\Version20250610121818 was executed but did not result in any SQL statements.
+[notice] finished in 209.1ms, used 24M memory, 5 migrations executed, 19 sql queries
+
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20250610121818                                        
+
+
+   > purging database
+   > loading App\DataFixtures\AppFixtures
+   > loading App\DataFixtures\UserFixtures
+   > loading App\DataFixtures\CategoryFixtures

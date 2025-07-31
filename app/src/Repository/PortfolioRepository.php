@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Repository;
 
 use App\Entity\Portfolio;
@@ -16,11 +25,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PortfolioRepository extends ServiceEntityRepository
 {
+    /**
+     * PortfolioRepository constructor.
+     *
+     * @param ManagerRegistry $registry the manager registry for Doctrine
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Portfolio::class);
     }
 
+    /**
+     * Save a Portfolio entity.
+     *
+     * @param Portfolio $entity the portfolio entity to save
+     * @param bool      $flush  whether to flush changes to the database
+     */
     public function save(Portfolio $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +50,12 @@ class PortfolioRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove a Portfolio entity.
+     *
+     * @param Portfolio $entity the portfolio entity to remove
+     * @param bool      $flush  whether to flush changes to the database
+     */
     public function remove(Portfolio $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -38,4 +64,4 @@ class PortfolioRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-} 
+}

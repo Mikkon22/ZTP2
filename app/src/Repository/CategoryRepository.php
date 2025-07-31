@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your@email.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Repository;
 
 use App\Entity\Category;
@@ -16,11 +25,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    /**
+     * CategoryRepository constructor.
+     *
+     * @param ManagerRegistry $registry the manager registry for Doctrine
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
     }
 
+    /**
+     * Save a Category entity.
+     *
+     * @param Category $entity the category entity to save
+     * @param bool     $flush  whether to flush changes to the database
+     */
     public function save(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +50,12 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove a Category entity.
+     *
+     * @param Category $entity the category entity to remove
+     * @param bool     $flush  whether to flush changes to the database
+     */
     public function remove(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -38,4 +64,4 @@ class CategoryRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-} 
+}

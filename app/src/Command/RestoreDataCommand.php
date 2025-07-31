@@ -1,10 +1,19 @@
 <?php
 
+/**
+ * This file is part of the ZTP2-2 project.
+ *
+ * (c) Your Name <your.email@example.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Command;
 
-use App\Entity\User;
-use App\Entity\Portfolio;
 use App\Entity\Category;
+use App\Entity\Portfolio;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -13,19 +22,34 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * Command to restore initial application data.
+ */
 #[AsCommand(
     name: 'app:restore-data',
     description: 'Restores initial application data',
 )]
 class RestoreDataCommand extends Command
 {
-    public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
+     */
+    public function __construct(private EntityManagerInterface $entityManager, private UserPasswordHasherInterface $passwordHasher)
+    {
         parent::__construct();
     }
 
+    /**
+     * Executes the command to restore initial data.
+     *
+     * @param InputInterface  $input  the input interface
+     * @param OutputInterface $output the output interface
+     *
+     * @return int the command exit code
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -36,10 +60,10 @@ class RestoreDataCommand extends Command
         $user->setFirstName('Admin');
         $user->setLastName('User');
         $user->setRoles(['ROLE_USER']);
-        
+
         $hashedPassword = $this->passwordHasher->hashPassword($user, 'password123');
         $user->setPassword($hashedPassword);
-        
+
         $this->entityManager->persist($user);
 
         // Create default categories
@@ -76,9 +100,9 @@ class RestoreDataCommand extends Command
         $io->note('You can now log in with:');
         $io->listing([
             'Email: admin@example.com',
-            'Password: password123'
+            'Password: password123',
         ]);
 
         return Command::SUCCESS;
     }
-} 
+}

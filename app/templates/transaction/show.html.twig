@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transaction Details{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h3 mb-0">Transaction Details</h1>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Title</dt>
+                        <dd class="col-sm-9">{{ transaction.title }}</dd>
+
+                        <dt class="col-sm-3">Amount</dt>
+                        <dd class="col-sm-9 {% if transaction.amount < 0 %}text-danger{% else %}text-success{% endif %}">
+                            {{ transaction.amount|number_format(2, '.', ',') }} PLN
+                        </dd>
+
+                        <dt class="col-sm-3">Date</dt>
+                        <dd class="col-sm-9">{{ transaction.date|date('Y-m-d H:i') }}</dd>
+
+                        <dt class="col-sm-3">Portfolio</dt>
+                        <dd class="col-sm-9">{{ transaction.portfolio.name }}</dd>
+
+                        <dt class="col-sm-3">Category</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge" style="background-color: {{ transaction.category.color }}">
+                                {{ transaction.category.name }}
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-3">Description</dt>
+                        <dd class="col-sm-9">{{ transaction.description ? transaction.description : '-' }}</dd>
+
+                        <dt class="col-sm-3">Tags</dt>
+                        <dd class="col-sm-9">
+                            {% for tag in transaction.tags %}
+                                <span class="badge bg-secondary me-1">{{ tag.name }}</span>
+                            {% else %}
+                                <span class="text-muted">No tags</span>
+                            {% endfor %}
+                        </dd>
+                    </dl>
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ path('app_transaction_index') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to Transactions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
