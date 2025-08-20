@@ -1,12 +1,9 @@
 <?php
 
 /**
- * This file is part of the ZTP2-2 project.
+ * This file is part of the ZTP2 FinanceApp project.
  *
- * (c) Your Name <your.email@example.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
  */
 
 namespace App\Command;
@@ -48,7 +45,9 @@ class CreateUserCommand extends Command
     {
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'The email of the user')
-            ->addArgument('password', InputArgument::REQUIRED, 'The password of the user');
+            ->addArgument('password', InputArgument::REQUIRED, 'The password of the user')
+            ->addArgument('firstName', InputArgument::REQUIRED, 'The first name of the user')
+            ->addArgument('lastName', InputArgument::REQUIRED, 'The last name of the user');
     }
 
     /**
@@ -64,9 +63,13 @@ class CreateUserCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
+        $firstName = $input->getArgument('firstName');
+        $lastName = $input->getArgument('lastName');
 
         $user = new User();
         $user->setEmail($email);
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
         $user->setRoles(['ROLE_USER']);
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);

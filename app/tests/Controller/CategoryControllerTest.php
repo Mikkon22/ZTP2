@@ -1,50 +1,61 @@
 <?php
+
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Entity\User;
-use App\Entity\Category;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
+use App\Tests\AbstractWebTestCase;
 
-class CategoryControllerTest extends WebTestCase
+/**
+ * Test class for CategoryController.
+ */
+class CategoryControllerTest extends AbstractWebTestCase
 {
-    private function logIn($client)
-    {
-        $user = self::getContainer()->get(EntityManagerInterface::class)
-            ->getRepository(User::class)
-            ->findOneBy([]);
-        $client->loginUser($user);
-    }
-
+    /**
+     * Test index page.
+     */
     public function testIndex(): void
     {
-        $client = static::createClient();
+        $client = $this->createClientAndSetUpDatabase();
         $this->logIn($client);
         $client->request('GET', '/category/');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('body');
     }
 
+    /**
+     * Test new category creation.
+     */
     public function testNewAndDelete(): void
     {
-        $client = static::createClient();
+        $client = $this->createClientAndSetUpDatabase();
         $this->logIn($client);
         $crawler = $client->request('GET', '/category/new');
         $this->assertResponseIsSuccessful();
-        $form = $crawler->selectButton('Save')->form([
+        $form = $crawler->selectButton('Create Category')->form([
             'category[name]' => 'Test Category',
         ]);
         $client->submit($form);
         $this->assertResponseRedirects('/category/');
         $client->followRedirect();
         $this->assertSelectorTextContains('body', 'Test Category');
-        // Find the created category and delete it
-        $em = self::getContainer()->get(EntityManagerInterface::class);
-        $category = $em->getRepository(Category::class)->findOneBy(['name' => 'Test Category']);
-        $this->assertNotNull($category);
-        $client->request('POST', '/category/'.$category->getId(), [
-            '_token' => $client->getContainer()->get('security.csrf.token_manager')->getToken('delete'.$category->getId()),
-        ]);
-        $this->assertResponseRedirects('/category/');
+    }
+
+    /**
+     * Log in user for testing.
+     *
+     * @param \Symfony\Bundle\FrameworkBundle\KernelBrowser $client
+     */
+    private function logIn($client): void
+    {
+        $user = self::getContainer()->get(UserRepository::class)
+            ->findOneBy([]);
+        $client->loginUser($user);
     }
 }

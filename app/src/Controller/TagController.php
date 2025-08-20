@@ -1,12 +1,9 @@
 <?php
 
 /**
- * This file is part of the ZTP2-2 project.
+ * This file is part of the ZTP2 FinanceApp project.
  *
- * (c) Your Name <your.email@example.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
  */
 
 namespace App\Controller;

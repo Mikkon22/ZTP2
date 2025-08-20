@@ -1,22 +1,34 @@
 <?php
 
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Unit\Entity;
 
 use App\Entity\Portfolio;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Test class for Portfolio entity.
+ */
 class PortfolioTest extends TestCase
 {
-    private Portfolio $portfolio;
-    private User $user;
-
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->portfolio = new Portfolio();
         $this->user = new User();
     }
 
+    /**
+     * Test portfolio creation.
+     */
     public function testPortfolioCreation(): void
     {
         $this->assertInstanceOf(Portfolio::class, $this->portfolio);
@@ -25,6 +37,9 @@ class PortfolioTest extends TestCase
         $this->assertEquals(0.0, $this->portfolio->getBalance());
     }
 
+    /**
+     * Test portfolio setters and getters.
+     */
     public function testPortfolioSettersAndGetters(): void
     {
         $name = 'Test Portfolio';
@@ -42,6 +57,9 @@ class PortfolioTest extends TestCase
         $this->assertEquals($this->user, $this->portfolio->getOwner());
     }
 
+    /**
+     * Test portfolio balance.
+     */
     public function testPortfolioBalance(): void
     {
         $this->portfolio->setBalance(1000.50);
@@ -51,6 +69,9 @@ class PortfolioTest extends TestCase
         $this->assertEquals(-500.25, $this->portfolio->getBalance());
     }
 
+    /**
+     * Test portfolio owner.
+     */
     public function testPortfolioOwner(): void
     {
         $this->portfolio->setOwner($this->user);

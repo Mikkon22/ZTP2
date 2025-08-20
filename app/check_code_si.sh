@@ -20,6 +20,9 @@ echo "Running php-cs-fixer..."
 rm -f -- .php-cs-fixer.dist.php
 rm -f -- .php-cs-fixer.cache
 
+echo "Running phpcbf to fix automatic issues..."
+./vendor/bin/phpcbf --standard=Symfony src/ --ignore=Kernel.php
+
 echo "Running phpcs..."
 ./vendor/bin/phpcs --standard=Symfony src/ --ignore=Kernel.php >> $RESULT_FILE
 

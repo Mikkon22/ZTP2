@@ -1,12 +1,9 @@
 <?php
 
 /**
- * This file is part of the ZTP2-2 project.
+ * This file is part of the ZTP2 FinanceApp project.
  *
- * (c) Your Name <your@email.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
  */
 
 namespace App\Controller;
@@ -55,7 +52,7 @@ class AdminController extends AbstractController
      *
      * @return Response the response object
      */
-    #[Route('/user/{id}/edit', name: 'app_admin_edit_user')]
+    #[Route('/users/{id}/edit', name: 'app_admin_edit_user')]
     public function editUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
@@ -88,7 +85,7 @@ class AdminController extends AbstractController
      *
      * @return Response the response object
      */
-    #[Route('/user/{id}/change-password', name: 'app_admin_change_user_password')]
+    #[Route('/users/{id}/change-password', name: 'app_admin_change_user_password')]
     public function changeUserPassword(Request $request, User $user, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');

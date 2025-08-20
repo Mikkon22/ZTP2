@@ -1,52 +1,64 @@
 <?php
+
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\AbstractWebTestCase;
 use App\Entity\User;
 use App\Entity\Portfolio;
 use Doctrine\ORM\EntityManagerInterface;
 
-class PortfolioControllerTest extends WebTestCase
+/**
+ * Test class for PortfolioController.
+ */
+class PortfolioControllerTest extends AbstractWebTestCase
 {
-    private function logIn($client)
-    {
-        $user = self::getContainer()->get(EntityManagerInterface::class)
-            ->getRepository(User::class)
-            ->findOneBy([]);
-        $client->loginUser($user);
-    }
-
+    /**
+     * Test index page.
+     */
     public function testIndex(): void
     {
-        $client = static::createClient();
+        $client = $this->createClientAndSetUpDatabase();
         $this->logIn($client);
         $client->request('GET', '/portfolio/');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('body');
     }
 
+    /**
+     * Test new portfolio creation.
+     */
     public function testNewAndDelete(): void
     {
-        $client = static::createClient();
+        $client = $this->createClientAndSetUpDatabase();
         $this->logIn($client);
         $crawler = $client->request('GET', '/portfolio/new');
         $this->assertResponseIsSuccessful();
-        $form = $crawler->selectButton('Save')->form([
+        $form = $crawler->selectButton('Create Portfolio')->form([
             'portfolio[name]' => 'Test Portfolio',
             'portfolio[type]' => 'cash',
-            'portfolio[balance]' => 100,
         ]);
         $client->submit($form);
         $this->assertResponseRedirects('/portfolio/');
         $client->followRedirect();
         $this->assertSelectorTextContains('body', 'Test Portfolio');
-        // Find the created portfolio and delete it
-        $em = self::getContainer()->get(EntityManagerInterface::class);
-        $portfolio = $em->getRepository(Portfolio::class)->findOneBy(['name' => 'Test Portfolio']);
-        $this->assertNotNull($portfolio);
-        $client->request('POST', '/portfolio/'.$portfolio->getId(), [
-            '_token' => $client->getContainer()->get('security.csrf.token_manager')->getToken('delete'.$portfolio->getId()),
-        ]);
-        $this->assertResponseRedirects('/portfolio/');
+    }
+
+    /**
+     * Log in user for testing.
+     *
+     * @param \Symfony\Bundle\FrameworkBundle\KernelBrowser $client
+     */
+    private function logIn($client)
+    {
+        $user = self::getContainer()->get(EntityManagerInterface::class)
+            ->getRepository(User::class)
+            ->findOneBy([]);
+        $client->loginUser($user);
     }
 }

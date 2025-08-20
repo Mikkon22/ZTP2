@@ -1,77 +1,22 @@
+   1) src/Repository/TaskRepository.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) src/Entity/Category.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
+   3) src/Entity/Transaction.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
+   4) src/Entity/Tag.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
+   5) src/Entity/User.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
+   6) src/Entity/Task.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   7) src/Entity/Portfolio.php (no_superfluous_phpdoc_tags, phpdoc_separation, phpdoc_trim)
 
-Found 0 of 43 files that can be fixed in 0.706 seconds, 18.00 MB memory used
+Found 7 of 45 files that can be fixed in 0.823 seconds, 18.00 MB memory used
+   1) tests/Form/AdminEditUserTypeTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) tests/Form/AdminChangePasswordTypeTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   3) tests/Form/ChangePasswordFormTypeTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   4) tests/AbstractBaseTestCase.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   5) tests/bootstrap.php (concat_space)
+   6) tests/Controller/AdminControllerTest.php (no_superfluous_phpdoc_tags, phpdoc_separation)
+   7) tests/Service/CategoryServiceTest.php (no_superfluous_phpdoc_tags)
+   8) tests/BaseTestCase.php (no_superfluous_phpdoc_tags, phpdoc_trim)
 
-FILE: /home/wwwroot/app/src/Entity/Category.php
-----------------------------------------------------------------------
-FOUND 5 ERRORS AFFECTING 5 LINES
-----------------------------------------------------------------------
-  68 | ERROR | Missing @return tag in function comment
-  90 | ERROR | Missing @return tag in function comment
- 115 | ERROR | Missing @return tag in function comment
- 137 | ERROR | Missing @return tag in function comment
- 159 | ERROR | Missing @return tag in function comment
-----------------------------------------------------------------------
-
-
-FILE: /home/wwwroot/app/src/Entity/Transaction.php
-----------------------------------------------------------------------
-FOUND 8 ERRORS AFFECTING 8 LINES
-----------------------------------------------------------------------
-  87 | ERROR | Missing @return tag in function comment
- 109 | ERROR | Missing @return tag in function comment
- 131 | ERROR | Missing @return tag in function comment
- 153 | ERROR | Missing @return tag in function comment
- 175 | ERROR | Missing @return tag in function comment
- 197 | ERROR | Missing @return tag in function comment
- 219 | ERROR | Missing @return tag in function comment
- 233 | ERROR | Missing @return tag in function comment
-----------------------------------------------------------------------
-
-
-FILE: /home/wwwroot/app/src/Entity/Tag.php
-----------------------------------------------------------------------
-FOUND 4 ERRORS AFFECTING 4 LINES
-----------------------------------------------------------------------
-  72 | ERROR | Missing @return tag in function comment
-  94 | ERROR | Missing @return tag in function comment
- 116 | ERROR | Missing @return tag in function comment
- 131 | ERROR | Missing @return tag in function comment
-----------------------------------------------------------------------
-
-
-FILE: /home/wwwroot/app/src/Entity/User.php
-----------------------------------------------------------------------
-FOUND 11 ERRORS AFFECTING 11 LINES
-----------------------------------------------------------------------
-  93 | ERROR | Missing @return tag in function comment
- 128 | ERROR | Missing @return tag in function comment
- 150 | ERROR | Missing @return tag in function comment
- 180 | ERROR | Missing @return tag in function comment
- 202 | ERROR | Missing @return tag in function comment
- 234 | ERROR | Missing @return tag in function comment
- 249 | ERROR | Missing @return tag in function comment
- 275 | ERROR | Missing @return tag in function comment
- 290 | ERROR | Missing @return tag in function comment
- 316 | ERROR | Missing @return tag in function comment
- 331 | ERROR | Missing @return tag in function comment
-----------------------------------------------------------------------
-
-
-FILE: /home/wwwroot/app/src/Entity/Portfolio.php
-----------------------------------------------------------------------
-FOUND 7 ERRORS AFFECTING 7 LINES
-----------------------------------------------------------------------
-  79 | ERROR | Missing @return tag in function comment
- 101 | ERROR | Missing @return tag in function comment
- 123 | ERROR | Missing @return tag in function comment
- 133 | ERROR | Missing @return tag in function comment
- 158 | ERROR | Missing @return tag in function comment
- 180 | ERROR | Missing @return tag in function comment
- 196 | ERROR | Missing @return tag in function comment
-----------------------------------------------------------------------
-
-Time: 1.07 secs; Memory: 10MB
-
+Found 8 of 35 files that can be fixed in 0.370 seconds, 16.00 MB memory used
  ------- -------- ---- ---------------------- 
   State   Domain   Id   Message Preview (en)  
  ------- -------- ---- ---------------------- 
@@ -80,10 +25,10 @@ Time: 1.07 secs; Memory: 10MB
   State   Domain   Id   Message Preview (pl)   Fallback Message Preview (en)  
  ------- -------- ---- ---------------------- ------------------------------- 
 
-[notice] Migrating up to DoctrineMigrations\Version20250731075859
-[notice] finished in 191.8ms, used 24M memory, 1 migrations executed, 14 sql queries
+[notice] Migrating up to DoctrineMigrations\Version20250802190508
+[notice] finished in 195.3ms, used 24M memory, 2 migrations executed, 16 sql queries
 
- [OK] Successfully migrated to version: DoctrineMigrations\Version20250731075859                            
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20250802190508                            
 
 
    > purging database

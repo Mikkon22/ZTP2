@@ -1,12 +1,9 @@
 <?php
 
 /**
- * This file is part of the ZTP2-2 project.
+ * This file is part of the ZTP2 FinanceApp project.
  *
- * (c) Your Name <your@email.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
  */
 
 namespace App\Service;
@@ -68,5 +65,30 @@ class CategoryService
         }
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * Get categories by user.
+     *
+     * @param User $user the user
+     *
+     * @return Category[] the categories
+     */
+    public function getCategoriesByUser(User $user): array
+    {
+        return $this->entityManager->getRepository(Category::class)->findByUser($user);
+    }
+
+    /**
+     * Get categories by user and type.
+     *
+     * @param User   $user the user
+     * @param string $type the category type
+     *
+     * @return Category[] the categories
+     */
+    public function getCategoriesByUserAndType(User $user, string $type): array
+    {
+        return $this->entityManager->getRepository(Category::class)->findByUserAndType($user, $type);
     }
 }

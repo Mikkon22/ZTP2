@@ -1,19 +1,32 @@
 <?php
 
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Unit\Entity;
 
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Test class for User entity.
+ */
 class UserTest extends TestCase
 {
-    private User $user;
-
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->user = new User();
     }
 
+    /**
+     * Test user creation.
+     */
     public function testUserCreation(): void
     {
         $this->assertInstanceOf(User::class, $this->user);
@@ -24,6 +37,9 @@ class UserTest extends TestCase
         $this->assertEquals(['ROLE_USER'], $this->user->getRoles());
     }
 
+    /**
+     * Test user setters and getters.
+     */
     public function testUserSettersAndGetters(): void
     {
         $email = 'test@example.com';
@@ -45,6 +61,9 @@ class UserTest extends TestCase
         $this->assertEquals($roles, $this->user->getRoles());
     }
 
+    /**
+     * Test user roles.
+     */
     public function testUserRoles(): void
     {
         $this->user->setRoles(['ROLE_USER']);
@@ -59,6 +78,9 @@ class UserTest extends TestCase
         $this->assertCount(2, $roles);
     }
 
+    /**
+     * Test user full name.
+     */
     public function testUserFullName(): void
     {
         $this->user->setFirstName('John');

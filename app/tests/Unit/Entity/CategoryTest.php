@@ -1,22 +1,34 @@
 <?php
 
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Unit\Entity;
 
 use App\Entity\Category;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Test class for Category entity.
+ */
 class CategoryTest extends TestCase
 {
-    private Category $category;
-    private User $user;
-
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->category = new Category();
         $this->user = new User();
     }
 
+    /**
+     * Test category creation.
+     */
     public function testCategoryCreation(): void
     {
         $this->assertInstanceOf(Category::class, $this->category);
@@ -28,6 +40,9 @@ class CategoryTest extends TestCase
         $this->assertNull($this->category->getOwner());
     }
 
+    /**
+     * Test setters and getters.
+     */
     public function testSettersAndGetters(): void
     {
         $this->category->setName('Food');
@@ -43,6 +58,9 @@ class CategoryTest extends TestCase
         $this->assertSame($this->user, $this->category->getOwner());
     }
 
+    /**
+     * Test invalid type throws exception.
+     */
     public function testInvalidTypeThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);

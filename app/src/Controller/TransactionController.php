@@ -1,12 +1,9 @@
 <?php
 
 /**
- * This file is part of the ZTP2-2 project.
+ * This file is part of the ZTP2 FinanceApp project.
  *
- * (c) Your Name <your.email@example.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
  */
 
 namespace App\Controller;
@@ -40,11 +37,14 @@ class TransactionController extends AbstractController
     public function index(Request $request, TransactionRepository $transactionRepository): Response
     {
         $tagId = $request->query->get('tag');
+        $categoryName = $request->query->get('category');
+        $portfolioName = $request->query->get('portfolio');
         $startDate = $request->query->get('start_date');
         $endDate = $request->query->get('end_date');
 
         $qb = $transactionRepository->createQueryBuilder('t')
             ->leftJoin('t.portfolio', 'p')
+            ->leftJoin('t.category', 'c')
             ->where('p.owner = :user')
             ->setParameter('user', $this->getUser())
             ->orderBy('t.date', 'DESC');
@@ -53,6 +53,16 @@ class TransactionController extends AbstractController
             $qb->leftJoin('t.tags', 'tag')
                 ->andWhere('tag.id = :tagId')
                 ->setParameter('tagId', $tagId);
+        }
+
+        if ($categoryName) {
+            $qb->andWhere('c.name = :categoryName')
+                ->setParameter('categoryName', $categoryName);
+        }
+
+        if ($portfolioName) {
+            $qb->andWhere('p.name = :portfolioName')
+                ->setParameter('portfolioName', $portfolioName);
         }
 
         if ($startDate) {
@@ -67,10 +77,34 @@ class TransactionController extends AbstractController
 
         $transactions = $qb->getQuery()->getResult();
 
+        // Get all categories and portfolios for the user (for dropdowns)
+        $userCategories = $transactionRepository->createQueryBuilder('t')
+            ->select('DISTINCT c.name')
+            ->leftJoin('t.portfolio', 'p')
+            ->leftJoin('t.category', 'c')
+            ->where('p.owner = :user')
+            ->setParameter('user', $this->getUser())
+            ->orderBy('c.name', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
+        $userPortfolios = $transactionRepository->createQueryBuilder('t')
+            ->select('DISTINCT p.name')
+            ->leftJoin('t.portfolio', 'p')
+            ->where('p.owner = :user')
+            ->setParameter('user', $this->getUser())
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
         return $this->render('transaction/index.html.twig', [
             'transactions' => $transactions,
             'tags' => $this->getUser()->getTags(),
+            'categories' => array_column($userCategories, 'name'),
+            'portfolios' => array_column($userPortfolios, 'name'),
             'selected_tag' => $tagId,
+            'selected_category' => $categoryName,
+            'selected_portfolio' => $portfolioName,
             'start_date' => $startDate,
             'end_date' => $endDate,
         ]);

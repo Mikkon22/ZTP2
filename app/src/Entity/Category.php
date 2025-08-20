@@ -2,9 +2,7 @@
 
 /**
  * This file is part of the ZTP2-2 project.
- *
  * (c) Your Name <your@email.com>
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -43,7 +41,6 @@ class Category
 
     /**
      * Get the ID of the category.
-     *
      * @return int|null the ID of the category
      */
     public function getId(): ?int
@@ -53,7 +50,6 @@ class Category
 
     /**
      * Get the name of the category.
-     *
      * @return string|null the name of the category
      */
     public function getName(): ?string
@@ -65,6 +61,8 @@ class Category
      * Set the name of the category.
      *
      * @param string $name the name to set
+     *
+     * @return static
      */
     public function setName(string $name): static
     {
@@ -75,7 +73,6 @@ class Category
 
     /**
      * Get the type of the category (income or expense).
-     *
      * @return string|null the type of the category
      */
     public function getType(): ?string
@@ -87,6 +84,8 @@ class Category
      * Set the type of the category.
      *
      * @param string $type the type to set (income or expense)
+     *
+     * @return static
      */
     public function setType(string $type): static
     {
@@ -100,7 +99,6 @@ class Category
 
     /**
      * Get the description of the category.
-     *
      * @return string|null the description of the category
      */
     public function getDescription(): ?string
@@ -112,6 +110,8 @@ class Category
      * Set the description of the category.
      *
      * @param string|null $description the description to set
+     *
+     * @return static
      */
     public function setDescription(?string $description): static
     {
@@ -122,7 +122,6 @@ class Category
 
     /**
      * Get the color of the category.
-     *
      * @return string|null the color of the category
      */
     public function getColor(): ?string
@@ -134,6 +133,8 @@ class Category
      * Set the color of the category.
      *
      * @param string|null $color the color to set
+     *
+     * @return static
      */
     public function setColor(?string $color): static
     {
@@ -144,7 +145,6 @@ class Category
 
     /**
      * Get the owner of the category.
-     *
      * @return User|null the owner of the category
      */
     public function getOwner(): ?User
@@ -156,6 +156,8 @@ class Category
      * Set the owner of the category.
      *
      * @param User|null $owner the owner to set
+     *
+     * @return static
      */
     public function setOwner(?User $owner): static
     {

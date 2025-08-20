@@ -1,18 +1,26 @@
 <?php
 
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Unit\Entity;
 
 use App\Entity\Transaction;
-use App\Entity\Portfolio;
 use App\Entity\Category;
+use App\Entity\Portfolio;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Test class for Transaction entity.
+ */
 class TransactionTest extends TestCase
 {
-    private Transaction $transaction;
-    private Portfolio $portfolio;
-    private Category $category;
-
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->transaction = new Transaction();
@@ -20,6 +28,9 @@ class TransactionTest extends TestCase
         $this->category = new Category();
     }
 
+    /**
+     * Test transaction creation.
+     */
     public function testTransactionCreation(): void
     {
         $this->assertInstanceOf(Transaction::class, $this->transaction);
@@ -28,6 +39,9 @@ class TransactionTest extends TestCase
         $this->assertEquals(0.0, $this->transaction->getAmount());
     }
 
+    /**
+     * Test transaction setters and getters.
+     */
     public function testTransactionSettersAndGetters(): void
     {
         $title = 'Test Transaction';
@@ -50,6 +64,9 @@ class TransactionTest extends TestCase
         $this->assertEquals($this->category, $this->transaction->getCategory());
     }
 
+    /**
+     * Test transaction amount.
+     */
     public function testTransactionAmount(): void
     {
         $this->transaction->setAmount(100.50);
@@ -59,6 +76,9 @@ class TransactionTest extends TestCase
         $this->assertEquals(-50.25, $this->transaction->getAmount());
     }
 
+    /**
+     * Test transaction relationships.
+     */
     public function testTransactionRelationships(): void
     {
         $this->transaction->setPortfolio($this->portfolio);

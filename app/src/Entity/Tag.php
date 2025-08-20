@@ -2,9 +2,7 @@
 
 /**
  * This file is part of the ZTP2-2 project.
- *
  * (c) Your Name <your@email.com>
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -47,7 +45,6 @@ class Tag
 
     /**
      * Get the ID of the tag.
-     *
      * @return int|null the ID of the tag
      */
     public function getId(): ?int
@@ -57,7 +54,6 @@ class Tag
 
     /**
      * Get the name of the tag.
-     *
      * @return string|null the name of the tag
      */
     public function getName(): ?string
@@ -67,8 +63,9 @@ class Tag
 
     /**
      * Set the name of the tag.
-     *
      * @param string $name the name to set
+     *
+     * @return static
      */
     public function setName(string $name): static
     {
@@ -79,7 +76,6 @@ class Tag
 
     /**
      * Get the owner of the tag.
-     *
      * @return User|null the owner of the tag
      */
     public function getOwner(): ?User
@@ -89,8 +85,9 @@ class Tag
 
     /**
      * Set the owner of the tag.
-     *
      * @param User|null $owner the owner to set
+     *
+     * @return static
      */
     public function setOwner(?User $owner): static
     {
@@ -101,7 +98,6 @@ class Tag
 
     /**
      * Get the transactions associated with the tag.
-     *
      * @return Collection<int, Transaction> the transactions collection
      */
     public function getTransactions(): Collection
@@ -111,8 +107,9 @@ class Tag
 
     /**
      * Add a transaction to the tag.
-     *
      * @param Transaction $transaction the transaction to add
+     *
+     * @return static
      */
     public function addTransaction(Transaction $transaction): static
     {
@@ -126,8 +123,9 @@ class Tag
 
     /**
      * Remove a transaction from the tag.
-     *
      * @param Transaction $transaction the transaction to remove
+     *
+     * @return static
      */
     public function removeTransaction(Transaction $transaction): static
     {
@@ -140,7 +138,6 @@ class Tag
 
     /**
      * String representation of the tag.
-     *
      * @return string the tag name
      */
     public function __toString(): string

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This file is part of the ZTP2 FinanceApp project.
+ *
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
+ */
+
 namespace App\Tests\Unit\Entity;
 
 use App\Entity\Tag;
@@ -7,12 +13,14 @@ use App\Entity\User;
 use App\Entity\Transaction;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Test class for Tag entity.
+ */
 class TagTest extends TestCase
 {
-    private Tag $tag;
-    private User $user;
-    private Transaction $transaction;
-
+    /**
+     * Set up test environment.
+     */
     protected function setUp(): void
     {
         $this->tag = new Tag();
@@ -20,6 +28,9 @@ class TagTest extends TestCase
         $this->transaction = new Transaction();
     }
 
+    /**
+     * Test tag creation.
+     */
     public function testTagCreation(): void
     {
         $this->assertInstanceOf(Tag::class, $this->tag);
@@ -29,6 +40,9 @@ class TagTest extends TestCase
         $this->assertCount(0, $this->tag->getTransactions());
     }
 
+    /**
+     * Test setters and getters.
+     */
     public function testSettersAndGetters(): void
     {
         $this->tag->setName('Urgent');
@@ -37,6 +51,9 @@ class TagTest extends TestCase
         $this->assertSame($this->user, $this->tag->getOwner());
     }
 
+    /**
+     * Test add and remove transaction.
+     */
     public function testAddAndRemoveTransaction(): void
     {
         $this->assertCount(0, $this->tag->getTransactions());
@@ -47,6 +64,9 @@ class TagTest extends TestCase
         $this->assertCount(0, $this->tag->getTransactions());
     }
 
+    /**
+     * Test to string method.
+     */
     public function testToString(): void
     {
         $this->tag->setName('Important');

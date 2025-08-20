@@ -1,12 +1,9 @@
 <?php
 
 /**
- * This file is part of the ZTP2-2 project.
+ * This file is part of the ZTP2 FinanceApp project.
  *
- * (c) Your Name <your@email.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
  */
 
 namespace App\Repository;
@@ -63,5 +60,42 @@ class CategoryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * Find categories by user.
+     *
+     * @param \App\Entity\User $user the user
+     *
+     * @return Category[] the categories
+     */
+    public function findByUser(\App\Entity\User $user): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.owner = :user')
+            ->setParameter('user', $user)
+            ->orderBy('c.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Find categories by user and type.
+     *
+     * @param \App\Entity\User $user the user
+     * @param string           $type the category type
+     *
+     * @return Category[] the categories
+     */
+    public function findByUserAndType(\App\Entity\User $user, string $type): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.owner = :user')
+            ->andWhere('c.type = :type')
+            ->setParameter('user', $user)
+            ->setParameter('type', $type)
+            ->orderBy('c.name', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 }
