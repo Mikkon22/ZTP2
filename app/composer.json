@@ -106,7 +106,7 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "*",
+        "doctrine/doctrine-fixtures-bundle": "^4.1",
         "escapestudios/symfony2-coding-standard": "^3.16",
         "friendsofphp/php-cs-fixer": "^3.85",
         "phpunit/phpunit": "^9.5",

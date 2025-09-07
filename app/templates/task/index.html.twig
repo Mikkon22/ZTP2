@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task List{% endblock %}
+{% block title %}{{ 'common.task_list'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Task List</h1>
+    <h1>{{ 'common.task_list'|trans }}</h1>
 
-    <a href="{{ path('task_new') }}" class="btn btn-primary mb-3">Create New Task</a>
+    <a href="{{ path('task_new') }}" class="btn btn-primary mb-3">{{ 'common.create_new_task'|trans }}</a>
 
     <div class="row">
         {% for task in tasks %}
@@ -18,17 +18,17 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <form action="{{ path('task_toggle', {'id': task.id}) }}" method="POST" style="display: inline;">
                                 <button type="submit" class="btn btn-sm {{ task.isDone ? 'btn-success' : 'btn-secondary' }}">
-                                    {{ task.isDone ? 'Done' : 'Mark as Done' }}
+                                    {{ task.isDone ? 'task.done'|trans : 'common.mark_as_done'|trans }}
                                 </button>
                             </form>
-                            <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-sm btn-info">View</a>
+                            <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-sm btn-info">{{ 'common.view'|trans }}</a>
                         </div>
                     </div>
                 </div>
             </div>
         {% else %}
             <div class="col-12">
-                <p>No tasks found. Create one!</p>
+                <p>{{ 'common.no_data'|trans }}</p>
             </div>
         {% endfor %}
     </div>

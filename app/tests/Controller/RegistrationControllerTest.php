@@ -26,8 +26,10 @@ class RegistrationControllerTest extends AbstractWebTestCase
         $this->assertSelectorExists('form');
 
         // Test form submission
-        $crawler = $client->request('GET', '/register');
-        $form = $crawler->selectButton('Register')->form([
+        $crawler = $client->request('GET', '/register', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('form');
+        $form = $crawler->filter('form')->form([
             'registration_form[email]' => 'newuser@example.com',
             'registration_form[firstName]' => 'New',
             'registration_form[lastName]' => 'User',

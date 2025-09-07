@@ -13,6 +13,7 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 /**
@@ -26,10 +27,23 @@ class Tag
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'tag.name.not_blank')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'tag.name.min_length',
+        maxMessage: 'tag.name.max_length'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s\-_]+$/',
+        message: 'tag.name.regex'
+    )]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'tags')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: 'tag.owner.not_blank')]
+    #[Assert\Valid]
     private ?User $owner = null;
 
     #[ORM\ManyToMany(targetEntity: Transaction::class, mappedBy: 'tags')]

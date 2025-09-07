@@ -64,8 +64,8 @@ class RestoreDataCommand extends Command
         $this->entityManager->persist($user);
 
         // Create default categories
-        $incomeCategories = ['Salary', 'Investment', 'Gift'];
-        $expenseCategories = ['Food', 'Transport', 'Entertainment', 'Bills'];
+        $incomeCategories = ['Wynagrodzenie', 'Inwestycje', 'Prezenty'];
+        $expenseCategories = ['Jedzenie', 'Transport', 'Rozrywka', 'Rachunki'];
 
         foreach ($incomeCategories as $name) {
             $category = new Category();

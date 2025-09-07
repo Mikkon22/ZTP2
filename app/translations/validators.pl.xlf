@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="pl" target-language="pl" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="VKDowX6" resname="Error">
+        <source>Error</source>
+        <target>Błąd</target>
+      </trans-unit>
+      <trans-unit id="pKM6svh" resname="Please enter a tag name">
+        <source>Please enter a tag name</source>
+        <target>Proszę podać nazwę tagu</target>
+      </trans-unit>
+      <trans-unit id="Wcu_eR2" resname="Please enter your current password">
+        <source>Please enter your current password</source>
+        <target>Proszę podać obecne hasło</target>
+      </trans-unit>
+      <trans-unit id="neN8HXD" resname="Please enter a new password">
+        <source>Please enter a new password</source>
+        <target>Proszę podać nowe hasło</target>
+      </trans-unit>
+      <trans-unit id=".esazsm" resname="Your password should be at least {{ limit }} characters">
+        <source>Your password should be at least {{ limit }} characters</source>
+        <target>Twoje hasło powinno mieć co najmniej {{ limit }} znaków</target>
+      </trans-unit>
+      <trans-unit id="YXZ26gK" resname="Please enter a password">
+        <source>Please enter a password</source>
+        <target>Proszę podać hasło</target>
+      </trans-unit>
+      <trans-unit id="RRn5PkG" resname="The password should be at least {{ limit }} characters">
+        <source>The password should be at least {{ limit }} characters</source>
+        <target>Hasło powinno mieć co najmniej {{ limit }} znaków</target>
+      </trans-unit>
+      <trans-unit id="F5ggQi4" resname="Please enter an email">
+        <source>Please enter an email</source>
+        <target>Proszę podać adres e-mail</target>
+      </trans-unit>
+      <trans-unit id="0GIFG5t" resname="Please enter a first name">
+        <source>Please enter a first name</source>
+        <target>Proszę podać imię</target>
+      </trans-unit>
+      <trans-unit id="KHcXK9S" resname="Please enter a last name">
+        <source>Please enter a last name</source>
+        <target>Proszę podać nazwisko</target>
+      </trans-unit>
+      <trans-unit id="dGF0NjV" resname="Please select a portfolio">
+        <source>Please select a portfolio</source>
+        <target>Proszę wybrać portfel</target>
+      </trans-unit>
+      <trans-unit id="Xvw_XQs" resname="Please select a transaction type">
+        <source>Please select a transaction type</source>
+        <target>Proszę wybrać typ transakcji</target>
+      </trans-unit>
+      <trans-unit id="ktWztOI" resname="Please enter a transaction title">
+        <source>Please enter a transaction title</source>
+        <target>Proszę podać tytuł transakcji</target>
+      </trans-unit>
+      <trans-unit id="cROCkml" resname="Please enter an amount">
+        <source>Please enter an amount</source>
+        <target>Proszę podać kwotę</target>
+      </trans-unit>
+      <trans-unit id="3K2JnB7" resname="Amount must be greater than 0">
+        <source>Amount must be greater than 0</source>
+        <target>Kwota musi być większa niż 0</target>
+      </trans-unit>
+      <trans-unit id="y8r670X" resname="Please select a date">
+        <source>Please select a date</source>
+        <target>Proszę wybrać datę</target>
+      </trans-unit>
+      <trans-unit id="ka8XRfM" resname="Please select a category">
+        <source>Please select a category</source>
+        <target>Proszę wybrać kategorię</target>
+      </trans-unit>
+      <trans-unit id="YRKYC4." resname="There is already an account with this email">
+        <source>There is already an account with this email</source>
+        <target>Konto z tym adresem e-mail już istnieje</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

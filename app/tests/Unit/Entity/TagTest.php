@@ -18,6 +18,10 @@ use PHPUnit\Framework\TestCase;
  */
 class TagTest extends TestCase
 {
+    private Tag $tag;
+    private User $user;
+    private Transaction $transaction;
+
     /**
      * Set up test environment.
      */

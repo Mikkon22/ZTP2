@@ -18,6 +18,10 @@ use PHPUnit\Framework\TestCase;
  */
 class TransactionTest extends TestCase
 {
+    private Transaction $transaction;
+    private Portfolio $portfolio;
+    private Category $category;
+
     /**
      * Set up test environment.
      */

@@ -30,18 +30,21 @@ class PortfolioType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Portfolio Name',
+                'label' => 'portfolio.portfolio_name',
                 'attr' => [
-                    'placeholder' => 'Enter portfolio name',
+                    'placeholder' => 'portfolio.enter_portfolio_name',
                 ],
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'Portfolio Type',
+                'label' => 'portfolio.portfolio_type',
                 'choices' => [
-                    'Cash' => 'cash',
-                    'Card' => 'card',
+                    'portfolio.cash' => 'cash',
+                    'portfolio.card' => 'card',
                 ],
-                'placeholder' => 'Choose portfolio type',
+                'choice_label' => function ($choice, $key, $value) {
+                    return $key;
+                },
+                'placeholder' => 'portfolio.choose_portfolio_type',
             ])
         ;
     }

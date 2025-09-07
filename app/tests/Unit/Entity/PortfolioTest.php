@@ -17,6 +17,9 @@ use PHPUnit\Framework\TestCase;
  */
 class PortfolioTest extends TestCase
 {
+    private Portfolio $portfolio;
+    private User $user;
+
     /**
      * Set up test environment.
      */

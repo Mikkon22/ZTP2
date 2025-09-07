@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="pl" target-language="pl" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="rujVJ3G" resname="app.title">
+        <source>app.title</source>
+        <target>Aplikacja Symfony</target>
+      </trans-unit>
+      <trans-unit id="BTkw..U" resname="app.welcome">
+        <source>app.welcome</source>
+        <target>Witamy w aplikacji Symfony</target>
+      </trans-unit>
+      <trans-unit id="Zi61dx5" resname="app.hello_world">
+        <source>app.hello_world</source>
+        <target>Witaj Świecie!</target>
+      </trans-unit>
+      <trans-unit id="caY7uXD" resname="app.hello_name">
+        <source>app.hello_name</source>
+        <target>Witaj, {{ name }}!</target>
+      </trans-unit>
+      <trans-unit id="9rSjjzw" resname="app.example_list">
+        <source>app.example_list</source>
+        <target>Przykładowa lista:</target>
+      </trans-unit>
+      <trans-unit id="b5XoFJH" resname="app.item">
+        <source>app.item</source>
+        <target>Element</target>
+      </trans-unit>
+      <trans-unit id="nUXWXrC" resname="nav.logout">
+        <source>nav.logout</source>
+        <target>Wyloguj się</target>
+      </trans-unit>
+      <trans-unit id="nf9H0Ev" resname="nav.back_to_list">
+        <source>nav.back_to_list</source>
+        <target>Wróć do listy</target>
+      </trans-unit>
+      <trans-unit id="sTf9R26" resname="nav.finance_manager">
+        <source>nav.finance_manager</source>
+        <target>Menedżer Finansów</target>
+      </trans-unit>
+      <trans-unit id="osxJ1ce" resname="nav.portfolios">
+        <source>nav.portfolios</source>
+        <target>Portfele</target>
+      </trans-unit>
+      <trans-unit id="P_aiIjh" resname="nav.transactions">
+        <source>nav.transactions</source>
+        <target>Transakcje</target>
+      </trans-unit>
+      <trans-unit id="E.sPE5L" resname="nav.tags">
+        <source>nav.tags</source>
+        <target>Tagi</target>
+      </trans-unit>
+      <trans-unit id="LkzRAWa" resname="nav.user_management">
+        <source>nav.user_management</source>
+        <target>Zarządzanie użytkownikami</target>
+      </trans-unit>
+      <trans-unit id="1eUtEWI" resname="auth.sign_in">
+        <source>auth.sign_in</source>
+        <target>Zaloguj się</target>
+      </trans-unit>
+      <trans-unit id="lK.OsRi" resname="auth.email">
+        <source>auth.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="Lvnn.rL" resname="auth.password">
+        <source>auth.password</source>
+        <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="pE7u8sv" resname="auth.dont_have_account">
+        <source>auth.dont_have_account</source>
+        <target>Nie masz konta?</target>
+      </trans-unit>
+      <trans-unit id="Jr1Y_.c" resname="auth.register_here">
+        <source>auth.register_here</source>
+        <target>Zarejestruj się tutaj</target>
+      </trans-unit>
+      <trans-unit id="30SpyLC" resname="auth.register">
+        <source>auth.register</source>
+        <target>Zarejestruj się</target>
+      </trans-unit>
+      <trans-unit id="5KORZT3" resname="auth.already_have_account">
+        <source>auth.already_have_account</source>
+        <target>Masz już konto?</target>
+      </trans-unit>
+      <trans-unit id="fiVAW7o" resname="auth.sign_in_here">
+        <source>auth.sign_in_here</source>
+        <target>Zaloguj się tutaj</target>
+      </trans-unit>
+      <trans-unit id="qnaqLfn" resname="auth.first_name">
+        <source>auth.first_name</source>
+        <target>Imię</target>
+      </trans-unit>
+      <trans-unit id="015ZzPq" resname="auth.last_name">
+        <source>auth.last_name</source>
+        <target>Nazwisko</target>
+      </trans-unit>
+      <trans-unit id="KZbNdJB" resname="auth.change_password">
+        <source>auth.change_password</source>
+        <target>Zmień hasło</target>
+      </trans-unit>
+      <trans-unit id="ROcbvtR" resname="auth.change_password_title">
+        <source>auth.change_password_title</source>
+        <target>Zmień hasło</target>
+      </trans-unit>
+      <trans-unit id="NWrgsyT" resname="auth.current_password">
+        <source>auth.current_password</source>
+        <target>Aktualne hasło</target>
+      </trans-unit>
+      <trans-unit id="x3x3qaY" resname="auth.new_password">
+        <source>auth.new_password</source>
+        <target>Nowe hasło</target>
+      </trans-unit>
+      <trans-unit id="uTnPArB" resname="auth.confirm_password">
+        <source>auth.confirm_password</source>
+        <target>Potwierdź hasło</target>
+      </trans-unit>
+      <trans-unit id="yeHq4Kc" resname="transaction.title">
+        <source>transaction.title</source>
+        <target>Transakcja</target>
+      </trans-unit>
+      <trans-unit id="sRtP71m" resname="transaction.new_transaction">
+        <source>transaction.new_transaction</source>
+        <target>Nowa transakcja</target>
+      </trans-unit>
+      <trans-unit id="mYFrLJj" resname="transaction.create_new_transaction">
+        <source>transaction.create_new_transaction</source>
+        <target>Utwórz nową transakcję</target>
+      </trans-unit>
+      <trans-unit id="jy6PNN6" resname="transaction.transaction_details">
+        <source>transaction.transaction_details</source>
+        <target>Szczegóły transakcji</target>
+      </trans-unit>
+      <trans-unit id="zoZAglh" resname="transaction.edit_transaction">
+        <source>transaction.edit_transaction</source>
+        <target>Edytuj transakcję</target>
+      </trans-unit>
+      <trans-unit id="E.VXmns" resname="transaction.transaction_type">
+        <source>transaction.transaction_type</source>
+        <target>Typ transakcji</target>
+      </trans-unit>
+      <trans-unit id="j2BTUa." resname="transaction.amount">
+        <source>transaction.amount</source>
+        <target>Kwota</target>
+      </trans-unit>
+      <trans-unit id="pT9XTRV" resname="transaction.date">
+        <source>transaction.date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="z7VD7IM" resname="transaction.portfolio">
+        <source>transaction.portfolio</source>
+        <target>Portfel</target>
+      </trans-unit>
+      <trans-unit id="cIqfBuq" resname="transaction.category">
+        <source>transaction.category</source>
+        <target>Kategoria</target>
+      </trans-unit>
+      <trans-unit id="ucolAml" resname="transaction.description">
+        <source>transaction.description</source>
+        <target>Opis</target>
+      </trans-unit>
+      <trans-unit id="X_Npwcm" resname="transaction.tags">
+        <source>transaction.tags</source>
+        <target>Tagi</target>
+      </trans-unit>
+      <trans-unit id="cqqVKsU" resname="transaction.save_changes">
+        <source>transaction.save_changes</source>
+        <target>Zapisz zmiany</target>
+      </trans-unit>
+      <trans-unit id="JMpiQm8" resname="transaction.cancel">
+        <source>transaction.cancel</source>
+        <target>Anuluj</target>
+      </trans-unit>
+      <trans-unit id="AwGfvJH" resname="transaction.transaction_created_successfully">
+        <source>transaction.transaction_created_successfully</source>
+        <target>Transakcja została utworzona pomyślnie.</target>
+      </trans-unit>
+      <trans-unit id="aCbsrhQ" resname="transaction.transaction_updated_successfully">
+        <source>transaction.transaction_updated_successfully</source>
+        <target>Transakcja została zaktualizowana pomyślnie.</target>
+      </trans-unit>
+      <trans-unit id="6kx7ttZ" resname="transaction.transaction_deleted_successfully">
+        <source>transaction.transaction_deleted_successfully</source>
+        <target>Transakcja została usunięta pomyślnie.</target>
+      </trans-unit>
+      <trans-unit id="nRoism8" resname="transaction.please_select_transaction_type">
+        <source>transaction.please_select_transaction_type</source>
+        <target>Proszę wybrać typ transakcji.</target>
+      </trans-unit>
+      <trans-unit id="e2RfaV6" resname="transaction.please_enter_valid_amount">
+        <source>transaction.please_enter_valid_amount</source>
+        <target>Proszę podać prawidłową kwotę większą niż 0.</target>
+      </trans-unit>
+      <trans-unit id="dcxGj83" resname="transaction.transaction_negative_balance">
+        <source>transaction.transaction_negative_balance</source>
+        <target>Transakcja spowodowałaby ujemne saldo.</target>
+      </trans-unit>
+      <trans-unit id="yDIjDZF" resname="transaction.filter_by_tag">
+        <source>transaction.filter_by_tag</source>
+        <target>Filtruj według tagu</target>
+      </trans-unit>
+      <trans-unit id="3DykV25" resname="transaction.filter_by_category">
+        <source>transaction.filter_by_category</source>
+        <target>Filtruj według kategorii</target>
+      </trans-unit>
+      <trans-unit id="Ij_S0WY" resname="transaction.filter_by_portfolio">
+        <source>transaction.filter_by_portfolio</source>
+        <target>Filtruj według portfela</target>
+      </trans-unit>
+      <trans-unit id="iz7OxcY" resname="transaction.all_tags">
+        <source>transaction.all_tags</source>
+        <target>Wszystkie tagi</target>
+      </trans-unit>
+      <trans-unit id="F2X_Y8j" resname="transaction.all_categories">
+        <source>transaction.all_categories</source>
+        <target>Wszystkie kategorie</target>
+      </trans-unit>
+      <trans-unit id="kAQSu7T" resname="transaction.all_portfolios">
+        <source>transaction.all_portfolios</source>
+        <target>Wszystkie portfele</target>
+      </trans-unit>
+      <trans-unit id="tnaGaR0" resname="transaction.start_date">
+        <source>transaction.start_date</source>
+        <target>Data początkowa</target>
+      </trans-unit>
+      <trans-unit id="Bir4GgF" resname="transaction.end_date">
+        <source>transaction.end_date</source>
+        <target>Data końcowa</target>
+      </trans-unit>
+      <trans-unit id="GgsTXmV" resname="transaction.filter">
+        <source>transaction.filter</source>
+        <target>Filtruj</target>
+      </trans-unit>
+      <trans-unit id="0H.9pnm" resname="transaction.reset">
+        <source>transaction.reset</source>
+        <target>Resetuj</target>
+      </trans-unit>
+      <trans-unit id="_31SQqY" resname="transaction.no_transactions_found">
+        <source>transaction.no_transactions_found</source>
+        <target>Nie znaleziono transakcji</target>
+      </trans-unit>
+      <trans-unit id="ZlpmOTF" resname="transaction.summary">
+        <source>transaction.summary</source>
+        <target>Podsumowanie</target>
+      </trans-unit>
+      <trans-unit id="pd26x0a" resname="transaction.total_income">
+        <source>transaction.total_income</source>
+        <target>Całkowity przychód</target>
+      </trans-unit>
+      <trans-unit id="97oIvsT" resname="transaction.total_expenses">
+        <source>transaction.total_expenses</source>
+        <target>Całkowite wydatki</target>
+      </trans-unit>
+      <trans-unit id="qqzFGBx" resname="transaction.balance">
+        <source>transaction.balance</source>
+        <target>Saldo</target>
+      </trans-unit>
+      <trans-unit id="tMBk_or" resname="transaction.create_transaction">
+        <source>transaction.create_transaction</source>
+        <target>Utwórz transakcję</target>
+      </trans-unit>
+      <trans-unit id="JL5uyeA" resname="transaction.select_or_create_tags">
+        <source>transaction.select_or_create_tags</source>
+        <target>Wybierz lub utwórz tagi...</target>
+      </trans-unit>
+      <trans-unit id="SYaCGf6" resname="transaction.create_new_tag">
+        <source>transaction.create_new_tag</source>
+        <target>Utwórz nowy tag</target>
+      </trans-unit>
+      <trans-unit id="9UlGuKW" resname="transaction.tag_name">
+        <source>transaction.tag_name</source>
+        <target>Nazwa tagu</target>
+      </trans-unit>
+      <trans-unit id="UAg8CWJ" resname="transaction.create_tag">
+        <source>transaction.create_tag</source>
+        <target>Utwórz tag</target>
+      </trans-unit>
+      <trans-unit id="RVEwrKZ" resname="task.title">
+        <source>task.title</source>
+        <target>Zadanie</target>
+      </trans-unit>
+      <trans-unit id="cprnUWz" resname="task.new_task">
+        <source>task.new_task</source>
+        <target>Nowe zadanie</target>
+      </trans-unit>
+      <trans-unit id="pQUEVS0" resname="task.created_at">
+        <source>task.created_at</source>
+        <target>Utworzono</target>
+      </trans-unit>
+      <trans-unit id="60aXFZ1" resname="task.status">
+        <source>task.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="Dxyz4LF" resname="task.done">
+        <source>task.done</source>
+        <target>Wykonane</target>
+      </trans-unit>
+      <trans-unit id="GpkNsBF" resname="task.pending">
+        <source>task.pending</source>
+        <target>Oczekujące</target>
+      </trans-unit>
+      <trans-unit id="FKgygPB" resname="task.note">
+        <source>task.note</source>
+        <target>Uwaga: Obsługa formularza zostanie dodana później. To jest tylko podgląd danych zadania.</target>
+      </trans-unit>
+      <trans-unit id="GSdsmKc" resname="portfolio.new_portfolio">
+        <source>portfolio.new_portfolio</source>
+        <target>Nowy portfel</target>
+      </trans-unit>
+      <trans-unit id="5Hqj1x1" resname="portfolio.balance">
+        <source>portfolio.balance</source>
+        <target>Saldo</target>
+      </trans-unit>
+      <trans-unit id="1l.JOvH" resname="portfolio.my_portfolios">
+        <source>portfolio.my_portfolios</source>
+        <target>Moje portfele</target>
+      </trans-unit>
+      <trans-unit id="WjmxlJ_" resname="portfolio.no_portfolios_yet">
+        <source>portfolio.no_portfolios_yet</source>
+        <target>Nie masz jeszcze żadnych portfeli. Utwórz swój pierwszy!</target>
+      </trans-unit>
+      <trans-unit id="ExU32NV" resname="portfolio.details">
+        <source>portfolio.details</source>
+        <target>Szczegóły</target>
+      </trans-unit>
+      <trans-unit id="O5_19Qk" resname="portfolio.add_transaction">
+        <source>portfolio.add_transaction</source>
+        <target>Dodaj transakcję</target>
+      </trans-unit>
+      <trans-unit id="yS.loYW" resname="portfolio.total_balance">
+        <source>portfolio.total_balance</source>
+        <target>Całkowite saldo</target>
+      </trans-unit>
+      <trans-unit id="yCqzD6E" resname="portfolio.create_portfolio">
+        <source>portfolio.create_portfolio</source>
+        <target>Utwórz portfel</target>
+      </trans-unit>
+      <trans-unit id="JYmJsFn" resname="portfolio.delete_portfolio">
+        <source>portfolio.delete_portfolio</source>
+        <target>Usuń portfel</target>
+      </trans-unit>
+      <trans-unit id="JrbzYpL" resname="portfolio.are_you_sure_delete_portfolio">
+        <source>portfolio.are_you_sure_delete_portfolio</source>
+        <target>Czy na pewno chcesz usunąć ten portfel?</target>
+      </trans-unit>
+      <trans-unit id="jc.P2tX" resname="category.new_category">
+        <source>category.new_category</source>
+        <target>Nowa kategoria</target>
+      </trans-unit>
+      <trans-unit id="zENX5Rk" resname="category.name">
+        <source>category.name</source>
+        <target>Nazwa</target>
+      </trans-unit>
+      <trans-unit id="Obwp7Xc" resname="category.color">
+        <source>category.color</source>
+        <target>Kolor</target>
+      </trans-unit>
+      <trans-unit id="ORY7hhD" resname="category.categories">
+        <source>category.categories</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="4XXUWkt" resname="category.create_category">
+        <source>category.create_category</source>
+        <target>Utwórz kategorię</target>
+      </trans-unit>
+      <trans-unit id="gShEqVM" resname="category.back_to_list">
+        <source>category.back_to_list</source>
+        <target>Wróć do listy</target>
+      </trans-unit>
+      <trans-unit id="JZD2tnM" resname="category.filter_by_type">
+        <source>category.filter_by_type</source>
+        <target>Filtruj według typu</target>
+      </trans-unit>
+      <trans-unit id="pAoalgF" resname="category.all_types">
+        <source>category.all_types</source>
+        <target>Wszystkie typy</target>
+      </trans-unit>
+      <trans-unit id="uMUjW6B" resname="category.income">
+        <source>category.income</source>
+        <target>Przychód</target>
+      </trans-unit>
+      <trans-unit id="nf5v1Ec" resname="category.expense">
+        <source>category.expense</source>
+        <target>Wydatek</target>
+      </trans-unit>
+      <trans-unit id="e_MHVnw" resname="category.no_categories_found">
+        <source>category.no_categories_found</source>
+        <target>Nie znaleziono kategorii. Utwórz pierwszą kategorię, aby rozpocząć śledzenie transakcji.</target>
+      </trans-unit>
+      <trans-unit id="vGM2Ren" resname="category.are_you_sure_delete_category">
+        <source>category.are_you_sure_delete_category</source>
+        <target>Czy na pewno chcesz usunąć tę kategorię?</target>
+      </trans-unit>
+      <trans-unit id="QyZHg0O" resname="category.delete">
+        <source>category.delete</source>
+        <target>Usuń</target>
+      </trans-unit>
+      <trans-unit id="eL_giUu" resname="category.edit">
+        <source>category.edit</source>
+        <target>Edytuj</target>
+      </trans-unit>
+      <trans-unit id="gs_TkK." resname="tag.tags">
+        <source>tag.tags</source>
+        <target>Tagi</target>
+      </trans-unit>
+      <trans-unit id="4PwEuSW" resname="tag.new_tag">
+        <source>tag.new_tag</source>
+        <target>Nowy tag</target>
+      </trans-unit>
+      <trans-unit id="CME6U.J" resname="tag.create_new_tag">
+        <source>tag.create_new_tag</source>
+        <target>Utwórz nowy tag</target>
+      </trans-unit>
+      <trans-unit id="BtYFp2G" resname="tag.actions">
+        <source>tag.actions</source>
+        <target>Akcje</target>
+      </trans-unit>
+      <trans-unit id="3ZYxJv9" resname="tag.no_tags_found">
+        <source>tag.no_tags_found</source>
+        <target>Nie znaleziono tagów</target>
+      </trans-unit>
+      <trans-unit id="p7lpKzj" resname="tag.create_tag">
+        <source>tag.create_tag</source>
+        <target>Utwórz tag</target>
+      </trans-unit>
+      <trans-unit id="XRbTda3" resname="tag.back_to_tags">
+        <source>tag.back_to_tags</source>
+        <target>Wróć do tagów</target>
+      </trans-unit>
+      <trans-unit id="BR.BjSK" resname="tag.edit_tag">
+        <source>tag.edit_tag</source>
+        <target>Edytuj tag</target>
+      </trans-unit>
+      <trans-unit id="1EQIOtj" resname="tag.are_you_sure_delete">
+        <source>tag.are_you_sure_delete</source>
+        <target>Czy na pewno chcesz usunąć ten tag?</target>
+      </trans-unit>
+      <trans-unit id="CxRlWNm" resname="tag.save_changes">
+        <source>tag.save_changes</source>
+        <target>Zapisz zmiany</target>
+      </trans-unit>
+      <trans-unit id="1WZIMKl" resname="tag.tag_name">
+        <source>tag.tag_name</source>
+        <target>Nazwa tagu</target>
+      </trans-unit>
+      <trans-unit id="FQJHPK5" resname="admin.user_management">
+        <source>admin.user_management</source>
+        <target>Zarządzanie użytkownikami</target>
+      </trans-unit>
+      <trans-unit id="cYgulJN" resname="admin.registered_users">
+        <source>admin.registered_users</source>
+        <target>Zarejestrowani użytkownicy</target>
+      </trans-unit>
+      <trans-unit id="VMeSIuL" resname="admin.roles">
+        <source>admin.roles</source>
+        <target>Role</target>
+      </trans-unit>
+      <trans-unit id="sbhZQg4" resname="admin.actions">
+        <source>admin.actions</source>
+        <target>Akcje</target>
+      </trans-unit>
+      <trans-unit id="o3W9Rj4" resname="admin.edit">
+        <source>admin.edit</source>
+        <target>Edytuj</target>
+      </trans-unit>
+      <trans-unit id="iZ4gzaM" resname="admin.change_password">
+        <source>admin.change_password</source>
+        <target>Zmień hasło</target>
+      </trans-unit>
+      <trans-unit id="j8A4Y44" resname="admin.save_changes">
+        <source>admin.save_changes</source>
+        <target>Zapisz zmiany</target>
+      </trans-unit>
+      <trans-unit id="nyMAUTe" resname="admin.back_to_users">
+        <source>admin.back_to_users</source>
+        <target>Wróć do użytkowników</target>
+      </trans-unit>
+      <trans-unit id="jLJnuEe" resname="admin.change_password_for">
+        <source>admin.change_password_for</source>
+        <target>Zmień hasło dla</target>
+      </trans-unit>
+      <trans-unit id="QHUbcoY" resname="admin.edit_user">
+        <source>admin.edit_user</source>
+        <target>Edytuj użytkownika</target>
+      </trans-unit>
+      <trans-unit id="4FE3Ga3" resname="admin.change_user_password">
+        <source>admin.change_user_password</source>
+        <target>Zmień hasło użytkownika</target>
+      </trans-unit>
+      <trans-unit id="YKjOueU" resname="common.actions">
+        <source>common.actions</source>
+        <target>Akcje</target>
+      </trans-unit>
+      <trans-unit id="gHzTWEh" resname="common.no_data">
+        <source>common.no_data</source>
+        <target>Brak danych</target>
+      </trans-unit>
+      <trans-unit id="zueVdng" resname="common.close">
+        <source>common.close</source>
+        <target>Zamknij</target>
+      </trans-unit>
+      <trans-unit id="lMtHCbD" resname="common.no_tags">
+        <source>common.no_tags</source>
+        <target>Brak tagów</target>
+      </trans-unit>
+      <trans-unit id="3t1yumj" resname="common.create_new_task">
+        <source>common.create_new_task</source>
+        <target>Utwórz nowe zadanie</target>
+      </trans-unit>
+      <trans-unit id="L4L2p5N" resname="common.task_list">
+        <source>common.task_list</source>
+        <target>Lista zadań</target>
+      </trans-unit>
+      <trans-unit id="wtm58vc" resname="common.mark_as_done">
+        <source>common.mark_as_done</source>
+        <target>Oznacz jako wykonane</target>
+      </trans-unit>
+      <trans-unit id="t95IAsb" resname="common.mark_as_pending">
+        <source>common.mark_as_pending</source>
+        <target>Oznacz jako oczekujące</target>
+      </trans-unit>
+      <trans-unit id="8vZDUiX" resname="common.back_to_list">
+        <source>common.back_to_list</source>
+        <target>Wróć do listy</target>
+      </trans-unit>
+      <trans-unit id="9zOpX48" resname="common.view">
+        <source>common.view</source>
+        <target>Zobacz</target>
+      </trans-unit>
+      <trans-unit id="Yua5tNK" resname="common.status">
+        <source>common.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="KXWu2v5" resname="common.please_enter_tag_name">
+        <source>common.please_enter_tag_name</source>
+        <target>Proszę podać nazwę tagu</target>
+      </trans-unit>
+      <trans-unit id="v53E5ht" resname="common.failed_to_create_tag">
+        <source>common.failed_to_create_tag</source>
+        <target>Nie udało się utworzyć tagu</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

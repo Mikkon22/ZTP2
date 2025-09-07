@@ -30,10 +30,11 @@ class TagType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'tag.tag_name',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a tag name',
+                        'message' => 'common.error_enter_tag_name',
                     ]),
                 ],
             ])

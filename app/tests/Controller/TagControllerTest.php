@@ -78,7 +78,7 @@ class TagControllerTest extends AbstractWebTestCase
         $this->entityManager->persist($tag);
         $this->entityManager->flush();
 
-        $client->request('GET', '/tag/'.$tag->getId().'/edit');
+        $client->request('GET', '/tag/' . $tag->getId() . '/edit');
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('body');
     }
@@ -101,7 +101,7 @@ class TagControllerTest extends AbstractWebTestCase
         $this->entityManager->persist($tag);
         $this->entityManager->flush();
 
-        $client->request('POST', '/tag/'.$tag->getId());
+        $client->request('POST', '/tag/' . $tag->getId());
         $this->assertResponseRedirects('/tag/');
     }
 }

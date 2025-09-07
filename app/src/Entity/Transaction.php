@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 /**
@@ -27,23 +28,40 @@ class Transaction
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'transaction.title.not_blank')]
+    #[Assert\Length(
+        min: 3,
+        max: 255,
+        minMessage: 'transaction.title.min_length',
+        maxMessage: 'transaction.title.max_length'
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Length(max: 1000, maxMessage: 'transaction.description.max_length')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'transaction.amount.not_blank')]
+    #[Assert\Type(type: 'numeric', message: 'transaction.amount.type')]
+    #[Assert\NotEqualTo(value: 0, message: 'transaction.amount.not_equal_to_zero')]
     private float $amount = 0.0;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank(message: 'transaction.date.not_blank')]
+    #[Assert\Type(type: '\DateTimeInterface', message: 'transaction.date.type')]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: 'transaction.portfolio.not_blank')]
+    #[Assert\Valid]
     private ?Portfolio $portfolio = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: 'transaction.category.not_blank')]
+    #[Assert\Valid]
     private ?Category $category = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'transactions')]

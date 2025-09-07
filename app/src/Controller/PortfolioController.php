@@ -10,7 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PortfolioService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +24,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  */
 class PortfolioController extends AbstractController
 {
+    public function __construct(
+        private PortfolioService $portfolioService
+    ) {
+    }
+
     /**
      * Display the list of portfolios for the current user.
      *
@@ -32,21 +37,22 @@ class PortfolioController extends AbstractController
     #[Route('/', name: 'app_portfolio_index', methods: ['GET'])]
     public function index(): Response
     {
+        $portfolios = $this->portfolioService->getPortfoliosByUser($this->getUser());
+
         return $this->render('portfolio/index.html.twig', [
-            'portfolios' => $this->getUser()->getPortfolios(),
+            'portfolios' => $portfolios,
         ]);
     }
 
     /**
      * Create a new portfolio for the current user.
      *
-     * @param Request                $request       the HTTP request
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
      *
      * @return Response the response object
      */
     #[Route('/new', name: 'app_portfolio_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $portfolio = new Portfolio();
         $portfolio->setOwner($this->getUser());
@@ -55,8 +61,7 @@ class PortfolioController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($portfolio);
-            $entityManager->flush();
+            $this->portfolioService->createPortfolio($portfolio);
 
             return $this->redirectToRoute('app_portfolio_index');
         }
@@ -75,10 +80,9 @@ class PortfolioController extends AbstractController
      * @return Response the response object
      */
     #[Route('/{id}', name: 'app_portfolio_show', methods: ['GET'])]
+    #[IsGranted('view', subject: 'portfolio')]
     public function show(Portfolio $portfolio): Response
     {
-        $this->denyAccessUnlessGranted('view', $portfolio);
-
         return $this->render('portfolio/show.html.twig', [
             'portfolio' => $portfolio,
         ]);
@@ -87,22 +91,20 @@ class PortfolioController extends AbstractController
     /**
      * Edit a portfolio.
      *
-     * @param Request                $request       the HTTP request
-     * @param Portfolio              $portfolio     the portfolio entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request   $request   the HTTP request
+     * @param Portfolio $portfolio the portfolio entity
      *
      * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_portfolio_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Portfolio $portfolio, EntityManagerInterface $entityManager): Response
+    #[IsGranted('edit', subject: 'portfolio')]
+    public function edit(Request $request, Portfolio $portfolio): Response
     {
-        $this->denyAccessUnlessGranted('edit', $portfolio);
-
         $form = $this->createForm(PortfolioType::class, $portfolio);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->portfolioService->updatePortfolio($portfolio);
 
             return $this->redirectToRoute('app_portfolio_show', ['id' => $portfolio->getId()]);
         }
@@ -116,20 +118,17 @@ class PortfolioController extends AbstractController
     /**
      * Delete a portfolio.
      *
-     * @param Request                $request       the HTTP request
-     * @param Portfolio              $portfolio     the portfolio entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request   $request   the HTTP request
+     * @param Portfolio $portfolio the portfolio entity
      *
      * @return Response the response object
      */
     #[Route('/{id}', name: 'app_portfolio_delete', methods: ['POST'])]
-    public function delete(Request $request, Portfolio $portfolio, EntityManagerInterface $entityManager): Response
+    #[IsGranted('delete', subject: 'portfolio')]
+    public function delete(Request $request, Portfolio $portfolio): Response
     {
-        $this->denyAccessUnlessGranted('delete', $portfolio);
-
-        if ($this->isCsrfTokenValid('delete'.$portfolio->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($portfolio);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $portfolio->getId(), $request->request->get('_token'))) {
+            $this->portfolioService->deletePortfolio($portfolio);
         }
 
         return $this->redirectToRoute('app_portfolio_index');

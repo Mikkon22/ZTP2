@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Personal Finance Manager{% endblock %}</title>
+        <title>{% block title %}{{ 'nav.finance_manager'|trans }}{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>💰</text></svg>">
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
                 <div class="container">
                     <a class="navbar-brand" href="{{ path('app_portfolio_index') }}">
-                        <i class="fas fa-wallet me-2"></i>Finance Manager
+                        <i class="fas fa-wallet me-2"></i>{{ 'nav.finance_manager'|trans }}
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
@@ -27,23 +27,23 @@
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_portfolio_index') }}">
-                                    <i class="fas fa-chart-pie me-1"></i>Portfolios
+                                    <i class="fas fa-chart-pie me-1"></i>{{ 'nav.portfolios'|trans }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_transaction_index') }}">
-                                    <i class="fas fa-exchange-alt me-1"></i>Transactions
+                                    <i class="fas fa-exchange-alt me-1"></i>{{ 'nav.transactions'|trans }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_tag_index') }}">
-                                    <i class="fas fa-tags me-1"></i>Tags
+                                    <i class="fas fa-tags me-1"></i>{{ 'nav.tags'|trans }}
                                 </a>
                             </li>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_admin_users') }}">
-                                        <i class="fas fa-users me-1"></i>User Management
+                                        <i class="fas fa-users me-1"></i>{{ 'nav.user_management'|trans }}
                                     </a>
                                 </li>
                             {% endif %}
@@ -55,11 +55,11 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="{{ path('app_change_password') }}">
-                                        <i class="fas fa-key me-2"></i>Change Password
+                                        <i class="fas fa-key me-2"></i>{{ 'auth.change_password'|trans }}
                                     </a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">
-                                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                        <i class="fas fa-sign-out-alt me-2"></i>{{ 'nav.logout'|trans }}
                                     </a></li>
                                 </ul>
                             </li>
@@ -74,7 +74,7 @@
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
                         {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'common.close'|trans }}"></button>
                     </div>
                 {% endfor %}
             {% endfor %}

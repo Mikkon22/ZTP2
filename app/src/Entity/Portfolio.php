@@ -13,6 +13,7 @@ use App\Repository\PortfolioRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PortfolioRepository::class)]
 /**
@@ -26,16 +27,33 @@ class Portfolio
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'portfolio_validation.name.not_blank')]
+    #[Assert\Length(
+        min: 3,
+        max: 100,
+        minMessage: 'portfolio_validation.name.min_length',
+        maxMessage: 'portfolio_validation.name.max_length'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s\-_]+$/',
+        message: 'portfolio_validation.name.regex'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'portfolio_validation.type.not_blank')]
+    #[Assert\Choice(choices: ['cash', 'card'], message: 'portfolio_validation.type.choice')]
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Assert\Type(type: 'numeric', message: 'portfolio_validation.balance.type')]
+    #[Assert\GreaterThanOrEqual(value: 0, message: 'portfolio_validation.balance.greater_than_or_equal_zero')]
     private float $balance = 0.0;
 
     #[ORM\ManyToOne(inversedBy: 'portfolios')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: 'portfolio_validation.owner.not_blank')]
+    #[Assert\Valid]
     private ?User $owner = null;
 
     #[ORM\OneToMany(mappedBy: 'portfolio', targetEntity: Transaction::class, orphanRemoval: true)]

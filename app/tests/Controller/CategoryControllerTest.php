@@ -36,9 +36,10 @@ class CategoryControllerTest extends AbstractWebTestCase
     {
         $client = $this->createClientAndSetUpDatabase();
         $this->logIn($client);
-        $crawler = $client->request('GET', '/category/new');
+        $crawler = $client->request('GET', '/category/new', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
-        $form = $crawler->selectButton('Create Category')->form([
+        $this->assertSelectorExists('form');
+        $form = $crawler->filter('form')->form([
             'category[name]' => 'Test Category',
         ]);
         $client->submit($form);

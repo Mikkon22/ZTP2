@@ -34,21 +34,21 @@ class AdminChangePasswordType extends AbstractType
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'first_options' => [
-                    'label' => 'New Password',
+                    'label' => 'admin.new_password',
                     'attr' => ['class' => 'form-control'],
                 ],
                 'second_options' => [
-                    'label' => 'Repeat New Password',
+                    'label' => 'admin.repeat_new_password',
                     'attr' => ['class' => 'form-control'],
                 ],
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'common.error_password_fields_match',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a new password',
+                        'message' => 'common.error_enter_new_password',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'The password should be at least {{ limit }} characters',
+                        'minMessage' => 'common.error_password_min_length',
                         'max' => 4096,
                     ]),
                 ],

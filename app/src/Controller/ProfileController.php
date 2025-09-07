@@ -53,7 +53,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your password has been changed successfully!');
+            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Twoje hasło zostało zmienione pomyślnie!' : 'Your password has been changed successfully!');
 
             return $this->redirectToRoute('app_portfolio_index');
         }

@@ -1,35 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Task{% endblock %}
+{% block title %}{{ 'task.new_task'|trans }}{% endblock %}
 
 {% block body %}
     <div class="card">
         <div class="card-body">
-            <h1 class="card-title">New Task</h1>
+            <h1 class="card-title">{{ 'task.new_task'|trans }}</h1>
             
             <div class="alert alert-info">
-                Note: Form handling will be added later. This is just a preview of the task data.
+                {{ 'task.note'|trans }}
             </div>
 
             <dl class="row">
-                <dt class="col-sm-3">Title</dt>
+                <dt class="col-sm-3">{{ 'task.title'|trans }}</dt>
                 <dd class="col-sm-9">{{ task.title }}</dd>
 
-                <dt class="col-sm-3">Description</dt>
+                <dt class="col-sm-3">{{ 'transaction.description'|trans }}</dt>
                 <dd class="col-sm-9">{{ task.description }}</dd>
 
-                <dt class="col-sm-3">Created At</dt>
+                <dt class="col-sm-3">{{ 'task.created_at'|trans }}</dt>
                 <dd class="col-sm-9">{{ task.createdAt|date('Y-m-d H:i:s') }}</dd>
 
-                <dt class="col-sm-3">Status</dt>
+                <dt class="col-sm-3">{{ 'task.status'|trans }}</dt>
                 <dd class="col-sm-9">
                     <span class="badge {{ task.isDone ? 'bg-success' : 'bg-secondary' }}">
-                        {{ task.isDone ? 'Done' : 'Pending' }}
+                        {{ task.isDone ? 'task.done'|trans : 'task.pending'|trans }}
                     </span>
                 </dd>
             </dl>
 
-            <a href="{{ path('task_index') }}" class="btn btn-secondary">Back to List</a>
+            <a href="{{ path('task_index') }}" class="btn btn-secondary">{{ 'nav.back_to_list'|trans }}</a>
         </div>
     </div>
 {% endblock %} 

@@ -33,39 +33,43 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
+                'label' => 'auth.email',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your email',
+                        'message' => 'common.error_enter_email',
                     ]),
                 ],
             ])
             ->add('firstName', TextType::class, [
+                'label' => 'auth.first_name',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your first name',
+                        'message' => 'common.error_enter_first_name',
                     ]),
                 ],
             ])
             ->add('lastName', TextType::class, [
+                'label' => 'auth.last_name',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your last name',
+                        'message' => 'common.error_enter_last_name',
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
+                'label' => 'auth.password',
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'common.error_enter_password',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'common.error_password_min_length',
                         'max' => 4096,
                     ]),
                 ],

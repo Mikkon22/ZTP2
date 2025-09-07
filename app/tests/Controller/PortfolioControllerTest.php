@@ -37,9 +37,10 @@ class PortfolioControllerTest extends AbstractWebTestCase
     {
         $client = $this->createClientAndSetUpDatabase();
         $this->logIn($client);
-        $crawler = $client->request('GET', '/portfolio/new');
+        $crawler = $client->request('GET', '/portfolio/new', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
-        $form = $crawler->selectButton('Create Portfolio')->form([
+        $this->assertSelectorExists('form');
+        $form = $crawler->filter('form')->form([
             'portfolio[name]' => 'Test Portfolio',
             'portfolio[type]' => 'cash',
         ]);

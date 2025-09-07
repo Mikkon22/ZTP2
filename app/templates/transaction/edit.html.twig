@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Transaction{% endblock %}
+{% block title %}{{ 'transaction.edit_transaction'|trans }}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -24,18 +24,18 @@
     <div class="col-md-8 col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h1 class="h3 mb-4">Edit Transaction</h1>
+                <h1 class="h3 mb-4">{{ 'transaction.edit_transaction'|trans }}</h1>
 
                 {{ form_start(form) }}
                     <div class="mb-3">
-                        {{ form_label(form.portfolio) }}
+                        {{ form_label(form.portfolio, 'transaction.portfolio') }}
                         {{ form_widget(form.portfolio, {'attr': {'class': 'form-select'}}) }}
                         {{ form_help(form.portfolio) }}
                         {{ form_errors(form.portfolio) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.transactionType) }}
+                        {{ form_label(form.transactionType, 'transaction.transaction_type') }}
                         <div class="btn-group w-100" role="group">
                             {{ form_widget(form.transactionType) }}
                         </div>
@@ -44,14 +44,14 @@
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.title) }}
+                        {{ form_label(form.title, 'transaction.title') }}
                         {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                         {{ form_help(form.title) }}
                         {{ form_errors(form.title) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.amount) }}
+                        {{ form_label(form.amount, 'transaction.amount') }}
                         <div class="input-group">
                             {{ form_widget(form.amount, {'attr': {'class': 'form-control'}}) }}
                             <span class="input-group-text">PLN</span>
@@ -61,21 +61,21 @@
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.category) }}
+                        {{ form_label(form.category, 'transaction.category') }}
                         {{ form_widget(form.category, {'attr': {'class': 'form-select'}}) }}
                         {{ form_help(form.category) }}
                         {{ form_errors(form.category) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.description) }}
+                        {{ form_label(form.description, 'transaction.description') }}
                         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                         {{ form_help(form.description) }}
                         {{ form_errors(form.description) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.date) }}
+                        {{ form_label(form.date, 'transaction.date') }}
                         {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
                         {{ form_help(form.date) }}
                         {{ form_errors(form.date) }}
@@ -83,10 +83,10 @@
 
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i>Save Changes
+                            <i class="fas fa-save me-1"></i>{{ 'transaction.save_changes'|trans }}
                         </button>
                         <a href="{{ path('app_transaction_show', {'id': transaction.id}) }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-times me-1"></i>Cancel
+                            <i class="fas fa-times me-1"></i>{{ 'transaction.cancel'|trans }}
                         </a>
                     </div>
                 {{ form_end(form) }}

@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Portfolio{% endblock %}
+{% block title %}{{ 'portfolio.new_portfolio'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h1 class="h3 mb-4">New Portfolio</h1>
+                <h1 class="h3 mb-4">{{ 'portfolio.new_portfolio'|trans }}</h1>
 
                 {{ form_start(form) }}
                     <div class="mb-3">
-                        {{ form_label(form.name) }}
+                        {{ form_label(form.name, 'portfolio.portfolio_name') }}
                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                         {{ form_help(form.name) }}
                         {{ form_errors(form.name) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.type) }}
+                        {{ form_label(form.type, 'portfolio.portfolio_type') }}
                         {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
                         {{ form_help(form.type) }}
                         {{ form_errors(form.type) }}
@@ -26,10 +26,10 @@
 
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i>Create Portfolio
+                            <i class="fas fa-save me-1"></i>{{ 'portfolio.create_portfolio'|trans }}
                         </button>
                         <a href="{{ path('app_portfolio_index') }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-1"></i>Back to List
+                            <i class="fas fa-arrow-left me-1"></i>{{ 'nav.back_to_list'|trans }}
                         </a>
                     </div>
                 {{ form_end(form) }}

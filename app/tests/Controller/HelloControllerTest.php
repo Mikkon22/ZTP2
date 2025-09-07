@@ -31,7 +31,7 @@ class HelloControllerTest extends AbstractWebTestCase
     public function testIndex(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/hello');
+        $client->request('GET', '/hello', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('body');
         $this->assertSelectorTextContains('body', 'John Doe');

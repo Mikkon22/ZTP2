@@ -33,22 +33,22 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 
         // Income categories
         $incomeCategories = [
-            ['name' => 'Salary', 'color' => '#28a745', 'description' => 'Regular income from employment'],
-            ['name' => 'Side Projects', 'color' => '#17a2b8', 'description' => 'Income from freelance work and side projects'],
-            ['name' => 'Gift', 'color' => '#dc3545', 'description' => 'Gifts received'],
-            ['name' => 'Others', 'color' => '#6c757d', 'description' => 'Other sources of income'],
+            ['name' => 'Wynagrodzenie', 'color' => '#28a745', 'description' => 'Regularne wynagrodzenie'],
+            ['name' => 'Projekty poboczne', 'color' => '#17a2b8', 'description' => 'Dochody z projektów pobocznych'],
+            ['name' => 'Prezenty', 'color' => '#dc3545', 'description' => 'Otrzymane prezenty'],
+            ['name' => 'Inne', 'color' => '#6c757d', 'description' => 'Inne źródła dochodu'],
         ];
 
         // Expense categories
         $expenseCategories = [
-            ['name' => 'Food & Dining', 'color' => '#fd7e14', 'description' => 'Groceries, restaurants, and food delivery'],
-            ['name' => 'Transportation', 'color' => '#20c997', 'description' => 'Public transport, fuel, and vehicle maintenance'],
-            ['name' => 'Housing', 'color' => '#6f42c1', 'description' => 'Rent, utilities, and home maintenance'],
-            ['name' => 'Entertainment', 'color' => '#e83e8c', 'description' => 'Movies, games, and hobbies'],
-            ['name' => 'Shopping', 'color' => '#ffc107', 'description' => 'Clothing, electronics, and personal items'],
-            ['name' => 'Healthcare', 'color' => '#0dcaf0', 'description' => 'Medical expenses and health insurance'],
-            ['name' => 'Education', 'color' => '#198754', 'description' => 'Courses, books, and training'],
-            ['name' => 'Others', 'color' => '#6c757d', 'description' => 'Other expenses'],
+            ['name' => 'Jedzenie', 'color' => '#fd7e14', 'description' => 'Zakupy spożywcze, restauracje i dostawa jedzenia'],
+            ['name' => 'Transport', 'color' => '#20c997', 'description' => 'Transport publiczny, paliwo i utrzymanie pojazdu'],
+            ['name' => 'Mieszkanie', 'color' => '#6f42c1', 'description' => 'Czynsz, media i utrzymanie domu'],
+            ['name' => 'Rozrywka', 'color' => '#e83e8c', 'description' => 'Filmy, gry i hobby'],
+            ['name' => 'Zakupy', 'color' => '#ffc107', 'description' => 'Odzież, elektronika i przedmioty osobiste'],
+            ['name' => 'Zdrowie', 'color' => '#0dcaf0', 'description' => 'Wydatki medyczne i ubezpieczenie zdrowotne'],
+            ['name' => 'Edukacja', 'color' => '#198754', 'description' => 'Kursy, książki i szkolenia'],
+            ['name' => 'Inne', 'color' => '#6c757d', 'description' => 'Inne wydatki'],
         ];
 
         // Create categories for admin user

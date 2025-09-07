@@ -58,21 +58,21 @@ class CreateDefaultCategoriesCommand extends Command
 
         // Default expense categories
         $expenseCategories = [
-            ['name' => 'Food & Dining', 'color' => '#FF5733', 'type' => 'expense'],
-            ['name' => 'Transportation', 'color' => '#33FF57', 'type' => 'expense'],
-            ['name' => 'Housing', 'color' => '#3357FF', 'type' => 'expense'],
-            ['name' => 'Entertainment', 'color' => '#FF33F5', 'type' => 'expense'],
-            ['name' => 'Shopping', 'color' => '#33FFF5', 'type' => 'expense'],
-            ['name' => 'Healthcare', 'color' => '#F5FF33', 'type' => 'expense'],
-            ['name' => 'Utilities', 'color' => '#FF3333', 'type' => 'expense'],
+            ['name' => 'Jedzenie', 'color' => '#FF5733', 'type' => 'expense'],
+            ['name' => 'Transport', 'color' => '#33FF57', 'type' => 'expense'],
+            ['name' => 'Mieszkanie', 'color' => '#3357FF', 'type' => 'expense'],
+            ['name' => 'Rozrywka', 'color' => '#FF33F5', 'type' => 'expense'],
+            ['name' => 'Zakupy', 'color' => '#33FFF5', 'type' => 'expense'],
+            ['name' => 'Zdrowie', 'color' => '#F5FF33', 'type' => 'expense'],
+            ['name' => 'Media', 'color' => '#FF3333', 'type' => 'expense'],
         ];
 
         // Default income categories
         $incomeCategories = [
-            ['name' => 'Salary', 'color' => '#33FF33', 'type' => 'income'],
-            ['name' => 'Investments', 'color' => '#3333FF', 'type' => 'income'],
-            ['name' => 'Gifts', 'color' => '#FF33FF', 'type' => 'income'],
-            ['name' => 'Side Business', 'color' => '#FFFF33', 'type' => 'income'],
+            ['name' => 'Wynagrodzenie', 'color' => '#33FF33', 'type' => 'income'],
+            ['name' => 'Inwestycje', 'color' => '#3333FF', 'type' => 'income'],
+            ['name' => 'Prezenty', 'color' => '#FF33FF', 'type' => 'income'],
+            ['name' => 'Biznes poboczny', 'color' => '#FFFF33', 'type' => 'income'],
         ];
 
         $allCategories = array_merge($expenseCategories, $incomeCategories);

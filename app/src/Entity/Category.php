@@ -10,6 +10,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -38,6 +40,17 @@ class Category
     #[ORM\ManyToOne(inversedBy: 'categories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Transaction::class)]
+    private Collection $transactions;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->transactions = new ArrayCollection();
+    }
 
     /**
      * Get the ID of the category.
@@ -162,6 +175,49 @@ class Category
     public function setOwner(?User $owner): static
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get the transactions associated with this category.
+     * @return Collection<int, Transaction> the transactions collection
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Add a transaction to this category.
+     * @param Transaction $transaction the transaction to add
+     *
+     * @return static
+     */
+    public function addTransaction(Transaction $transaction): static
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions->add($transaction);
+            $transaction->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove a transaction from this category.
+     * @param Transaction $transaction the transaction to remove
+     *
+     * @return static
+     */
+    public function removeTransaction(Transaction $transaction): static
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getCategory() === $this) {
+                $transaction->setCategory(null);
+            }
+        }
 
         return $this;
     }

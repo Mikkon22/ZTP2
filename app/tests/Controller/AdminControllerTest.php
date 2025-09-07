@@ -39,12 +39,14 @@ class AdminControllerTest extends AbstractWebTestCase
 
         // Get a user to edit
         $user = $this->getUser();
-        $client->request('GET', '/admin/users/'.$user->getId().'/edit');
+        $client->request('GET', '/admin/users/' . $user->getId() . '/edit', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
 
         // Submit edit form
-        $crawler = $client->request('GET', '/admin/users/'.$user->getId().'/edit');
-        $form = $crawler->selectButton('Save')->form([
+        $crawler = $client->request('GET', '/admin/users/' . $user->getId() . '/edit', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('form');
+        $form = $crawler->filter('form')->form([
             'admin_edit_user[email]' => 'updated@example.com',
             'admin_edit_user[firstName]' => 'Updated',
             'admin_edit_user[lastName]' => 'User',
@@ -62,12 +64,14 @@ class AdminControllerTest extends AbstractWebTestCase
         $this->logInAsAdmin($client);
 
         $user = $this->getUser();
-        $client->request('GET', '/admin/users/'.$user->getId().'/change-password');
+        $client->request('GET', '/admin/users/' . $user->getId() . '/change-password', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
 
         // Submit password change form
-        $crawler = $client->request('GET', '/admin/users/'.$user->getId().'/change-password');
-        $form = $crawler->selectButton('Change Password')->form([
+        $crawler = $client->request('GET', '/admin/users/' . $user->getId() . '/change-password', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists('form');
+        $form = $crawler->filter('form')->form([
             'admin_change_password[newPassword][first]' => 'newpassword123',
             'admin_change_password[newPassword][second]' => 'newpassword123',
         ]);

@@ -17,6 +17,9 @@ use PHPUnit\Framework\TestCase;
  */
 class CategoryTest extends TestCase
 {
+    private Category $category;
+    private User $user;
+
     /**
      * Set up test environment.
      */

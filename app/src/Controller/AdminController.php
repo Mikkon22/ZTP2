@@ -64,7 +64,7 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', \sprintf('User "%s" has been updated successfully!', $user->getEmail()));
+            $this->addFlash('success', \sprintf($this->getParameter('kernel.default_locale') === 'pl' ? 'Użytkownik "%s" został zaktualizowany pomyślnie!' : 'User "%s" has been updated successfully!', $user->getEmail()));
 
             return $this->redirectToRoute('app_admin_users');
         }
@@ -104,7 +104,7 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', \sprintf('Password for user %s has been changed successfully!', $user->getEmail()));
+            $this->addFlash('success', \sprintf($this->getParameter('kernel.default_locale') === 'pl' ? 'Hasło dla użytkownika %s zostało zmienione pomyślnie!' : 'Password for user %s has been changed successfully!', $user->getEmail()));
 
             return $this->redirectToRoute('app_admin_users');
         }

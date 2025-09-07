@@ -127,7 +127,7 @@ class CategoryController extends AbstractController
     {
         $this->denyAccessUnlessGranted('delete', $category);
 
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
         }

@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
             // Create default categories for the new user
             $categoryService->createDefaultCategories($user);
 
-            $this->addFlash('success', 'Your account has been created successfully!');
+            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Twoje konto zostało utworzone pomyślnie!' : 'Your account has been created successfully!');
 
             return $this->redirectToRoute('app_login');
         }

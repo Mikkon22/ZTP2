@@ -9,11 +9,11 @@
             <i class="fas fa-{% if portfolio.type == 'cash' %}money-bill{% else %}credit-card{% endif %} me-2"></i>
             {{ portfolio.name }}
         </h1>
-        <p class="text-muted mb-0">{{ portfolio.type|capitalize }}</p>
+        <p class="text-muted mb-0">{{ ('portfolio.' ~ portfolio.type)|trans }}</p>
     </div>
     <div class="col text-end">
         <a href="{{ path('app_transaction_new') }}" class="btn btn-success me-2">
-            <i class="fas fa-plus me-1"></i>Add Transaction
+            <i class="fas fa-plus me-1"></i>{{ 'portfolio.add_transaction'|trans }}
         </a>
     </div>
 </div>
@@ -22,7 +22,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Current Balance</h5>
+                <h5 class="card-title">{{ 'portfolio.balance'|trans }}</h5>
                 <p class="h2 {% if portfolio.balance < 0 %}text-danger{% else %}text-success{% endif %} mb-0">
                     {{ portfolio.balance|number_format(2, '.', ',') }} PLN
                 </p>
@@ -33,13 +33,13 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Recent Transactions</h5>
+        <h5 class="mb-0">{{ 'transaction.title'|trans }}</h5>
         <div class="btn-group">
             <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                <i class="fas fa-filter me-1"></i>Filter by Category
+                <i class="fas fa-filter me-1"></i>{{ 'transaction.filter_by_category'|trans }}
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="{{ path('app_portfolio_show', {'id': portfolio.id}) }}">All Categories</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_portfolio_show', {'id': portfolio.id}) }}">{{ 'transaction.all_categories'|trans }}</a></li>
                 <li><hr class="dropdown-divider"></li>
                 {% set categories = [] %}
                 {% for transaction in portfolio.transactions %}
@@ -57,11 +57,11 @@
         <table class="table table-hover mb-0">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>Actions</th>
+                    <th>{{ 'transaction.date'|trans }}</th>
+                    <th>{{ 'transaction.title'|trans }}</th>
+                    <th>{{ 'transaction.category'|trans }}</th>
+                    <th>{{ 'transaction.amount'|trans }}</th>
+                    <th>{{ 'common.actions'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,7 +87,7 @@
                     {% endif %}
                 {% else %}
                     <tr>
-                        <td colspan="5" class="text-center py-4">No transactions found</td>
+                        <td colspan="5" class="text-center py-4">{{ 'transaction.no_transactions_found'|trans }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -95,10 +95,10 @@
     </div>
 </div>
 
-<form method="post" action="{{ path('app_portfolio_delete', {'id': portfolio.id}) }}" onsubmit="return confirm('Are you sure you want to delete this portfolio?');" class="mt-4">
+<form method="post" action="{{ path('app_portfolio_delete', {'id': portfolio.id}) }}" onsubmit="return confirm('{{ 'portfolio.are_you_sure_delete_portfolio'|trans }}');" class="mt-4">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ portfolio.id) }}">
     <button class="btn btn-danger">
-        <i class="fas fa-trash me-1"></i>Delete Portfolio
+        <i class="fas fa-trash me-1"></i>{{ 'portfolio.delete_portfolio'|trans }}
     </button>
 </form>
 {% endblock %} 

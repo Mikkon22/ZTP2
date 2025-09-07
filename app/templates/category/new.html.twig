@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Category{% endblock %}
+{% block title %}{{ 'category.new_category'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h1 class="h3 mb-4">New Category</h1>
+                <h1 class="h3 mb-4">{{ 'category.new_category'|trans }}</h1>
 
                 {{ form_start(form) }}
                     <div class="mb-3">
-                        {{ form_label(form.type) }}
+                        {{ form_label(form.type, 'transaction.transaction_type') }}
                         <div class="btn-group w-100" role="group">
                             {{ form_widget(form.type) }}
                         </div>
@@ -20,21 +20,21 @@
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.name) }}
+                        {{ form_label(form.name, 'category.name') }}
                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                         {{ form_help(form.name) }}
                         {{ form_errors(form.name) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.description) }}
+                        {{ form_label(form.description, 'transaction.description') }}
                         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                         {{ form_help(form.description) }}
                         {{ form_errors(form.description) }}
                     </div>
 
                     <div class="mb-3">
-                        {{ form_label(form.color) }}
+                        {{ form_label(form.color, 'category.color') }}
                         {{ form_widget(form.color) }}
                         {{ form_help(form.color) }}
                         {{ form_errors(form.color) }}
@@ -42,10 +42,10 @@
 
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i>Create Category
+                            <i class="fas fa-save me-1"></i>{{ 'category.create_category'|trans }}
                         </button>
                         <a href="{{ path('app_category_index') }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-1"></i>Back to List
+                            <i class="fas fa-arrow-left me-1"></i>{{ 'category.back_to_list'|trans }}
                         </a>
                     </div>
                 {{ form_end(form) }}

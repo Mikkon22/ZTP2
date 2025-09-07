@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ 'auth.register'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
@@ -8,39 +8,39 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="h3 mb-0">Register</h1>
+                        <h1 class="h3 mb-0">{{ 'auth.register'|trans }}</h1>
                     </div>
                     <div class="card-body">
                         {{ form_start(registrationForm) }}
                             <div class="mb-3">
-                                {{ form_label(registrationForm.email) }}
+                                {{ form_label(registrationForm.email, 'auth.email') }}
                                 {{ form_widget(registrationForm.email) }}
                                 {{ form_errors(registrationForm.email) }}
                             </div>
 
                             <div class="mb-3">
-                                {{ form_label(registrationForm.firstName) }}
+                                {{ form_label(registrationForm.firstName, 'auth.first_name') }}
                                 {{ form_widget(registrationForm.firstName) }}
                                 {{ form_errors(registrationForm.firstName) }}
                             </div>
 
                             <div class="mb-3">
-                                {{ form_label(registrationForm.lastName) }}
+                                {{ form_label(registrationForm.lastName, 'auth.last_name') }}
                                 {{ form_widget(registrationForm.lastName) }}
                                 {{ form_errors(registrationForm.lastName) }}
                             </div>
 
                             <div class="mb-3">
-                                {{ form_label(registrationForm.plainPassword, 'Password') }}
+                                {{ form_label(registrationForm.plainPassword, 'auth.password') }}
                                 {{ form_widget(registrationForm.plainPassword) }}
                                 {{ form_errors(registrationForm.plainPassword) }}
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">{{ 'auth.register'|trans }}</button>
                         {{ form_end(registrationForm) }}
                         
                         <div class="mt-3 text-center">
-                            Already have an account? <a href="{{ path('app_login') }}">Sign in here</a>
+                            {{ 'auth.already_have_account'|trans }} <a href="{{ path('app_login') }}">{{ 'auth.sign_in_here'|trans }}</a>
                         </div>
                     </div>
                 </div>

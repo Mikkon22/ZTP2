@@ -10,7 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Tag;
 use App\Form\TagType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\TagService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,17 +25,20 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class TagController extends AbstractController
 {
+    public function __construct(
+        private TagService $tagService
+    ) {
+    }
+
     /**
      * Displays a list of tags for the current user.
-     *
-     * @param EntityManagerInterface $entityManager the entity manager
      *
      * @return Response the response object
      */
     #[Route('/', name: 'app_tag_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(): Response
     {
-        $tags = $entityManager->getRepository(Tag::class)->findBy(['owner' => $this->getUser()]);
+        $tags = $this->tagService->getTagsByUser($this->getUser());
 
         return $this->render('tag/index.html.twig', [
             'tags' => $tags,
@@ -45,13 +48,12 @@ class TagController extends AbstractController
     /**
      * Handles creation of a new tag via form.
      *
-     * @param Request                $request       the HTTP request
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
      *
      * @return Response the response object
      */
     #[Route('/new', name: 'app_tag_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $tag = new Tag();
         $tag->setOwner($this->getUser());
@@ -60,10 +62,9 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($tag);
-            $entityManager->flush();
+            $this->tagService->createTag($tag);
 
-            $this->addFlash('success', 'Tag created successfully.');
+            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Tag został utworzony pomyślnie.' : 'Tag created successfully.');
 
             return $this->redirectToRoute('app_tag_index');
         }
@@ -77,13 +78,12 @@ class TagController extends AbstractController
     /**
      * Handles creation of a new tag via AJAX.
      *
-     * @param Request                $request       the HTTP request
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
      *
      * @return JsonResponse the JSON response object
      */
     #[Route('/ajax/new', name: 'app_tag_ajax_new', methods: ['POST'])]
-    public function ajaxNew(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function ajaxNew(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -99,8 +99,7 @@ class TagController extends AbstractController
         $tag->setName($data['name']);
         $tag->setOwner($this->getUser());
 
-        $entityManager->persist($tag);
-        $entityManager->flush();
+        $this->tagService->createTag($tag);
 
         return new JsonResponse([
             'success' => true,
@@ -114,14 +113,13 @@ class TagController extends AbstractController
     /**
      * Handles editing of an existing tag.
      *
-     * @param Request                $request       the HTTP request
-     * @param Tag                    $tag           the tag entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
+     * @param Tag     $tag    the tag entity
      *
      * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_tag_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Tag $tag): Response
     {
         if ($tag->getOwner() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You cannot edit this tag.');
@@ -131,9 +129,9 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->tagService->updateTag($tag);
 
-            $this->addFlash('success', 'Tag updated successfully.');
+            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Tag został zaktualizowany pomyślnie.' : 'Tag updated successfully.');
 
             return $this->redirectToRoute('app_tag_index');
         }
@@ -147,24 +145,22 @@ class TagController extends AbstractController
     /**
      * Handles deletion of a tag.
      *
-     * @param Request                $request       the HTTP request
-     * @param Tag                    $tag           the tag entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
+     * @param Tag     $tag    the tag entity
      *
      * @return Response the response object
      */
     #[Route('/{id}', name: 'app_tag_delete', methods: ['POST'])]
-    public function delete(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Tag $tag): Response
     {
         if ($tag->getOwner() !== $this->getUser()) {
             throw $this->createAccessDeniedException('You cannot delete this tag.');
         }
 
-        if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($tag);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $tag->getId(), $request->request->get('_token'))) {
+            $this->tagService->deleteTag($tag);
 
-            $this->addFlash('success', 'Tag deleted successfully.');
+            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Tag został usunięty pomyślnie.' : 'Tag deleted successfully.');
         }
 
         return $this->redirectToRoute('app_tag_index');

@@ -48,65 +48,63 @@ class TransactionType extends AbstractType
             ->add('portfolio', EntityType::class, [
                 'class' => Portfolio::class,
                 'choice_label' => 'name',
+                'choice_translation_domain' => false,
                 'query_builder' => function (EntityRepository $er) use ($user) {
                     return $er->createQueryBuilder('p')
                         ->where('p.owner = :user')
                         ->setParameter('user', $user)
                         ->orderBy('p.name', 'ASC');
                 },
-                'label' => 'Portfolio',
-                'placeholder' => 'Choose a portfolio',
+                'label' => 'transaction.portfolio',
+                'placeholder' => 'nav.choose_portfolio',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please select a portfolio',
+                        'message' => 'common.error_select_portfolio',
                     ]),
                 ],
                 'attr' => ['class' => 'form-select'],
             ])
             ->add('transactionType', ChoiceType::class, [
-                'label' => 'Transaction Type',
+                'label' => 'transaction.transaction_type',
                 'mapped' => false,
                 'choices' => [
-                    'Income' => 'income',
-                    'Expense' => 'expense',
+                    'transaction.income_label' => 'income',
+                    'transaction.expense_label' => 'expense',
                 ],
+                'choice_label' => function ($choice, $key, $value) {
+                    return $key;
+                },
                 'expanded' => true,
                 'data' => 'expense',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please select a transaction type',
+                        'message' => 'common.error_select_transaction_type',
                     ]),
-                ],
-                'attr' => [
-                    'class' => 'btn-group',
-                    'data-toggle' => 'buttons',
-                ],
-                'label_attr' => [
-                    'class' => 'btn btn-outline-primary',
                 ],
             ])
             ->add('title', TextType::class, [
-                'label' => 'Title',
+                'label' => 'transaction.title',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a transaction title',
+                        'message' => 'common.error_enter_transaction_title',
                     ]),
                 ],
                 'attr' => [
-                    'placeholder' => 'Enter transaction title',
+                    'placeholder' => 'nav.enter_transaction_title',
                 ],
             ])
             ->add('amount', NumberType::class, [
-                'label' => 'Amount',
+                'label' => 'transaction.amount',
                 'scale' => 2,
                 'html5' => true,
+                'translation_domain' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter an amount',
+                        'message' => 'common.error_enter_amount',
                     ]),
                     new GreaterThan([
                         'value' => 0,
-                        'message' => 'Amount must be greater than 0',
+                        'message' => 'common.error_amount_greater_than_zero',
                     ]),
                 ],
                 'attr' => [
@@ -116,19 +114,19 @@ class TransactionType extends AbstractType
                 ],
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'transaction.description',
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Enter transaction description (optional)',
+                    'placeholder' => 'nav.enter_transaction_description',
                     'rows' => 3,
                 ],
             ])
             ->add('date', DateTimeType::class, [
-                'label' => 'Date',
+                'label' => 'transaction.date',
                 'widget' => 'single_text',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please select a date',
+                        'message' => 'common.error_select_date',
                     ]),
                 ],
                 'attr' => ['class' => 'form-control'],
@@ -136,16 +134,18 @@ class TransactionType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'query_builder' => function (EntityRepository $er) {
+                'choice_translation_domain' => false,
+                'query_builder' => function (EntityRepository $er) use ($user) {
                     return $er->createQueryBuilder('c')
                         ->where('c.owner = :user')
+                        ->setParameter('user', $user)
                         ->orderBy('c.name', 'ASC');
                 },
-                'label' => 'Category',
-                'placeholder' => 'Choose a category',
+                'label' => 'transaction.category',
+                'placeholder' => 'nav.choose_category',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please select a category',
+                        'message' => 'common.error_select_category',
                     ]),
                 ],
                 'attr' => ['class' => 'form-select'],
@@ -153,8 +153,10 @@ class TransactionType extends AbstractType
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
                 'choices' => $user->getTags(),
+                'choice_translation_domain' => false,
                 'multiple' => true,
                 'required' => false,
+                'label' => 'transaction.tags',
                 'attr' => [
                     'class' => 'form-control',
                     'data-choices' => 'true',
@@ -178,6 +180,7 @@ class TransactionType extends AbstractType
                         ->orderBy('c.name', 'ASC');
                 },
                 'choice_label' => 'name',
+                'choice_translation_domain' => false,
                 'attr' => ['class' => 'form-select'],
             ]);
         });
@@ -198,6 +201,7 @@ class TransactionType extends AbstractType
                         ->orderBy('c.name', 'ASC');
                 },
                 'choice_label' => 'name',
+                'choice_translation_domain' => false,
                 'attr' => ['class' => 'form-select'],
             ]);
         });

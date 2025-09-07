@@ -32,10 +32,10 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class, [
-                'label' => 'Category Type',
+                'label' => 'category.category_type',
                 'choices' => [
-                    'Income' => 'income',
-                    'Expense' => 'expense',
+                    'category.income' => 'income',
+                    'category.expense' => 'expense',
                 ],
                 'expanded' => true,
                 'attr' => [
@@ -47,25 +47,25 @@ class CategoryType extends AbstractType
                 ],
             ])
             ->add('name', TextType::class, [
-                'label' => 'Category Name',
+                'label' => 'category.category_name',
                 'attr' => [
-                    'placeholder' => 'Enter category name',
+                    'placeholder' => 'category.enter_category_name',
                 ],
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'transaction.description',
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Enter category description (optional)',
+                    'placeholder' => 'category.enter_category_description',
                     'rows' => 3,
                 ],
             ])
             ->add('color', ColorType::class, [
-                'label' => 'Color',
+                'label' => 'category.color',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control form-control-color',
-                    'title' => 'Choose category color',
+                    'title' => 'category.choose_category_color',
                 ],
             ])
         ;

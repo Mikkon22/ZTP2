@@ -34,7 +34,7 @@ class AdminEditUserType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter an email',
+                        'message' => 'common.error_enter_email',
                     ]),
                 ],
             ])
@@ -42,7 +42,7 @@ class AdminEditUserType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a first name',
+                        'message' => 'common.error_enter_first_name',
                     ]),
                 ],
             ])
@@ -50,7 +50,7 @@ class AdminEditUserType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a last name',
+                        'message' => 'common.error_enter_last_name',
                     ]),
                 ],
             ])
