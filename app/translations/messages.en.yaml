@@ -204,14 +204,18 @@ common:
   success_updated: 'Updated successfully'
   success_deleted: 'Deleted successfully'
   success_password_changed: 'Password changed successfully'
-  success_account_created: 'Account created successfully'
   success_user_updated: 'User "%s" has been updated successfully!'
   success_password_changed_for: 'Password for user %s has been changed successfully!'
+  error_select_transaction_type: 'Please select transaction type'
+  choose_category: 'Choose category'
+  no_categories_found: 'No categories found'
+  error_loading_categories: 'Error loading categories'
   error_select_portfolio: 'Please select a portfolio'
-  error_enter_transaction_title: 'Please enter transaction title'
+  error_enter_transaction_title: 'Please enter a transaction title'
   error_select_category: 'Please select a category'
-  error_select_transaction_type: 'Please select a transaction type'
-  error_enter_valid_amount: 'Please enter a valid amount greater than 0'
+  success_tag_created: 'Tag created successfully'
+  success_tag_updated: 'Tag updated successfully'
+  success_tag_deleted: 'Tag deleted successfully'
   error_negative_balance: 'Transaction would result in negative balance'
   error_password_fields_match: 'Password fields must match'
   error_enter_email: 'Please enter email'
@@ -222,12 +226,20 @@ common:
   error_enter_password: 'Please enter password'
   error_enter_amount: 'Please enter amount'
   error_select_date: 'Please select a date'
+  error_invalid_email: 'Please enter a valid email address'
   error_account_exists: 'Account with this email already exists'
   error_amount_greater_than_zero: 'Amount must be greater than 0'
   error_password_min_length: 'Password should be at least {{ limit }} characters'
   error_password_min_length_alt: 'Your password should be at least {{ limit }} characters'
   error_password_min_length_alt2: 'Password must be at least {{ limit }} characters'
   error_enter_tag_name: 'Please enter tag name'
+
+# Validators domain
+validators:
+  common.error_password_fields_match: 'Password fields must match'
+  common.error_enter_current_password: 'Please enter current password'
+  common.error_enter_new_password: 'Please enter new password'
+  common.error_password_min_length: 'Password should be at least {{ limit }} characters'
 
 # Admin
 admin:

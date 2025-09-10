@@ -18,6 +18,10 @@ class TransactionMapper
 {
     /**
      * Convert Transaction entity to TransactionDTO.
+     *
+     * @param Transaction $transaction the transaction entity
+     *
+     * @return TransactionDTO the transaction DTO
      */
     public function entityToDto(Transaction $transaction): TransactionDTO
     {
@@ -36,6 +40,11 @@ class TransactionMapper
 
     /**
      * Convert TransactionDTO to Transaction entity.
+     *
+     * @param TransactionDTO   $dto         the transaction DTO
+     * @param Transaction|null $transaction the existing transaction entity
+     *
+     * @return Transaction the transaction entity
      */
     public function dtoToEntity(TransactionDTO $dto, ?Transaction $transaction = null): Transaction
     {
@@ -61,6 +70,11 @@ class TransactionMapper
 
     /**
      * Update Transaction entity with data from TransactionDTO.
+     *
+     * @param Transaction    $transaction the transaction entity
+     * @param TransactionDTO $dto         the transaction DTO
+     *
+     * @return Transaction the updated transaction entity
      */
     public function updateEntityFromDto(Transaction $transaction, TransactionDTO $dto): Transaction
     {

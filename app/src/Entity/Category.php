@@ -45,7 +45,7 @@ class Category
     private Collection $transactions;
 
     /**
-     * Category constructor.
+     * Constructor.
      */
     public function __construct()
     {
@@ -54,6 +54,7 @@ class Category
 
     /**
      * Get the ID of the category.
+     *
      * @return int|null the ID of the category
      */
     public function getId(): ?int
@@ -63,6 +64,7 @@ class Category
 
     /**
      * Get the name of the category.
+     *
      * @return string|null the name of the category
      */
     public function getName(): ?string
@@ -77,7 +79,7 @@ class Category
      *
      * @return static
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -86,6 +88,7 @@ class Category
 
     /**
      * Get the type of the category (income or expense).
+     *
      * @return string|null the type of the category
      */
     public function getType(): ?string
@@ -100,7 +103,7 @@ class Category
      *
      * @return static
      */
-    public function setType(string $type): static
+    public function setType(?string $type): static
     {
         if (!\in_array($type, ['income', 'expense'])) {
             throw new \InvalidArgumentException('Invalid category type');
@@ -112,6 +115,7 @@ class Category
 
     /**
      * Get the description of the category.
+     *
      * @return string|null the description of the category
      */
     public function getDescription(): ?string
@@ -135,6 +139,7 @@ class Category
 
     /**
      * Get the color of the category.
+     *
      * @return string|null the color of the category
      */
     public function getColor(): ?string
@@ -158,6 +163,7 @@ class Category
 
     /**
      * Get the owner of the category.
+     *
      * @return User|null the owner of the category
      */
     public function getOwner(): ?User
@@ -181,6 +187,7 @@ class Category
 
     /**
      * Get the transactions associated with this category.
+     *
      * @return Collection<int, Transaction> the transactions collection
      */
     public function getTransactions(): Collection
@@ -190,6 +197,7 @@ class Category
 
     /**
      * Add a transaction to this category.
+     *
      * @param Transaction $transaction the transaction to add
      *
      * @return static
@@ -206,6 +214,7 @@ class Category
 
     /**
      * Remove a transaction from this category.
+     *
      * @param Transaction $transaction the transaction to remove
      *
      * @return static

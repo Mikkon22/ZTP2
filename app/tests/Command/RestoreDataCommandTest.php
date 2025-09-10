@@ -4,8 +4,8 @@
  * This file is part of the ZTP2 FinanceApp project.
  *
  * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
-
-declare(strict_types=1);
+ *
+ * declare(strict_types=1);
  */
 
 namespace App\Tests\Command;

@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Tag;
 use App\Form\TagType;
+use App\Security\Voter\TagVoter;
 use App\Service\TagService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,9 +26,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class TagController extends AbstractController
 {
-    public function __construct(
-        private TagService $tagService
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param TagService $tagService the tag service
+     */
+    public function __construct(private TagService $tagService)
+    {
     }
 
     /**
@@ -64,7 +69,7 @@ class TagController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->tagService->createTag($tag);
 
-            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Tag został utworzony pomyślnie.' : 'Tag created successfully.');
+            $this->addFlash('success', 'common.success_tag_created');
 
             return $this->redirectToRoute('app_tag_index');
         }
@@ -91,8 +96,8 @@ class TagController extends AbstractController
             return new JsonResponse(['success' => false, 'error' => 'Invalid CSRF token'], 400);
         }
 
-        if (empty($data['name'])) {
-            return new JsonResponse(['success' => false, 'error' => 'Tag name is required'], 400);
+        if (empty($data['name']) || '' === trim($data['name'])) {
+            return new JsonResponse(['success' => false, 'error' => 'common.please_enter_tag_name'], 400);
         }
 
         $tag = new Tag();
@@ -114,24 +119,21 @@ class TagController extends AbstractController
      * Handles editing of an existing tag.
      *
      * @param Request $request the HTTP request
-     * @param Tag     $tag    the tag entity
+     * @param Tag     $tag     the tag entity
      *
      * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_tag_edit', methods: ['GET', 'POST'])]
+    #[IsGranted(TagVoter::EDIT, subject: 'tag')]
     public function edit(Request $request, Tag $tag): Response
     {
-        if ($tag->getOwner() !== $this->getUser()) {
-            throw $this->createAccessDeniedException('You cannot edit this tag.');
-        }
-
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->tagService->updateTag($tag);
 
-            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Tag został zaktualizowany pomyślnie.' : 'Tag updated successfully.');
+            $this->addFlash('success', 'common.success_tag_updated');
 
             return $this->redirectToRoute('app_tag_index');
         }
@@ -146,21 +148,18 @@ class TagController extends AbstractController
      * Handles deletion of a tag.
      *
      * @param Request $request the HTTP request
-     * @param Tag     $tag    the tag entity
+     * @param Tag     $tag     the tag entity
      *
      * @return Response the response object
      */
     #[Route('/{id}', name: 'app_tag_delete', methods: ['POST'])]
+    #[IsGranted(TagVoter::DELETE, subject: 'tag')]
     public function delete(Request $request, Tag $tag): Response
     {
-        if ($tag->getOwner() !== $this->getUser()) {
-            throw $this->createAccessDeniedException('You cannot delete this tag.');
-        }
-
-        if ($this->isCsrfTokenValid('delete' . $tag->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $this->tagService->deleteTag($tag);
 
-            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Tag został usunięty pomyślnie.' : 'Tag deleted successfully.');
+            $this->addFlash('success', 'common.success_tag_deleted');
         }
 
         return $this->redirectToRoute('app_tag_index');

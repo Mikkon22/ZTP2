@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h1 class="h3 mb-4">{{ 'category.new_category'|trans }}</h1>
 
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                     <div class="mb-3">
                         {{ form_label(form.type, 'transaction.transaction_type') }}
                         <div class="btn-group w-100" role="group">

@@ -11,7 +11,6 @@ namespace App\Service;
 use App\Entity\Transaction;
 use App\Entity\User;
 use App\Repository\TransactionRepository;
-use App\Service\PortfolioService;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -19,15 +18,21 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class TransactionService
 {
-    public function __construct(
-        private TransactionRepository $transactionRepository,
-        private EntityManagerInterface $entityManager,
-        private PortfolioService $portfolioService
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param TransactionRepository  $transactionRepository the transaction repository
+     * @param EntityManagerInterface $entityManager         the entity manager
+     * @param PortfolioService       $portfolioService      the portfolio service
+     */
+    public function __construct(private TransactionRepository $transactionRepository, private EntityManagerInterface $entityManager, private PortfolioService $portfolioService)
+    {
     }
 
     /**
      * Create a new transaction.
+     *
+     * @param Transaction $transaction the transaction to create
      */
     public function createTransaction(Transaction $transaction): void
     {
@@ -39,7 +44,39 @@ class TransactionService
     }
 
     /**
+     * Validate if user can create transaction in portfolio.
+     *
+     * @param Transaction $transaction the transaction
+     * @param User        $user        the user
+     *
+     * @return bool true if user can create transaction
+     */
+    public function canCreateTransactionInPortfolio(Transaction $transaction, User $user): bool
+    {
+        $portfolio = $transaction->getPortfolio();
+
+        return $portfolio && $portfolio->getOwner() === $user;
+    }
+
+    /**
+     * Validate if user can edit transaction.
+     *
+     * @param Transaction $transaction the transaction
+     * @param User        $user        the user
+     *
+     * @return bool true if user can edit transaction
+     */
+    public function canEditTransaction(Transaction $transaction, User $user): bool
+    {
+        $portfolio = $transaction->getPortfolio();
+
+        return $portfolio && $portfolio->getOwner() === $user;
+    }
+
+    /**
      * Update a transaction.
+     *
+     * @param Transaction $transaction the transaction to update
      */
     public function updateTransaction(Transaction $transaction): void
     {
@@ -51,6 +88,8 @@ class TransactionService
 
     /**
      * Delete a transaction.
+     *
+     * @param Transaction $transaction the transaction to delete
      */
     public function deleteTransaction(Transaction $transaction): void
     {
@@ -64,6 +103,11 @@ class TransactionService
 
     /**
      * Get transactions by user with optional filters.
+     *
+     * @param User  $user    the user
+     * @param array $filters optional filters
+     *
+     * @return array the transactions
      */
     public function getTransactionsByUser(User $user, array $filters = []): array
     {
@@ -72,6 +116,11 @@ class TransactionService
 
     /**
      * Get transaction by ID and user (for security).
+     *
+     * @param int  $id   the transaction ID
+     * @param User $user the user
+     *
+     * @return Transaction|null the transaction or null
      */
     public function getTransactionByIdAndUser(int $id, User $user): ?Transaction
     {
@@ -87,6 +136,10 @@ class TransactionService
 
     /**
      * Get transaction statistics for user.
+     *
+     * @param User $user the user
+     *
+     * @return array the statistics
      */
     public function getTransactionStatistics(User $user): array
     {
@@ -95,6 +148,10 @@ class TransactionService
 
     /**
      * Get user categories for dropdown.
+     *
+     * @param User $user the user
+     *
+     * @return array the categories
      */
     public function getUserCategories(User $user): array
     {
@@ -103,6 +160,10 @@ class TransactionService
 
     /**
      * Get user portfolios for dropdown.
+     *
+     * @param User $user the user
+     *
+     * @return array the user portfolios
      */
     public function getUserPortfolios(User $user): array
     {
@@ -111,6 +172,11 @@ class TransactionService
 
     /**
      * Get monthly transaction summary.
+     *
+     * @param User $user the user
+     * @param int  $year the year
+     *
+     * @return array the monthly summary
      */
     public function getMonthlySummary(User $user, int $year): array
     {

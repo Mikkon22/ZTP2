@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Form type for Category entity.
@@ -45,11 +46,21 @@ class CategoryType extends AbstractType
                 'label_attr' => [
                     'class' => 'btn btn-outline-primary',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'common.error_select_category_type',
+                    ]),
+                ],
             ])
             ->add('name', TextType::class, [
                 'label' => 'category.category_name',
                 'attr' => [
                     'placeholder' => 'category.enter_category_name',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'common.error_enter_category_name',
+                    ]),
                 ],
             ])
             ->add('description', TextareaType::class, [

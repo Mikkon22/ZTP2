@@ -53,12 +53,16 @@ class UserDTO
     )]
     public ?string $phone = null;
 
-    public function __construct(
-        ?string $email = null,
-        ?string $firstName = null,
-        ?string $lastName = null,
-        ?string $phone = null
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param string|null $email     the email
+     * @param string|null $firstName the first name
+     * @param string|null $lastName  the last name
+     * @param string|null $phone     the phone
+     */
+    public function __construct(?string $email = null, ?string $firstName = null, ?string $lastName = null, ?string $phone = null)
+    {
         $this->email = $email;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -67,6 +71,8 @@ class UserDTO
 
     /**
      * Get full name.
+     *
+     * @return string|null the full name
      */
     public function getFullName(): ?string
     {
@@ -74,6 +80,6 @@ class UserDTO
             return null;
         }
 
-        return trim($this->firstName . ' ' . $this->lastName);
+        return trim($this->firstName.' '.$this->lastName);
     }
 }

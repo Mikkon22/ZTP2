@@ -10,7 +10,8 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Security\Voter\CategoryVoter;
+use App\Service\CategoryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,15 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class CategoryController extends AbstractController
 {
+    /**
+     * Constructor.
+     *
+     * @param CategoryService $categoryService the category service
+     */
+    public function __construct(private readonly CategoryService $categoryService)
+    {
+    }
+
     /**
      * Displays a list of categories for the current user.
      *
@@ -40,13 +50,12 @@ class CategoryController extends AbstractController
     /**
      * Handles creation of a new category.
      *
-     * @param Request                $request       the HTTP request
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
      *
      * @return Response the response object
      */
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $category = new Category();
         $category->setOwner($this->getUser());
@@ -55,8 +64,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($category);
-            $entityManager->flush();
+            $this->categoryService->createCategory($category);
 
             return $this->redirectToRoute('app_category_index');
         }
@@ -75,10 +83,9 @@ class CategoryController extends AbstractController
      * @return Response the response object
      */
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
+    #[IsGranted(CategoryVoter::VIEW, subject: 'category')]
     public function show(Category $category): Response
     {
-        $this->denyAccessUnlessGranted('view', $category);
-
         return $this->render('category/show.html.twig', [
             'category' => $category,
         ]);
@@ -87,22 +94,20 @@ class CategoryController extends AbstractController
     /**
      * Handles editing of a category.
      *
-     * @param Request                $request       the HTTP request
-     * @param Category               $category      the category entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request  $request  the HTTP request
+     * @param Category $category the category entity
      *
      * @return Response the response object
      */
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
+    #[IsGranted(CategoryVoter::EDIT, subject: 'category')]
+    public function edit(Request $request, Category $category): Response
     {
-        $this->denyAccessUnlessGranted('edit', $category);
-
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->categoryService->updateCategory($category);
 
             return $this->redirectToRoute('app_category_show', ['id' => $category->getId()]);
         }
@@ -116,20 +121,17 @@ class CategoryController extends AbstractController
     /**
      * Handles deletion of a category.
      *
-     * @param Request                $request       the HTTP request
-     * @param Category               $category      the category entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request  $request  the HTTP request
+     * @param Category $category the category entity
      *
      * @return Response the response object
      */
     #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
+    #[IsGranted(CategoryVoter::DELETE, subject: 'category')]
+    public function delete(Request $request, Category $category): Response
     {
-        $this->denyAccessUnlessGranted('delete', $category);
-
-        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($category);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            $this->categoryService->deleteCategory($category);
         }
 
         return $this->redirectToRoute('app_category_index');

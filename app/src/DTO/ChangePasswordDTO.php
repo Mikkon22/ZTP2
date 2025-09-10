@@ -41,11 +41,15 @@ class ChangePasswordDTO
     )]
     public ?string $confirmPassword = null;
 
-    public function __construct(
-        ?string $currentPassword = null,
-        ?string $newPassword = null,
-        ?string $confirmPassword = null
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param string|null $currentPassword the current password
+     * @param string|null $newPassword     the new password
+     * @param string|null $confirmPassword the confirm password
+     */
+    public function __construct(?string $currentPassword = null, ?string $newPassword = null, ?string $confirmPassword = null)
+    {
         $this->currentPassword = $currentPassword;
         $this->newPassword = $newPassword;
         $this->confirmPassword = $confirmPassword;

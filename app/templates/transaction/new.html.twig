@@ -11,7 +11,7 @@
                     <h1 class="h3 mb-0">{{ 'transaction.create_new_transaction'|trans }}</h1>
                 </div>
                 <div class="card-body">
-                    {{ form_start(form) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class="mb-3">
                             {{ form_label(form.transactionType, 'transaction.transaction_type') }}
                             <div class="btn-group w-100" role="group">
@@ -179,11 +179,19 @@
 
             // Handle tag creation
             $('#createTagBtn').click(function() {
-                const tagName = $('#newTagName').val();
+                const tagName = $('#newTagName').val().trim();
                 if (!tagName) {
-                    alert('{{ 'common.please_enter_tag_name'|trans }}');
+                    // Show error message below input instead of alert
+                    $('#newTagName').addClass('is-invalid');
+                    if (!$('#newTagName').next('.invalid-feedback').length) {
+                        $('#newTagName').after('<div class="invalid-feedback">{{ 'common.please_enter_tag_name'|trans }}</div>');
+                    }
                     return;
                 }
+                
+                // Clear any previous error state
+                $('#newTagName').removeClass('is-invalid');
+                $('#newTagName').next('.invalid-feedback').remove();
 
                 fetch('{{ path('app_tag_ajax_new') }}', {
                     method: 'POST',
@@ -205,12 +213,25 @@
                         $('#newTagName').val('');
                         $('#newTagModal').modal('hide');
                     } else {
-                        alert(data.error || '{{ 'common.failed_to_create_tag'|trans }}');
+                        // Show error message below input instead of alert
+                        $('#newTagName').addClass('is-invalid');
+                        const errorMessage = data.error === 'common.please_enter_tag_name' ? '{{ 'common.please_enter_tag_name'|trans }}' : (data.error || '{{ 'common.failed_to_create_tag'|trans }}');
+                        if (!$('#newTagName').next('.invalid-feedback').length) {
+                            $('#newTagName').after('<div class="invalid-feedback">' + errorMessage + '</div>');
+                        } else {
+                            $('#newTagName').next('.invalid-feedback').text(errorMessage);
+                        }
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('{{ 'common.failed_to_create_tag'|trans }}');
+                    // Show error message below input instead of alert
+                    $('#newTagName').addClass('is-invalid');
+                    if (!$('#newTagName').next('.invalid-feedback').length) {
+                        $('#newTagName').after('<div class="invalid-feedback">{{ 'common.failed_to_create_tag'|trans }}</div>');
+                    } else {
+                        $('#newTagName').next('.invalid-feedback').text('{{ 'common.failed_to_create_tag'|trans }}');
+                    }
                 });
             });
         });

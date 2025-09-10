@@ -21,7 +21,7 @@ abstract class AbstractBaseTestCase extends KernelTestCase
     /**
      * Boot the kernel and set up the test database.
      *
-     * @param array $options
+     * @param array $options the kernel options
      *
      * @return \Symfony\Component\HttpKernel\KernelInterface
      */

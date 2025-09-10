@@ -61,6 +61,7 @@ class CategoryServiceTest extends AbstractBaseTestCase
 
     /**
      * Get a test user.
+     *
      * @return User
      */
     private function getUser(): User

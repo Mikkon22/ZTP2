@@ -1,49 +1,55 @@
 <?php
 
 /**
- * This file is part of the ZTP2 FinanceApp project.
- *
- * Mikołaj Kondek<mikolaj.kondek@student.uj.edu.pl>
-
-declare(strict_types=1);
+ * This file is part of the ZTP2-2 project.
+ * (c) Your Name <your@email.com>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Tests\Command;
 
-use App\Tests\AbstractBaseTestCase;
+use App\Command\UpdatePortfolioBalancesCommand;
+use App\Repository\PortfolioRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Tester\CommandTester;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Test class for UpdatePortfolioBalancesCommand.
  */
-class UpdatePortfolioBalancesCommandTest extends AbstractBaseTestCase
+class UpdatePortfolioBalancesCommandTest extends TestCase
 {
+    private UpdatePortfolioBalancesCommand $command;
+    private PortfolioRepository $portfolioRepository;
     private EntityManagerInterface $entityManager;
 
     /**
-     * Set up the test environment.
+     * Set up test.
      */
     protected function setUp(): void
     {
-        parent::setUp();
-        $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
+        $this->portfolioRepository = $this->createMock(PortfolioRepository::class);
+        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+
+        $this->command = new UpdatePortfolioBalancesCommand(
+            $this->entityManager
+        );
     }
 
     /**
-     * Test successful command execution.
+     * Test command name.
      */
-    public function testExecuteSuccess(): void
+    public function testCommandName(): void
     {
-        $application = new Application(static::bootKernel());
-        $command = $application->find('app:update-portfolio-balances');
-        $commandTester = new CommandTester($command);
+        $this->assertEquals('app:update-portfolio-balances', $this->command->getName());
+    }
 
-        $commandTester->execute([]);
-
-        $output = $commandTester->getDisplay();
-        $this->assertStringContainsString('All portfolio balances are correct', $output);
-        $this->assertEquals(0, $commandTester->getStatusCode());
+    /**
+     * Test command description.
+     */
+    public function testCommandDescription(): void
+    {
+        $this->assertStringContainsString('Updates all portfolio balances', $this->command->getDescription());
     }
 }

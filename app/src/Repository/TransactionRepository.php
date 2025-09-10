@@ -66,14 +66,14 @@ class TransactionRepository extends ServiceEntityRepository
     /**
      * Find transactions by user with optimized query (1-NF denormalized).
      *
-     * @param User   $user    the user entity
-     * @param array  $filters optional filters
-     * @param int    $limit   optional limit
-     * @param int    $offset  optional offset
+     * @param User  $user    the user entity
+     * @param array $filters optional filters
+     * @param int   $limit   optional limit
+     * @param int   $offset  optional offset
      *
      * @return Transaction[] the transactions
      */
-    public function findByUserOptimized(User $user, array $filters = [], int $limit = null, int $offset = null): array
+    public function findByUserOptimized(User $user, array $filters = [], ?int $limit = null, ?int $offset = null): array
     {
         $qb = $this->createQueryBuilder('t')
             ->select('t', 'p', 'c', 'tags')
@@ -107,7 +107,7 @@ class TransactionRepository extends ServiceEntityRepository
 
         if (!empty($filters['end_date'])) {
             $qb->andWhere('t.date <= :endDate')
-                ->setParameter('endDate', new \DateTime($filters['end_date'] . ' 23:59:59'));
+                ->setParameter('endDate', new \DateTime($filters['end_date'].' 23:59:59'));
         }
 
         if ($limit) {

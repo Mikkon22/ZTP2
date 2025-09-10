@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Form type for Portfolio entity.
@@ -34,6 +35,11 @@ class PortfolioType extends AbstractType
                 'attr' => [
                     'placeholder' => 'portfolio.enter_portfolio_name',
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'common.error_enter_portfolio_name',
+                    ]),
+                ],
             ])
             ->add('type', ChoiceType::class, [
                 'label' => 'portfolio.portfolio_type',
@@ -45,6 +51,11 @@ class PortfolioType extends AbstractType
                     return $key;
                 },
                 'placeholder' => 'portfolio.choose_portfolio_type',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'common.error_select_portfolio_type',
+                    ]),
+                ],
             ])
         ;
     }

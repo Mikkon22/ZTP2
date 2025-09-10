@@ -41,8 +41,6 @@ class TaskRepository extends ServiceEntityRepository
      *
      * @param Task $entity the task entity to save
      * @param bool $flush  whether to flush the entity manager
-     *
-     * @return void
      */
     public function save(Task $entity, bool $flush = false): void
     {
@@ -58,8 +56,6 @@ class TaskRepository extends ServiceEntityRepository
      *
      * @param Task $entity the task entity to remove
      * @param bool $flush  whether to flush the entity manager
-     *
-     * @return void
      */
     public function remove(Task $entity, bool $flush = false): void
     {

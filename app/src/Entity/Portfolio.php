@@ -13,7 +13,6 @@ use App\Repository\PortfolioRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PortfolioRepository::class)]
 /**
@@ -27,33 +26,16 @@ class Portfolio
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'portfolio_validation.name.not_blank')]
-    #[Assert\Length(
-        min: 3,
-        max: 100,
-        minMessage: 'portfolio_validation.name.min_length',
-        maxMessage: 'portfolio_validation.name.max_length'
-    )]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s\-_]+$/',
-        message: 'portfolio_validation.name.regex'
-    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'portfolio_validation.type.not_blank')]
-    #[Assert\Choice(choices: ['cash', 'card'], message: 'portfolio_validation.type.choice')]
     private ?string $type = null;
 
     #[ORM\Column]
-    #[Assert\Type(type: 'numeric', message: 'portfolio_validation.balance.type')]
-    #[Assert\GreaterThanOrEqual(value: 0, message: 'portfolio_validation.balance.greater_than_or_equal_zero')]
     private float $balance = 0.0;
 
     #[ORM\ManyToOne(inversedBy: 'portfolios')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: 'portfolio_validation.owner.not_blank')]
-    #[Assert\Valid]
     private ?User $owner = null;
 
     #[ORM\OneToMany(mappedBy: 'portfolio', targetEntity: Transaction::class, orphanRemoval: true)]
@@ -70,6 +52,7 @@ class Portfolio
 
     /**
      * Get the ID of the portfolio.
+     *
      * @return int|null the ID of the portfolio
      */
     public function getId(): ?int
@@ -79,6 +62,7 @@ class Portfolio
 
     /**
      * Get the name of the portfolio.
+     *
      * @return string|null the name of the portfolio
      */
     public function getName(): ?string
@@ -88,11 +72,12 @@ class Portfolio
 
     /**
      * Set the name of the portfolio.
-     * @param string $name the name to set
+     *
+     * @param string|null $name the name to set
      *
      * @return static
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -101,6 +86,7 @@ class Portfolio
 
     /**
      * Get the type of the portfolio.
+     *
      * @return string|null the type of the portfolio
      */
     public function getType(): ?string
@@ -110,11 +96,12 @@ class Portfolio
 
     /**
      * Set the type of the portfolio.
-     * @param string $type the type to set
+     *
+     * @param string|null $type the type to set
      *
      * @return static
      */
-    public function setType(string $type): static
+    public function setType(?string $type): static
     {
         $this->type = $type;
 
@@ -123,6 +110,7 @@ class Portfolio
 
     /**
      * Get the balance of the portfolio.
+     *
      * @return float the balance of the portfolio
      */
     public function getBalance(): float
@@ -132,6 +120,7 @@ class Portfolio
 
     /**
      * Set the balance of the portfolio.
+     *
      * @param float $balance the balance to set
      *
      * @return static
@@ -145,6 +134,7 @@ class Portfolio
 
     /**
      * Update the balance of the portfolio based on its transactions.
+     *
      * @return static
      */
     public function updateBalance(): static
@@ -159,6 +149,7 @@ class Portfolio
 
     /**
      * Get the owner of the portfolio.
+     *
      * @return User|null the owner of the portfolio
      */
     public function getOwner(): ?User
@@ -168,6 +159,7 @@ class Portfolio
 
     /**
      * Set the owner of the portfolio.
+     *
      * @param User|null $owner the owner to set
      *
      * @return static
@@ -181,6 +173,7 @@ class Portfolio
 
     /**
      * Get the transactions associated with the portfolio.
+     *
      * @return Collection<int, Transaction> the transactions collection
      */
     public function getTransactions(): Collection
@@ -190,6 +183,7 @@ class Portfolio
 
     /**
      * Add a transaction to the portfolio.
+     *
      * @param Transaction $transaction the transaction to add
      *
      * @return static
@@ -207,6 +201,7 @@ class Portfolio
 
     /**
      * Remove a transaction from the portfolio.
+     *
      * @param Transaction $transaction the transaction to remove
      *
      * @return static

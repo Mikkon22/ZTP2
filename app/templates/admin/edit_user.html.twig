@@ -11,7 +11,7 @@
                         <h1 class="h3 mb-0">{{ 'admin.edit_user'|trans }}: {{ user.email }}</h1>
                     </div>
                     <div class="card-body">
-                        {{ form_start(form) }}
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="mb-3">
                                 {{ form_label(form.email, 'auth.email') }}
                                 {{ form_widget(form.email) }}

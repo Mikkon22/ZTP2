@@ -18,23 +18,44 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserService
 {
-    public function __construct(
-        private UserRepository $userRepository,
-        private EntityManagerInterface $entityManager,
-        private UserPasswordHasherInterface $passwordHasher
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param UserRepository              $userRepository the user repository
+     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param UserPasswordHasherInterface $passwordHasher the password hasher
+     */
+    public function __construct(private UserRepository $userRepository, private EntityManagerInterface $entityManager, private UserPasswordHasherInterface $passwordHasher)
+    {
+    }
+
+    /**
+     * Create a new user.
+     *
+     * @param User $user the user to create
+     */
+    public function createUser(User $user): void
+    {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 
     /**
      * Update user information.
+     *
+     * @param User $user the user to update
      */
     public function updateUser(User $user): void
     {
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
     /**
      * Change user password.
+     *
+     * @param User   $user        the user
+     * @param string $newPassword the new password
      */
     public function changePassword(User $user, string $newPassword): void
     {
@@ -45,6 +66,10 @@ class UserService
 
     /**
      * Get user statistics.
+     *
+     * @param User $user the user
+     *
+     * @return array the statistics
      */
     public function getUserStatistics(User $user): array
     {
@@ -59,6 +84,10 @@ class UserService
 
     /**
      * Get user by ID.
+     *
+     * @param int $id the user ID
+     *
+     * @return User|null the user or null
      */
     public function getUserById(int $id): ?User
     {
@@ -67,6 +96,8 @@ class UserService
 
     /**
      * Get all users (for admin).
+     *
+     * @return array the users
      */
     public function getAllUsers(): array
     {

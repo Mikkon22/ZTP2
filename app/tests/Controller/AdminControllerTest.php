@@ -39,11 +39,11 @@ class AdminControllerTest extends AbstractWebTestCase
 
         // Get a user to edit
         $user = $this->getUser();
-        $client->request('GET', '/admin/users/' . $user->getId() . '/edit', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $client->request('GET', '/admin/users/'.$user->getId().'/edit', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
 
         // Submit edit form
-        $crawler = $client->request('GET', '/admin/users/' . $user->getId() . '/edit', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $crawler = $client->request('GET', '/admin/users/'.$user->getId().'/edit', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
         $form = $crawler->filter('form')->form([
@@ -64,11 +64,11 @@ class AdminControllerTest extends AbstractWebTestCase
         $this->logInAsAdmin($client);
 
         $user = $this->getUser();
-        $client->request('GET', '/admin/users/' . $user->getId() . '/change-password', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $client->request('GET', '/admin/users/'.$user->getId().'/change-password', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
 
         // Submit password change form
-        $crawler = $client->request('GET', '/admin/users/' . $user->getId() . '/change-password', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
+        $crawler = $client->request('GET', '/admin/users/'.$user->getId().'/change-password', [], [], ['HTTP_ACCEPT_LANGUAGE' => 'en']);
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
         $form = $crawler->filter('form')->form([
@@ -81,6 +81,7 @@ class AdminControllerTest extends AbstractWebTestCase
 
     /**
      * Log in as admin user for testing.
+     *
      * @param \Symfony\Bundle\FrameworkBundle\KernelBrowser $client
      */
     private function logInAsAdmin($client): void
@@ -92,6 +93,7 @@ class AdminControllerTest extends AbstractWebTestCase
 
     /**
      * Get a test user.
+     *
      * @return User
      */
     private function getUser(): User

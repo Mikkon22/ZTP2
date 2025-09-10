@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h1 class="h3 mb-4">{{ 'portfolio.new_portfolio'|trans }}</h1>
 
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                     <div class="mb-3">
                         {{ form_label(form.name, 'portfolio.portfolio_name') }}
                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}

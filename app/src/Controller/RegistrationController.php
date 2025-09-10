@@ -11,7 +11,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Service\CategoryService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,17 +24,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationController extends AbstractController
 {
     /**
+     * Constructor.
+     *
+     * @param UserService                 $userService        the user service
+     * @param CategoryService             $categoryService    the category service
+     * @param UserPasswordHasherInterface $userPasswordHasher the password hasher
+     */
+    public function __construct(private readonly UserService $userService, private readonly CategoryService $categoryService, private readonly UserPasswordHasherInterface $userPasswordHasher)
+    {
+    }
+
+    /**
      * Handles user registration.
      *
-     * @param Request                     $request            The HTTP request object
-     * @param UserPasswordHasherInterface $userPasswordHasher The password hasher
-     * @param EntityManagerInterface      $entityManager      The entity manager
-     * @param CategoryService             $categoryService    The category service
+     * @param Request $request The HTTP request object
      *
      * @return Response The HTTP response
      */
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryService $categoryService): Response
+    public function register(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -42,20 +50,19 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
-                $userPasswordHasher->hashPassword(
+                $this->userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
 
             $user->setRoles(['ROLE_USER']);
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userService->createUser($user);
 
             // Create default categories for the new user
-            $categoryService->createDefaultCategories($user);
+            $this->categoryService->createDefaultCategories($user);
 
-            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Twoje konto zostało utworzone pomyślnie!' : 'Your account has been created successfully!');
+            $this->addFlash('success', 'common.success_account_created');
 
             return $this->redirectToRoute('app_login');
         }

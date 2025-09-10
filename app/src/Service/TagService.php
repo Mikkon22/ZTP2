@@ -18,14 +18,20 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class TagService
 {
-    public function __construct(
-        private TagRepository $tagRepository,
-        private EntityManagerInterface $entityManager
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param TagRepository          $tagRepository the tag repository
+     * @param EntityManagerInterface $entityManager the entity manager
+     */
+    public function __construct(private TagRepository $tagRepository, private EntityManagerInterface $entityManager)
+    {
     }
 
     /**
      * Create a new tag.
+     *
+     * @param Tag $tag the tag to create
      */
     public function createTag(Tag $tag): void
     {
@@ -35,6 +41,8 @@ class TagService
 
     /**
      * Update a tag.
+     *
+     * @param Tag $tag the tag to update
      */
     public function updateTag(Tag $tag): void
     {
@@ -43,6 +51,8 @@ class TagService
 
     /**
      * Delete a tag.
+     *
+     * @param Tag $tag the tag to delete
      */
     public function deleteTag(Tag $tag): void
     {
@@ -52,6 +62,10 @@ class TagService
 
     /**
      * Get tags by user.
+     *
+     * @param User $user the user
+     *
+     * @return array the tags
      */
     public function getTagsByUser(User $user): array
     {
@@ -60,6 +74,11 @@ class TagService
 
     /**
      * Get tag by ID and user (for security).
+     *
+     * @param int  $id   the tag ID
+     * @param User $user the user
+     *
+     * @return Tag|null the tag or null
      */
     public function getTagByIdAndUser(int $id, User $user): ?Tag
     {

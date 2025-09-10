@@ -18,18 +18,26 @@ class TagMapper
 {
     /**
      * Convert Tag entity to TagDTO.
+     *
+     * @param Tag $tag the tag entity
+     *
+     * @return TagDTO the tag DTO
      */
     public function entityToDto(Tag $tag): TagDTO
     {
         $dto = new TagDTO();
         $dto->name = $tag->getName();
-        $dto->color = $tag->getColor();
 
         return $dto;
     }
 
     /**
      * Convert TagDTO to Tag entity.
+     *
+     * @param TagDTO   $dto the tag DTO
+     * @param Tag|null $tag the existing tag entity
+     *
+     * @return Tag the tag entity
      */
     public function dtoToEntity(TagDTO $dto, ?Tag $tag = null): Tag
     {
@@ -38,13 +46,17 @@ class TagMapper
         }
 
         $tag->setName($dto->name);
-        $tag->setColor($dto->color);
 
         return $tag;
     }
 
     /**
      * Update Tag entity with data from TagDTO.
+     *
+     * @param Tag    $tag the tag entity
+     * @param TagDTO $dto the tag DTO
+     *
+     * @return Tag the updated tag entity
      */
     public function updateEntityFromDto(Tag $tag, TagDTO $dto): Tag
     {

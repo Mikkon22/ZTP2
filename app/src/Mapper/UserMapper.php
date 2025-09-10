@@ -18,6 +18,10 @@ class UserMapper
 {
     /**
      * Convert User entity to UserDTO.
+     *
+     * @param User $user the user entity
+     *
+     * @return UserDTO the user DTO
      */
     public function entityToDto(User $user): UserDTO
     {
@@ -25,13 +29,17 @@ class UserMapper
         $dto->email = $user->getEmail();
         $dto->firstName = $user->getFirstName();
         $dto->lastName = $user->getLastName();
-        $dto->phone = $user->getPhone();
 
         return $dto;
     }
 
     /**
      * Convert UserDTO to User entity.
+     *
+     * @param UserDTO   $dto  the user DTO
+     * @param User|null $user the existing user entity
+     *
+     * @return User the user entity
      */
     public function dtoToEntity(UserDTO $dto, ?User $user = null): User
     {
@@ -42,13 +50,17 @@ class UserMapper
         $user->setEmail($dto->email);
         $user->setFirstName($dto->firstName);
         $user->setLastName($dto->lastName);
-        $user->setPhone($dto->phone);
 
         return $user;
     }
 
     /**
      * Update User entity with data from UserDTO.
+     *
+     * @param User    $user the user entity
+     * @param UserDTO $dto  the user DTO
+     *
+     * @return User the updated user entity
      */
     public function updateEntityFromDto(User $user, UserDTO $dto): User
     {

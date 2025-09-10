@@ -24,9 +24,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  */
 class PortfolioController extends AbstractController
 {
-    public function __construct(
-        private PortfolioService $portfolioService
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param PortfolioService $portfolioService the portfolio service
+     */
+    public function __construct(private PortfolioService $portfolioService)
+    {
     }
 
     /**
@@ -127,7 +131,7 @@ class PortfolioController extends AbstractController
     #[IsGranted('delete', subject: 'portfolio')]
     public function delete(Request $request, Portfolio $portfolio): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $portfolio->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$portfolio->getId(), $request->request->get('_token'))) {
             $this->portfolioService->deletePortfolio($portfolio);
         }
 

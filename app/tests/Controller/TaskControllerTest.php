@@ -80,7 +80,7 @@ class TaskControllerTest extends AbstractWebTestCase
         $this->entityManager->persist($task);
         $this->entityManager->flush();
 
-        $client->request('GET', '/task/' . $task->getId());
+        $client->request('GET', '/task/'.$task->getId());
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('body');
         $this->assertSelectorTextContains('body', 'Test Task');

@@ -50,7 +50,7 @@ class TransactionDTO
 
     #[Assert\Type(type: 'array', message: 'transaction.tags.type')]
     #[Assert\All([
-        new Assert\Type(type: Tag::class, message: 'transaction.tags.all_type')
+        new Assert\Type(type: Tag::class, message: 'transaction.tags.all_type'),
     ])]
     public array $tags = [];
 
@@ -58,6 +58,9 @@ class TransactionDTO
     #[Assert\Choice(choices: ['income', 'expense'], message: 'transaction.transaction_type.choice')]
     public ?string $transactionType = null;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -65,6 +68,8 @@ class TransactionDTO
 
     /**
      * Get the amount with proper sign based on transaction type.
+     *
+     * @return float|null the signed amount
      */
     public function getSignedAmount(): ?float
     {
@@ -77,6 +82,8 @@ class TransactionDTO
 
     /**
      * Set amount with proper sign based on transaction type.
+     *
+     * @param float $amount the amount to set
      */
     public function setSignedAmount(float $amount): void
     {

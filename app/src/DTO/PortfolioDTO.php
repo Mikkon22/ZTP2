@@ -44,12 +44,16 @@ class PortfolioDTO
     )]
     public ?string $currency = null;
 
-    public function __construct(
-        ?string $name = null,
-        ?string $description = null,
-        ?float $initialBalance = 0.0,
-        ?string $currency = 'PLN'
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param string|null $name           the name
+     * @param string|null $description    the description
+     * @param float|null  $initialBalance the initial balance
+     * @param string|null $currency       the currency
+     */
+    public function __construct(?string $name = null, ?string $description = null, ?float $initialBalance = 0.0, ?string $currency = 'PLN')
+    {
         $this->name = $name;
         $this->description = $description;
         $this->initialBalance = $initialBalance;

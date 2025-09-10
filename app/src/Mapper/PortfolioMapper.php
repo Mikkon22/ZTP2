@@ -18,20 +18,28 @@ class PortfolioMapper
 {
     /**
      * Convert Portfolio entity to PortfolioDTO.
+     *
+     * @param Portfolio $portfolio the portfolio entity
+     *
+     * @return PortfolioDTO the portfolio DTO
      */
     public function entityToDto(Portfolio $portfolio): PortfolioDTO
     {
         $dto = new PortfolioDTO();
         $dto->name = $portfolio->getName();
-        $dto->description = $portfolio->getDescription();
+        $dto->description = $portfolio->getType();
         $dto->initialBalance = $portfolio->getBalance();
-        $dto->currency = $portfolio->getCurrency();
 
         return $dto;
     }
 
     /**
      * Convert PortfolioDTO to Portfolio entity.
+     *
+     * @param PortfolioDTO   $dto       the portfolio DTO
+     * @param Portfolio|null $portfolio the existing portfolio entity
+     *
+     * @return Portfolio the portfolio entity
      */
     public function dtoToEntity(PortfolioDTO $dto, ?Portfolio $portfolio = null): Portfolio
     {
@@ -40,15 +48,19 @@ class PortfolioMapper
         }
 
         $portfolio->setName($dto->name);
-        $portfolio->setDescription($dto->description);
+        $portfolio->setType($dto->description);
         $portfolio->setBalance($dto->initialBalance);
-        $portfolio->setCurrency($dto->currency);
 
         return $portfolio;
     }
 
     /**
      * Update Portfolio entity with data from PortfolioDTO.
+     *
+     * @param Portfolio    $portfolio the portfolio entity
+     * @param PortfolioDTO $dto       the portfolio DTO
+     *
+     * @return Portfolio the updated portfolio entity
      */
     public function updateEntityFromDto(Portfolio $portfolio, PortfolioDTO $dto): Portfolio
     {

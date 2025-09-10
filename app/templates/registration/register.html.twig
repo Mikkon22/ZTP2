@@ -11,7 +11,7 @@
                         <h1 class="h3 mb-0">{{ 'auth.register'|trans }}</h1>
                     </div>
                     <div class="card-body">
-                        {{ form_start(registrationForm) }}
+                        {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="mb-3">
                                 {{ form_label(registrationForm.email, 'auth.email') }}
                                 {{ form_widget(registrationForm.email) }}

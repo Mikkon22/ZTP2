@@ -22,8 +22,10 @@ RUN docker-php-source extract && \
     docker-php-ext-install pdo_mysql zip && \
     docker-php-source delete
 
-# Install Intl
-RUN docker-php-source extract && \
+# Install ICU libraries for intl extension
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libicu-dev && \
+    docker-php-source extract && \
     docker-php-ext-configure intl && \
     docker-php-ext-install intl && \
     docker-php-source delete

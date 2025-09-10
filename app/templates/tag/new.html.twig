@@ -11,7 +11,7 @@
                     <h1 class="h3 mb-0">{{ 'tag.create_new_tag'|trans }}</h1>
                 </div>
                 <div class="card-body">
-                    {{ form_start(form) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class="mb-3">
                             {{ form_label(form.name, 'tag.tag_name') }}
                             {{ form_widget(form.name) }}

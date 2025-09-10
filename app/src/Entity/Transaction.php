@@ -14,7 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 /**
@@ -28,40 +27,23 @@ class Transaction
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'transaction.title.not_blank')]
-    #[Assert\Length(
-        min: 3,
-        max: 255,
-        minMessage: 'transaction.title.min_length',
-        maxMessage: 'transaction.title.max_length'
-    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\Length(max: 1000, maxMessage: 'transaction.description.max_length')]
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'transaction.amount.not_blank')]
-    #[Assert\Type(type: 'numeric', message: 'transaction.amount.type')]
-    #[Assert\NotEqualTo(value: 0, message: 'transaction.amount.not_equal_to_zero')]
     private float $amount = 0.0;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank(message: 'transaction.date.not_blank')]
-    #[Assert\Type(type: '\DateTimeInterface', message: 'transaction.date.type')]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: 'transaction.portfolio.not_blank')]
-    #[Assert\Valid]
     private ?Portfolio $portfolio = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: 'transaction.category.not_blank')]
-    #[Assert\Valid]
     private ?Category $category = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'transactions')]
@@ -78,6 +60,7 @@ class Transaction
 
     /**
      * Get the ID of the transaction.
+     *
      * @return int|null the ID of the transaction
      */
     public function getId(): ?int
@@ -87,6 +70,7 @@ class Transaction
 
     /**
      * Get the title of the transaction.
+     *
      * @return string|null the title of the transaction
      */
     public function getTitle(): ?string
@@ -96,11 +80,12 @@ class Transaction
 
     /**
      * Set the title of the transaction.
+     *
      * @param string $title the title to set
      *
      * @return static
      */
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -109,6 +94,7 @@ class Transaction
 
     /**
      * Get the description of the transaction.
+     *
      * @return string|null the description of the transaction
      */
     public function getDescription(): ?string
@@ -118,6 +104,7 @@ class Transaction
 
     /**
      * Set the description of the transaction.
+     *
      * @param string|null $description the description to set
      *
      * @return static
@@ -131,6 +118,7 @@ class Transaction
 
     /**
      * Get the amount of the transaction.
+     *
      * @return float the amount of the transaction
      */
     public function getAmount(): float
@@ -140,6 +128,7 @@ class Transaction
 
     /**
      * Set the amount of the transaction.
+     *
      * @param float $amount the amount to set
      *
      * @return static
@@ -153,6 +142,7 @@ class Transaction
 
     /**
      * Get the date of the transaction.
+     *
      * @return \DateTimeInterface|null the date of the transaction
      */
     public function getDate(): ?\DateTimeInterface
@@ -162,6 +152,7 @@ class Transaction
 
     /**
      * Set the date of the transaction.
+     *
      * @param \DateTimeInterface $date the date to set
      *
      * @return static
@@ -175,6 +166,7 @@ class Transaction
 
     /**
      * Get the portfolio associated with the transaction.
+     *
      * @return Portfolio|null the portfolio entity
      */
     public function getPortfolio(): ?Portfolio
@@ -184,6 +176,7 @@ class Transaction
 
     /**
      * Set the portfolio associated with the transaction.
+     *
      * @param Portfolio|null $portfolio the portfolio entity to set
      *
      * @return static
@@ -197,6 +190,7 @@ class Transaction
 
     /**
      * Get the category associated with the transaction.
+     *
      * @return Category|null the category entity
      */
     public function getCategory(): ?Category
@@ -206,6 +200,7 @@ class Transaction
 
     /**
      * Set the category associated with the transaction.
+     *
      * @param Category|null $category the category entity to set
      *
      * @return static
@@ -219,6 +214,7 @@ class Transaction
 
     /**
      * Get the tags associated with the transaction.
+     *
      * @return Collection<int, Tag> the tags collection
      */
     public function getTags(): Collection
@@ -228,6 +224,7 @@ class Transaction
 
     /**
      * Add a tag to the transaction.
+     *
      * @param Tag $tag the tag to add
      *
      * @return static
@@ -243,6 +240,7 @@ class Transaction
 
     /**
      * Remove a tag from the transaction.
+     *
      * @param Tag $tag the tag to remove
      *
      * @return static

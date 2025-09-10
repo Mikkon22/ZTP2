@@ -1,0 +1,35 @@
+   1) src/Entity/Category.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) src/Entity/Transaction.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   3) src/Entity/Tag.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   4) src/Entity/User.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   5) src/Entity/Task.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   6) src/Entity/Portfolio.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+
+Found 6 of 62 files that can be fixed in 3.027 seconds, 18.00 MB memory used
+   1) tests/Form/AdminEditUserTypeTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   2) tests/Form/AdminChangePasswordTypeTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   3) tests/Form/ChangePasswordFormTypeTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   4) tests/AbstractBaseTestCase.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   5) tests/Controller/AdminControllerTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   6) tests/Service/CategoryServiceTest.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+   7) tests/BaseTestCase.php (no_superfluous_phpdoc_tags, phpdoc_trim)
+
+Found 7 of 48 files that can be fixed in 0.833 seconds, 16.00 MB memory used
+ ------- -------- ---- ---------------------- ------------------------------- 
+  State   Domain   Id   Message Preview (en)   Fallback Message Preview (pl)  
+ ------- -------- ---- ---------------------- ------------------------------- 
+
+ ------- -------- ---- ---------------------- ------------------------------- 
+  State   Domain   Id   Message Preview (pl)   Fallback Message Preview (en)  
+ ------- -------- ---- ---------------------- ------------------------------- 
+
+[notice] Migrating up to DoctrineMigrations\Version20250802190508
+[notice] finished in 330ms, used 24M memory, 2 migrations executed, 16 sql queries
+
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20250802190508                                        
+
+
+   > purging database
+   > loading App\DataFixtures\AppFixtures
+   > loading App\DataFixtures\UserFixtures
+   > loading App\DataFixtures\CategoryFixtures

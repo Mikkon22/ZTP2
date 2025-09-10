@@ -11,12 +11,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AdminChangePasswordType;
 use App\Form\AdminEditUserType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin')]
 /**
@@ -25,18 +25,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * Display the list of users for admin.
+     * Constructor.
      *
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param UserService $userService the user service
+     */
+    public function __construct(private readonly UserService $userService)
+    {
+    }
+
+    /**
+     * Display the list of users for admin.
      *
      * @return Response the response object
      */
     #[Route('/users', name: 'app_admin_users')]
-    public function users(EntityManagerInterface $entityManager): Response
+    #[IsGranted('ROLE_ADMIN')]
+    public function users(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        $users = $entityManager->getRepository(User::class)->findAll();
+        $users = $this->userService->getAllUsers();
 
         return $this->render('admin/users.html.twig', [
             'users' => $users,
@@ -46,25 +52,23 @@ class AdminController extends AbstractController
     /**
      * Edit a user as admin.
      *
-     * @param Request                $request       the HTTP request
-     * @param User                   $user          the user entity to edit
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Request $request the HTTP request
+     * @param User    $user    the user entity to edit
      *
      * @return Response the response object
      */
     #[Route('/users/{id}/edit', name: 'app_admin_edit_user')]
-    public function editUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[IsGranted('ROLE_ADMIN')]
+    public function editUser(Request $request, User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $form = $this->createForm(AdminEditUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userService->updateUser($user);
 
-            $this->addFlash('success', \sprintf($this->getParameter('kernel.default_locale') === 'pl' ? 'Użytkownik "%s" został zaktualizowany pomyślnie!' : 'User "%s" has been updated successfully!', $user->getEmail()));
+            $this->addFlash('success', 'common.success_user_updated');
 
             return $this->redirectToRoute('app_admin_users');
         }
@@ -78,33 +82,23 @@ class AdminController extends AbstractController
     /**
      * Change a user's password as admin.
      *
-     * @param Request                     $request        the HTTP request
-     * @param User                        $user           the user entity whose password is to be changed
-     * @param UserPasswordHasherInterface $passwordHasher the password hasher
-     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param Request $request the HTTP request
+     * @param User    $user    the user entity whose password is to be changed
      *
      * @return Response the response object
      */
     #[Route('/users/{id}/change-password', name: 'app_admin_change_user_password')]
-    public function changeUserPassword(Request $request, User $user, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    #[IsGranted('ROLE_ADMIN')]
+    public function changeUserPassword(Request $request, User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $form = $this->createForm(AdminChangePasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordHasher->hashPassword(
-                    $user,
-                    $form->get('newPassword')->getData()
-                )
-            );
+            $this->userService->changePassword($user, $form->get('newPassword')->getData());
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', \sprintf($this->getParameter('kernel.default_locale') === 'pl' ? 'Hasło dla użytkownika %s zostało zmienione pomyślnie!' : 'Password for user %s has been changed successfully!', $user->getEmail()));
+            $this->addFlash('success', 'common.success_password_changed_for');
 
             return $this->redirectToRoute('app_admin_users');
         }

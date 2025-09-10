@@ -26,10 +26,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[IsGranted('ROLE_USER')]
 class TransactionController extends AbstractController
 {
-    public function __construct(
-        private TransactionService $transactionService,
-        private TranslatorInterface $translator
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param TransactionService  $transactionService the transaction service
+     * @param TranslatorInterface $translator         the translator
+     */
+    public function __construct(private TransactionService $transactionService, private TranslatorInterface $translator)
+    {
     }
 
     /**
@@ -84,15 +88,14 @@ class TransactionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $portfolio = $transaction->getPortfolio();
-
-            if ($this->getUser() !== $portfolio->getOwner()) {
+            if (!$this->transactionService->canCreateTransactionInPortfolio($transaction, $this->getUser())) {
                 throw $this->createAccessDeniedException('You cannot create transactions in this portfolio.');
             }
 
             $transactionType = $form->get('transactionType')->getData();
             if (null === $transactionType) {
                 $this->addFlash('error', $this->translator->trans('common.error_select_transaction_type'));
+
                 return $this->render('transaction/new.html.twig', [
                     'transaction' => $transaction,
                     'form' => $form,
@@ -141,23 +144,23 @@ class TransactionController extends AbstractController
             $portfolio = $transaction->getPortfolio();
 
             if (null === $portfolio) {
-                $this->addFlash('error', $this->getParameter('kernel.default_locale') === 'pl' ? 'Proszę wybrać portfel.' : 'Please select a portfolio.');
+                $this->addFlash('error', 'common.error_select_portfolio');
 
                 return $this->redirectToRoute('app_transaction_edit', ['id' => $transaction->getId()]);
             }
 
-            if ($this->getUser() !== $portfolio->getOwner()) {
+            if (!$this->transactionService->canEditTransaction($transaction, $this->getUser())) {
                 throw $this->createAccessDeniedException('You cannot edit transactions in this portfolio.');
             }
 
             if (null === $transaction->getTitle()) {
-                $this->addFlash('error', $this->getParameter('kernel.default_locale') === 'pl' ? 'Proszę podać tytuł transakcji.' : 'Please enter a transaction title.');
+                $this->addFlash('error', 'common.error_enter_transaction_title');
 
                 return $this->redirectToRoute('app_transaction_edit', ['id' => $transaction->getId()]);
             }
 
             if (null === $transaction->getCategory()) {
-                $this->addFlash('error', $this->getParameter('kernel.default_locale') === 'pl' ? 'Proszę wybrać kategorię.' : 'Please select a category.');
+                $this->addFlash('error', 'common.error_select_category');
 
                 return $this->redirectToRoute('app_transaction_edit', ['id' => $transaction->getId()]);
             }
@@ -218,7 +221,7 @@ class TransactionController extends AbstractController
     public function delete(Request $request, Transaction $transaction): Response
     {
 
-        if ($this->isCsrfTokenValid('delete' . $transaction->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$transaction->getId(), $request->request->get('_token'))) {
             $this->transactionService->deleteTransaction($transaction);
 
             $this->addFlash('success', $this->translator->trans('transaction.transaction_deleted_successfully'));
@@ -259,7 +262,7 @@ class TransactionController extends AbstractController
 
         $transactionType = $request->request->get('transactionType');
         if (!in_array($transactionType, ['income', 'expense'])) {
-            return new JsonResponse(['success' => false, 'error' => 'Invalid transaction type: ' . $transactionType], 400);
+            return new JsonResponse(['success' => false, 'error' => 'Invalid transaction type: '.$transactionType], 400);
         }
 
         $user = $this->getUser();

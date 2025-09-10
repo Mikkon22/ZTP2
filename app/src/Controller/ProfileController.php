@@ -9,11 +9,10 @@
 namespace App\Controller;
 
 use App\Form\ChangePasswordFormType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -23,16 +22,23 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProfileController extends AbstractController
 {
     /**
+     * Constructor.
+     *
+     * @param UserService $userService the user service
+     */
+    public function __construct(private readonly UserService $userService)
+    {
+    }
+
+    /**
      * Handles password change for the logged-in user.
      *
-     * @param Request                     $request        the HTTP request
-     * @param UserPasswordHasherInterface $passwordHasher the password hasher
-     * @param EntityManagerInterface      $entityManager  the entity manager
+     * @param Request $request the HTTP request
      *
      * @return Response the response object
      */
     #[Route('/profile/change-password', name: 'app_change_password')]
-    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    public function changePassword(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -43,17 +49,9 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordHasher->hashPassword(
-                    $user,
-                    $form->get('newPassword')->getData()
-                )
-            );
+            $this->userService->changePassword($user, $form->get('newPassword')->getData());
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', $this->getParameter('kernel.default_locale') === 'pl' ? 'Twoje hasło zostało zmienione pomyślnie!' : 'Your password has been changed successfully!');
+            $this->addFlash('success', 'common.success_password_changed');
 
             return $this->redirectToRoute('app_portfolio_index');
         }

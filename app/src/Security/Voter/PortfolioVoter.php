@@ -22,12 +22,29 @@ class PortfolioVoter extends Voter
     public const EDIT = 'edit';
     public const DELETE = 'delete';
 
+    /**
+     * Check if voter supports the given attribute and subject.
+     *
+     * @param string $attribute the attribute to check
+     * @param mixed  $subject   the subject to check
+     *
+     * @return bool true if supported
+     */
     protected function supports(string $attribute, mixed $subject): bool
     {
         return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE])
             && $subject instanceof Portfolio;
     }
 
+    /**
+     * Vote on the given attribute and subject.
+     *
+     * @param string         $attribute the attribute to vote on
+     * @param mixed          $subject   the subject to vote on
+     * @param TokenInterface $token     the authentication token
+     *
+     * @return bool true if access is granted
+     */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();

@@ -13,7 +13,6 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 /**
@@ -27,23 +26,10 @@ class Tag
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'tag.name.not_blank')]
-    #[Assert\Length(
-        min: 2,
-        max: 50,
-        minMessage: 'tag.name.min_length',
-        maxMessage: 'tag.name.max_length'
-    )]
-    #[Assert\Regex(
-        pattern: '/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9\s\-_]+$/',
-        message: 'tag.name.regex'
-    )]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'tags')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank(message: 'tag.owner.not_blank')]
-    #[Assert\Valid]
     private ?User $owner = null;
 
     #[ORM\ManyToMany(targetEntity: Transaction::class, mappedBy: 'tags')]
@@ -59,6 +45,7 @@ class Tag
 
     /**
      * Get the ID of the tag.
+     *
      * @return int|null the ID of the tag
      */
     public function getId(): ?int
@@ -68,6 +55,7 @@ class Tag
 
     /**
      * Get the name of the tag.
+     *
      * @return string|null the name of the tag
      */
     public function getName(): ?string
@@ -77,11 +65,12 @@ class Tag
 
     /**
      * Set the name of the tag.
+     *
      * @param string $name the name to set
      *
      * @return static
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -90,6 +79,7 @@ class Tag
 
     /**
      * Get the owner of the tag.
+     *
      * @return User|null the owner of the tag
      */
     public function getOwner(): ?User
@@ -99,6 +89,7 @@ class Tag
 
     /**
      * Set the owner of the tag.
+     *
      * @param User|null $owner the owner to set
      *
      * @return static
@@ -112,6 +103,7 @@ class Tag
 
     /**
      * Get the transactions associated with the tag.
+     *
      * @return Collection<int, Transaction> the transactions collection
      */
     public function getTransactions(): Collection
@@ -121,6 +113,7 @@ class Tag
 
     /**
      * Add a transaction to the tag.
+     *
      * @param Transaction $transaction the transaction to add
      *
      * @return static
@@ -137,6 +130,7 @@ class Tag
 
     /**
      * Remove a transaction from the tag.
+     *
      * @param Transaction $transaction the transaction to remove
      *
      * @return static
@@ -152,6 +146,7 @@ class Tag
 
     /**
      * String representation of the tag.
+     *
      * @return string the tag name
      */
     public function __toString(): string

@@ -35,6 +35,12 @@ class TagDTO
     )]
     public ?string $color = null;
 
+    /**
+     * Constructor.
+     *
+     * @param string|null $name  the name
+     * @param string|null $color the color
+     */
     public function __construct(?string $name = null, ?string $color = null)
     {
         $this->name = $name;

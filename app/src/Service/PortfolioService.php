@@ -18,14 +18,20 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class PortfolioService
 {
-    public function __construct(
-        private PortfolioRepository $portfolioRepository,
-        private EntityManagerInterface $entityManager
-    ) {
+    /**
+     * Constructor.
+     *
+     * @param PortfolioRepository    $portfolioRepository the portfolio repository
+     * @param EntityManagerInterface $entityManager       the entity manager
+     */
+    public function __construct(private PortfolioRepository $portfolioRepository, private EntityManagerInterface $entityManager)
+    {
     }
 
     /**
      * Create a new portfolio.
+     *
+     * @param Portfolio $portfolio the portfolio to create
      */
     public function createPortfolio(Portfolio $portfolio): void
     {
@@ -35,6 +41,8 @@ class PortfolioService
 
     /**
      * Update a portfolio.
+     *
+     * @param Portfolio $portfolio the portfolio to update
      */
     public function updatePortfolio(Portfolio $portfolio): void
     {
@@ -43,6 +51,8 @@ class PortfolioService
 
     /**
      * Delete a portfolio.
+     *
+     * @param Portfolio $portfolio the portfolio to delete
      */
     public function deletePortfolio(Portfolio $portfolio): void
     {
@@ -52,6 +62,8 @@ class PortfolioService
 
     /**
      * Recalculate and update portfolio balance based on transactions.
+     *
+     * @param Portfolio $portfolio the portfolio to recalculate
      */
     public function recalculatePortfolioBalance(Portfolio $portfolio): void
     {
@@ -66,6 +78,10 @@ class PortfolioService
 
     /**
      * Get portfolios by user.
+     *
+     * @param User $user the user
+     *
+     * @return array the portfolios
      */
     public function getPortfoliosByUser(User $user): array
     {
@@ -74,6 +90,11 @@ class PortfolioService
 
     /**
      * Get portfolio by ID and user (for security).
+     *
+     * @param int  $id   the portfolio ID
+     * @param User $user the user
+     *
+     * @return Portfolio|null the portfolio or null
      */
     public function getPortfolioByIdAndUser(int $id, User $user): ?Portfolio
     {
@@ -82,6 +103,10 @@ class PortfolioService
 
     /**
      * Get portfolio statistics.
+     *
+     * @param Portfolio $portfolio the portfolio
+     *
+     * @return array the statistics
      */
     public function getPortfolioStatistics(Portfolio $portfolio): array
     {

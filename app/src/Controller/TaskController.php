@@ -9,8 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Repository\TaskRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\TaskService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -22,17 +21,24 @@ use Symfony\Component\Routing\Attribute\Route;
 class TaskController extends AbstractController
 {
     /**
-     * Display the list of tasks.
+     * Constructor.
      *
-     * @param TaskRepository $taskRepository the task repository
+     * @param TaskService $taskService the task service
+     */
+    public function __construct(private readonly TaskService $taskService)
+    {
+    }
+
+    /**
+     * Display the list of tasks.
      *
      * @return Response the response object
      */
     #[Route('/', name: 'task_index', methods: ['GET'])]
-    public function index(TaskRepository $taskRepository): Response
+    public function index(): Response
     {
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $this->taskService->getAllTasks(),
         ]);
     }
 
@@ -72,16 +78,14 @@ class TaskController extends AbstractController
     /**
      * Toggle the completion status of a task.
      *
-     * @param Task                   $task          the task entity
-     * @param EntityManagerInterface $entityManager the entity manager
+     * @param Task $task the task entity
      *
      * @return Response the response object
      */
     #[Route('/{id}/toggle', name: 'task_toggle', methods: ['POST'])]
-    public function toggle(Task $task, EntityManagerInterface $entityManager): Response
+    public function toggle(Task $task): Response
     {
-        $task->setIsDone(!$task->isIsDone());
-        $entityManager->flush();
+        $this->taskService->toggleTask($task);
 
         return $this->redirectToRoute('task_index');
     }

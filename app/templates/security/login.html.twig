@@ -15,14 +15,16 @@
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
 
-                        <form method="post">
+                        <form method="post" novalidate id="loginForm">
                             <div class="mb-3">
                                 <label for="inputEmail" class="form-label">{{ 'auth.email'|trans }}</label>
-                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus>
+                                <div class="invalid-feedback" id="emailError"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="inputPassword" class="form-label">{{ 'auth.password'|trans }}</label>
-                                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
+                                <div class="invalid-feedback" id="passwordError"></div>
                             </div>
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -38,4 +40,70 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            const emailInput = document.getElementById('inputEmail');
+            const passwordInput = document.getElementById('inputPassword');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function showError(input, errorElement, message) {
+                input.classList.add('is-invalid');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            function clearError(input, errorElement) {
+                input.classList.remove('is-invalid');
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+            }
+
+            form.addEventListener('submit', function(e) {
+                let isValid = true;
+
+                // Clear previous errors
+                clearError(emailInput, emailError);
+                clearError(passwordInput, passwordError);
+
+                // Validate email
+                if (!emailInput.value.trim()) {
+                    showError(emailInput, emailError, '{{ "common.error_enter_email"|trans }}');
+                    isValid = false;
+                } else if (!validateEmail(emailInput.value)) {
+                    showError(emailInput, emailError, '{{ "common.error_invalid_email"|trans }}');
+                    isValid = false;
+                }
+
+                // Validate password
+                if (!passwordInput.value.trim()) {
+                    showError(passwordInput, passwordError, '{{ "common.error_enter_password"|trans }}');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+
+            // Clear errors on input
+            emailInput.addEventListener('input', function() {
+                clearError(emailInput, emailError);
+            });
+
+            passwordInput.addEventListener('input', function() {
+                clearError(passwordInput, passwordError);
+            });
+        });
+    </script>
 {% endblock %} 
