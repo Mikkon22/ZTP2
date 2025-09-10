@@ -1,1 +1,0 @@
-{"php":"8.3.25","version":"3.86.0:v3.86.0#4a952bd19dc97879b0620f495552ef09b55f7d36","indent":"    ","lineEnding":"\n","rules":{"no_superfluous_phpdoc_tags":true,"phpdoc_trim":true},"hashes":{"src\/Entity\/Category.php":"5d7a0a7ea24d540106ebb1f0987f1287"}}
