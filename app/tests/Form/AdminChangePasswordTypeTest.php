@@ -54,7 +54,7 @@ class AdminChangePasswordTypeTest extends TypeTestCase
     /**
      * Get form extensions for testing.
      *
-     * @return array
+     * @return array containing form extensions for validation
      */
     protected function getExtensions(): array
     {

@@ -23,7 +23,7 @@ abstract class AbstractBaseTestCase extends KernelTestCase
      *
      * @param array $options the kernel options
      *
-     * @return \Symfony\Component\HttpKernel\KernelInterface
+     * @return \Symfony\Component\HttpKernel\KernelInterface the configured kernel instance
      */
     protected static function bootKernel(array $options = []): \Symfony\Component\HttpKernel\KernelInterface
     {

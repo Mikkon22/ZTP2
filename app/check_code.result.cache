@@ -1,7 +1,7 @@
 
-Found 0 of 62 files that can be fixed in 0.238 seconds, 16.00 MB memory used
+Found 0 of 62 files that can be fixed in 1.089 seconds, 18.00 MB memory used
 
-Found 0 of 48 files that can be fixed in 0.157 seconds, 16.00 MB memory used
+Found 0 of 48 files that can be fixed in 0.620 seconds, 16.00 MB memory used
  ------- -------- ---- ---------------------- ------------------------------- 
   State   Domain   Id   Message Preview (en)   Fallback Message Preview (pl)  
  ------- -------- ---- ---------------------- ------------------------------- 
@@ -11,9 +11,9 @@ Found 0 of 48 files that can be fixed in 0.157 seconds, 16.00 MB memory used
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20250802190508
-[notice] finished in 398.9ms, used 24M memory, 2 migrations executed, 16 sql queries
+[notice] finished in 463.5ms, used 24M memory, 2 migrations executed, 16 sql queries
 
- [OK] Successfully migrated to version: DoctrineMigrations\Version20250802190508                            
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20250802190508                                        
 
 
    > purging database

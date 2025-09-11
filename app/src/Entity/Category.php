@@ -77,7 +77,7 @@ class Category
      *
      * @param string $name the name to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setName(?string $name): static
     {
@@ -101,7 +101,7 @@ class Category
      *
      * @param string $type the type to set (income or expense)
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setType(?string $type): static
     {
@@ -128,7 +128,7 @@ class Category
      *
      * @param string|null $description the description to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setDescription(?string $description): static
     {
@@ -152,7 +152,7 @@ class Category
      *
      * @param string|null $color the color to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setColor(?string $color): static
     {
@@ -176,7 +176,7 @@ class Category
      *
      * @param User|null $owner the owner to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setOwner(?User $owner): static
     {
@@ -200,7 +200,7 @@ class Category
      *
      * @param Transaction $transaction the transaction to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addTransaction(Transaction $transaction): static
     {
@@ -217,7 +217,7 @@ class Category
      *
      * @param Transaction $transaction the transaction to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removeTransaction(Transaction $transaction): static
     {

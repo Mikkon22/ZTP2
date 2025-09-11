@@ -83,7 +83,7 @@ class Transaction
      *
      * @param string $title the title to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setTitle(?string $title): static
     {
@@ -107,7 +107,7 @@ class Transaction
      *
      * @param string|null $description the description to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setDescription(?string $description): static
     {
@@ -131,7 +131,7 @@ class Transaction
      *
      * @param float $amount the amount to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setAmount(float $amount): static
     {
@@ -155,7 +155,7 @@ class Transaction
      *
      * @param \DateTimeInterface $date the date to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setDate(\DateTimeInterface $date): static
     {
@@ -179,7 +179,7 @@ class Transaction
      *
      * @param Portfolio|null $portfolio the portfolio entity to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setPortfolio(?Portfolio $portfolio): static
     {
@@ -203,7 +203,7 @@ class Transaction
      *
      * @param Category|null $category the category entity to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setCategory(?Category $category): static
     {
@@ -227,7 +227,7 @@ class Transaction
      *
      * @param Tag $tag the tag to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addTag(Tag $tag): static
     {
@@ -243,7 +243,7 @@ class Transaction
      *
      * @param Tag $tag the tag to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removeTag(Tag $tag): static
     {

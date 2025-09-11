@@ -75,7 +75,7 @@ class Portfolio
      *
      * @param string|null $name the name to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setName(?string $name): static
     {
@@ -99,7 +99,7 @@ class Portfolio
      *
      * @param string|null $type the type to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setType(?string $type): static
     {
@@ -123,7 +123,7 @@ class Portfolio
      *
      * @param float $balance the balance to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setBalance(float $balance): static
     {
@@ -135,7 +135,7 @@ class Portfolio
     /**
      * Update the balance of the portfolio based on its transactions.
      *
-     * @return static
+     * @return static for method chaining
      */
     public function updateBalance(): static
     {
@@ -162,7 +162,7 @@ class Portfolio
      *
      * @param User|null $owner the owner to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setOwner(?User $owner): static
     {
@@ -186,7 +186,7 @@ class Portfolio
      *
      * @param Transaction $transaction the transaction to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addTransaction(Transaction $transaction): static
     {
@@ -204,7 +204,7 @@ class Portfolio
      *
      * @param Transaction $transaction the transaction to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removeTransaction(Transaction $transaction): static
     {

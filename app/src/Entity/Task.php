@@ -74,7 +74,7 @@ class Task
      *
      * @param string $title the title to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setTitle(string $title): static
     {
@@ -98,7 +98,7 @@ class Task
      *
      * @param string|null $description the description to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setDescription(?string $description): static
     {
@@ -122,7 +122,7 @@ class Task
      *
      * @param \DateTimeImmutable $createdAt the creation date to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
@@ -146,7 +146,7 @@ class Task
      *
      * @param bool $isDone the completion status to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setIsDone(bool $isDone): static
     {
@@ -170,7 +170,7 @@ class Task
      *
      * @param User|null $user the user to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setUser(?User $user): static
     {

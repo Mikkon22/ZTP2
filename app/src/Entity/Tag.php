@@ -68,7 +68,7 @@ class Tag
      *
      * @param string $name the name to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setName(?string $name): static
     {
@@ -92,7 +92,7 @@ class Tag
      *
      * @param User|null $owner the owner to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setOwner(?User $owner): static
     {
@@ -116,7 +116,7 @@ class Tag
      *
      * @param Transaction $transaction the transaction to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addTransaction(Transaction $transaction): static
     {
@@ -133,7 +133,7 @@ class Tag
      *
      * @param Transaction $transaction the transaction to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removeTransaction(Transaction $transaction): static
     {

@@ -89,7 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string|null $email the email to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setEmail(?string $email): static
     {
@@ -126,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param array $roles the roles to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setRoles(array $roles): static
     {
@@ -150,7 +150,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string $password the password to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setPassword(string $password): static
     {
@@ -182,7 +182,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string|null $firstName the first name to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setFirstName(?string $firstName): static
     {
@@ -206,7 +206,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param string|null $lastName the last name to set
      *
-     * @return static
+     * @return static for method chaining
      */
     public function setLastName(?string $lastName): static
     {
@@ -240,7 +240,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param Portfolio $portfolio the portfolio to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addPortfolio(Portfolio $portfolio): static
     {
@@ -257,7 +257,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param Portfolio $portfolio the portfolio to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removePortfolio(Portfolio $portfolio): static
     {
@@ -285,7 +285,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param Category $category the category to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addCategory(Category $category): static
     {
@@ -302,7 +302,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param Category $category the category to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removeCategory(Category $category): static
     {
@@ -330,7 +330,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param Tag $tag the tag to add
      *
-     * @return static
+     * @return static for method chaining
      */
     public function addTag(Tag $tag): static
     {
@@ -347,7 +347,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param Tag $tag the tag to remove
      *
-     * @return static
+     * @return static for method chaining
      */
     public function removeTag(Tag $tag): static
     {
